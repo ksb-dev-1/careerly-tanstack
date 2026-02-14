@@ -1,6 +1,9 @@
+// lib
+import { prisma } from "@/lib/prisma";
+
+// 3rd party
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import prisma from "@/lib/prisma";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -8,6 +11,7 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    autoSignIn: false,
   },
   socialProviders: {
     google: {
@@ -24,6 +28,7 @@ export const auth = betterAuth({
       role: {
         type: "string",
         required: true,
+        input: false,
       },
     },
   },
