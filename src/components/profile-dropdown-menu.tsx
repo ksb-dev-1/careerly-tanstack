@@ -62,6 +62,11 @@ export function ProfileDropdownMenu({ image, role }: ProfileDropdownProps) {
         fetchOptions: {
           onSuccess: () => {
             router.push("/sign-in");
+            toast.success("Signed out successfully");
+          },
+          onError: (error) => {
+            toast.error("Failed to sign out");
+            console.error("Sign out error:", error);
           },
         },
       });
