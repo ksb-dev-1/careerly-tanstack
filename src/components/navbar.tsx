@@ -1,16 +1,17 @@
 "use client";
 
-// ----------------------------------------
+// ========================================
 // Imports
-// ----------------------------------------
+// ========================================
 import { Suspense, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 // generated
 import { UserRole } from "@/generated/prisma/browser";
 
 // lib
-import { useClientSession } from "@/hooks/useClientSession";
+import { authClient } from "@/lib/auth-client";
 
 // hooks
 import { useAutoCloseOnGreaterThanOrEqualToBreakpoint } from "@/hooks/useAutoCloseModalOnBreakPoint";
@@ -40,11 +41,10 @@ import {
   User,
 } from "lucide-react";
 import { toast } from "sonner";
-import { authClient } from "@/lib/auth-client";
 
-// ----------------------------------------
+// ========================================
 // Navigation items
-// ----------------------------------------
+// ========================================
 type NavItem = {
   href: string;
   label: string;
@@ -77,10 +77,11 @@ const EMPLOYER_NAV_ITEMS: NavItem[] = [
   },
 ];
 
-// ----------------------------------------
+// ========================================
 // Navbar wrapper component
-// ----------------------------------------
+// ========================================
 function NavbarWrapper({ children }: { children: React.ReactNode }) {
+  const { data: session } = authClient.useSession();
   const path = usePathname();
 
   return (
@@ -91,13 +92,23 @@ function NavbarWrapper({ children }: { children: React.ReactNode }) {
             <SideMenu />
           </Suspense>
 
-          <CustomLink
-            href="/"
-            className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
-            isActive={path === "/"}
-          >
-            Careerly
-          </CustomLink>
+          {session?.user.role === UserRole.JOB_SEEKER ||
+          session?.user.role === UserRole.EMPLOYER ? (
+            <Link
+              href="/"
+              className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
+            >
+              Careerly
+            </Link>
+          ) : (
+            <CustomLink
+              href="/"
+              className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
+              isActive={path === "/"}
+            >
+              Careerly
+            </CustomLink>
+          )}
         </div>
 
         <div className="hidden md:flex items-center gap-2">
@@ -109,9 +120,9 @@ function NavbarWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ----------------------------------------
+// ========================================
 // Navbar loading component
-// ----------------------------------------
+// ========================================
 function NavbarLoading() {
   return (
     <NavbarWrapper>
@@ -130,9 +141,9 @@ function NavbarLoading() {
   );
 }
 
-// ----------------------------------------
+// ========================================
 // Navbar without auth component
-// ----------------------------------------
+// ========================================
 function NavbarWithoutAuth() {
   const path = usePathname();
 
@@ -147,11 +158,12 @@ function NavbarWithoutAuth() {
   );
 }
 
-// ----------------------------------------
+// ========================================
 // Navbar without auth component
-// ----------------------------------------
+// ========================================
 function NavbarWithAuth() {
-  const { data: session } = useClientSession();
+  const { data: session } = authClient.useSession();
+
   const role =
     session?.user.role &&
     Object.values(UserRole).includes(session.user.role as UserRole)
@@ -165,11 +177,11 @@ function NavbarWithAuth() {
   );
 }
 
-// ----------------------------------------
+// ========================================
 // Job seeker navbar component
-// ----------------------------------------
+// ========================================
 function JobSeekerNavbar() {
-  const { data: session } = useClientSession();
+  const { data: session } = authClient.useSession();
   const path = usePathname();
   const role =
     session?.user.role &&
@@ -206,11 +218,11 @@ function JobSeekerNavbar() {
   );
 }
 
-// ----------------------------------------
+// ========================================
 // Employer navbar component
-// ----------------------------------------
+// ========================================
 function EmployerNavbar() {
-  const { data: session } = useClientSession();
+  const { data: session } = authClient.useSession();
   const path = usePathname();
   const role =
     session?.user.role &&
@@ -248,7 +260,7 @@ function EmployerNavbar() {
 }
 
 export function SideMenu() {
-  const { data: session, isPending } = useClientSession();
+  const { data: session, isPending } = authClient.useSession();
   const [isOpen, setIsOpen] = useState(false);
   const path = usePathname();
 
@@ -425,11 +437,11 @@ export function SideMenu() {
   );
 }
 
-// ----------------------------------------
+// ========================================
 // Navbar component
-// ----------------------------------------
+// ========================================
 export function Navbar() {
-  const { data: session, isPending } = useClientSession();
+  const { data: session, isPending } = authClient.useSession();
 
   if (isPending) {
     return <NavbarLoading />;

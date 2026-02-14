@@ -1,6 +1,13 @@
+// ========================================
+// Imports
+// ========================================
+
 // 3rd party
 import { FaGithub } from "react-icons/fa";
 
+// ========================================
+// Footer
+// ========================================
 export function Footer() {
   return (
     <footer className="border-t bg-background h-16">

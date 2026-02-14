@@ -1,12 +1,14 @@
 // ========================================
 // Imports
 // ========================================
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
 
 // components
 import { Providers } from "@/components/providers/providers";
+import { NavigationProgress } from "@/components/navigation-progress";
 
 // ========================================
 // Font family
@@ -35,6 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fontFamily.className}  antialiased`}>
+        <Suspense>
+          <NavigationProgress />
+        </Suspense>
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -126,8 +126,8 @@ export function SelectUserRole() {
           >
             {isPending ? (
               <span className="flex items-center gap-2">
-                <Spinner color="text-white dark:text-background" />
                 Submit
+                <Spinner color="text-white dark:text-background" />
               </span>
             ) : (
               "Submit"
