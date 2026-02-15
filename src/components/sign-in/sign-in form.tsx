@@ -137,7 +137,12 @@ export function SignInForm() {
                 name="password"
                 control={form.control}
                 render={({ field, fieldState }) => (
-                  <PasswordField field={field} fieldState={fieldState} />
+                  <PasswordField
+                    field={field}
+                    fieldState={fieldState}
+                    showForgotPassword
+                    placeholder="Enter your password"
+                  />
                 )}
               />
             </FieldGroup>

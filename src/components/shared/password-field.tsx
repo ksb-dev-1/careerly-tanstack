@@ -1,35 +1,43 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { useState } from "react";
-import { ControllerRenderProps, ControllerFieldState } from "react-hook-form";
+import {
+  ControllerRenderProps,
+  ControllerFieldState,
+  FieldValues,
+} from "react-hook-form";
 
-// components
 import { CustomLink } from "../custom-link";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
-// 3rd party
 import { Eye, EyeOff } from "lucide-react";
 
 // ========================================
 // Types
 // ========================================
-type PasswordFieldProps = {
-  field: ControllerRenderProps<any, "password">;
+type PasswordFieldProps<T extends FieldValues> = {
+  field: ControllerRenderProps<T, any>;
   fieldState: ControllerFieldState;
+  label?: string;
+  showForgotPassword?: boolean;
+  placeholder?: string;
 };
 
 // ========================================
-// PasswordField component
+// Component
 // ========================================
-export function PasswordField({ field, fieldState }: PasswordFieldProps) {
+export function PasswordField<T extends FieldValues>({
+  field,
+  fieldState,
+  label = "Password",
+  showForgotPassword = false,
+  placeholder,
+}: PasswordFieldProps<T>) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    field.onChange(e); // VERY IMPORTANT
+    field.onChange(e);
     if (!e.target.value) {
       setShowPassword(false);
     }
@@ -38,19 +46,22 @@ export function PasswordField({ field, fieldState }: PasswordFieldProps) {
   return (
     <Field data-invalid={fieldState.invalid}>
       <div className="flex items-center justify-between">
-        <FieldLabel htmlFor="password">Password</FieldLabel>
-        <CustomLink href="#" className="underline text-sm">
-          Forgot your password?
-        </CustomLink>
+        <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+
+        {showForgotPassword && (
+          <CustomLink href="#" className="underline text-sm">
+            Forgot your password?
+          </CustomLink>
+        )}
       </div>
 
       <div className="relative">
         <Input
           {...field}
-          id="password"
+          id={field.name}
           type={showPassword ? "text" : "password"}
           aria-invalid={fieldState.invalid}
-          placeholder="Enter your password"
+          placeholder={placeholder}
           autoComplete="off"
           onChange={handleChange}
           className="pr-10"
