@@ -1,8 +1,8 @@
 "use client";
 
-// ----------------------------------------
+// ========================================
 // Imports
-// ----------------------------------------
+// ========================================
 import { useState } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -12,10 +12,11 @@ import { UserRole } from "@/generated/prisma/browser";
 
 // lib
 import { authClient } from "@/lib/auth-client";
+import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES } from "@/lib/routes";
 
 // components
-import { CustomLink } from "@/components/custom-link";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { CustomLink } from "./custom-link";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,30 +24,29 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "./ui/dropdown-menu";
 
 // 3rd party
 import { toast } from "sonner";
 import { LogOut, User } from "lucide-react";
-import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES } from "@/lib/routes";
 
-// ----------------------------------------
+// ========================================
 // Types
-// ----------------------------------------
+// ========================================
 interface ProfileDropdownProps {
   image?: string | null;
   role?: UserRole;
 }
 
-// ----------------------------------------
+// ========================================
 // Constants
-// ----------------------------------------
+// ========================================
 
 const AVATAR_SIZE = 32;
 
-// ----------------------------------------
+// ========================================
 // Profile dropdown component
-// ----------------------------------------
+// ========================================
 export function ProfileDropdownMenu({ image, role }: ProfileDropdownProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [isSigningOut, setIsSigningOut] = useState(false);

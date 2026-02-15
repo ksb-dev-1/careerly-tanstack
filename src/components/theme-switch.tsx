@@ -4,13 +4,13 @@
 // Imports
 // ----------------------------------------
 // components
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "./ui/dropdown-menu";
 
 // 3rd party
 import { useTheme } from "next-themes";

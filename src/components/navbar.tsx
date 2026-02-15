@@ -17,19 +17,19 @@ import { authClient } from "@/lib/auth-client";
 import { useAutoCloseOnGreaterThanOrEqualToBreakpoint } from "@/hooks/useAutoCloseModalOnBreakPoint";
 
 // components
-import { CustomLink } from "@/components/custom-link";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { ProfileDropdownMenu } from "@/components/profile-dropdown-menu";
-import { ThemeSwitchMobile } from "@/components/theme-switch-mobile";
+import { CustomLink } from "./custom-link";
+import { ThemeSwitch } from "./theme-switch";
+import { ProfileDropdownMenu } from "./profile-dropdown-menu";
+import { ThemeSwitchMobile } from "./theme-switch-mobile";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
+} from "./ui/sheet";
+import { Skeleton } from "./ui/skeleton";
+import { Button } from "./ui/button";
 
 // 3rd party
 import {
