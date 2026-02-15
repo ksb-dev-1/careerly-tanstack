@@ -121,7 +121,7 @@ export function SignInForm() {
                       {...field}
                       id={field.name}
                       aria-invalid={fieldState.invalid}
-                      placeholder="johndoe@gmail.com"
+                      placeholder="your@email.com"
                       autoComplete="off"
                     />
 

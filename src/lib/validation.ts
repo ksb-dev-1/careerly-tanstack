@@ -18,8 +18,7 @@ export const signUpSchema = z
     password: passwordSchema,
     passwordConfirmation: z
       .string()
-      .min(1, { message: "Please confirm password" })
-      .min(6, { message: "Password must be atleast 6 characters long" }),
+      .min(1, { message: "Please confirm password" }),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords do not match",
@@ -33,10 +32,7 @@ export type SignUpValues = z.infer<typeof signUpSchema>;
 // ========================================
 export const signInSchema = z.object({
   email: z.email({ message: "Please enter a valid email" }),
-  password: z
-    .string()
-    .min(1, { message: "Password is required" })
-    .min(6, { message: "Password must be atleast 6 characters long" }),
+  password: passwordSchema,
   rememberMe: z.boolean().optional(),
 });
 

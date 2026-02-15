@@ -51,6 +51,8 @@ export function SignUpForm() {
     },
   });
 
+  async function onSubmit() {}
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <Card className="max-w-sm w-full mx-auto">
@@ -62,7 +64,92 @@ export function SignUpForm() {
             Fill in the fields below to sign up to your account.
           </CardDescription>
         </CardHeader>
-        <CardContent></CardContent>
+        <CardContent>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FieldGroup>
+              {/* Name */}
+              <Controller
+                name="name"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                    <Input
+                      {...field}
+                      id={field.name}
+                      aria-invalid={fieldState.invalid}
+                      placeholder="John Doe"
+                      autoComplete="off"
+                    />
+
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+
+              {/* Email */}
+              <Controller
+                name="email"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                    <Input
+                      {...field}
+                      id={field.name}
+                      aria-invalid={fieldState.invalid}
+                      placeholder="your@email.com"
+                      autoComplete="off"
+                    />
+
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+
+              {/* Password */}
+              <Controller
+                name="password"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <PasswordField
+                    field={field}
+                    fieldState={fieldState}
+                    label="Password"
+                    placeholder="Create a password"
+                  />
+                )}
+              />
+
+              {/* Confirm Password */}
+              <Controller
+                name="passwordConfirmation"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <PasswordField
+                    field={field}
+                    fieldState={fieldState}
+                    label="Confirm Password"
+                    placeholder="Re-enter your password"
+                  />
+                )}
+              />
+            </FieldGroup>
+
+            {/* Sign up button */}
+            <Button
+              variant="brand"
+              disabled={loading}
+              className="w-full mt-4 font-semibold"
+            >
+              Sign up
+            </Button>
+          </form>
+        </CardContent>
         <CardFooter>
           <div className="flex w-full justify-center">
             <p className="text-muted-foreground text-center text-sm">
