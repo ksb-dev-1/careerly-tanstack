@@ -27,7 +27,11 @@ export async function proxy(request: NextRequest) {
 
   // 1️⃣ Not logged in
   if (!session?.user.id) {
-    if (pathname === ROUTES.HOME || pathname === ROUTES.SIGN_IN) {
+    if (
+      pathname === ROUTES.HOME ||
+      pathname === ROUTES.SIGN_IN ||
+      pathname === ROUTES.SIGN_UP
+    ) {
       return NextResponse.next();
     }
     return NextResponse.redirect(new URL(ROUTES.HOME, request.url));

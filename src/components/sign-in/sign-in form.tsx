@@ -9,10 +9,12 @@ import { useRouter } from "next/navigation";
 // lib
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
+import { signInSchema, SignInValues } from "@/lib/validation";
 
 // components
+import { PasswordField } from "../shared/password-field";
 import { Spinner } from "../spinner";
-import { PasswordField } from "./password-field";
+import { CustomLink } from "../custom-link";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -20,6 +22,7 @@ import {
   CardTitle,
   CardContent,
   CardDescription,
+  CardFooter,
 } from "../ui/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
@@ -27,7 +30,6 @@ import { Alert } from "../ui/alert";
 import { Checkbox } from "../ui/checkbox";
 
 // 3rd party
-import z from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -35,21 +37,11 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 // ========================================
-// Zod schema
-// ========================================
-const signInSchema = z.object({
-  email: z.email({ message: "Please enter a valid email" }),
-  password: z.string().min(1, { message: "Password is required" }),
-  rememberMe: z.boolean().optional(),
-});
-type SignInValues = z.infer<typeof signInSchema>;
-
-// ========================================
 // SignInForm component
 // ========================================
 export function SignInForm() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("tyhthtyhnth");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [loadingProvider, setLoadingProvider] = useState<
     "google" | "github" | null
   >(null);
@@ -101,13 +93,13 @@ export function SignInForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <Card className="max-w-md w-full mx-auto">
+      <Card className="max-w-sm w-full mx-auto">
         <CardHeader>
-          <CardTitle className="text-xl font-extrabold">
+          <CardTitle className="text-lg font-bold">
             Sign in to <span className="text-brand">Careerly</span>
           </CardTitle>
           <CardDescription>
-            Enter your email and password below to login into your account
+            Fill in the fields below to sign in to your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -162,7 +154,7 @@ export function SignInForm() {
                     onCheckedChange={(checked) =>
                       field.onChange(checked === true)
                     }
-                    className={`${field.value ? "bg-brand! text-white! dark:text-background! border-brand!" : ""}`}
+                    className={`cursor-pointer ${field.value ? "bg-brand! text-white! dark:text-background! border-brand!" : ""}`}
                   />
                   <FieldLabel htmlFor={field.name} className="cursor-pointer">
                     Remember me
@@ -172,38 +164,49 @@ export function SignInForm() {
             />
 
             {/* Sign in button */}
-            <Button variant="brand" disabled={loading} className="w-full mt-4">
+            <Button
+              variant="brand"
+              disabled={loading}
+              className="w-full mt-4 font-semibold"
+            >
               Sign in
             </Button>
           </form>
 
-          <div className="relative border-t my-8">
-            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-3 text-sm text-slate-600 dark:text-muted-foreground">
-              Or continue with
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-4 border-t pt-6 mt-6">
+            {/* Sign in with google button */}
             <Button
               variant="outline"
               disabled={loadingProvider !== null}
               onClick={() => handleSocialSignIn("google")}
               className="w-full"
             >
-              <FcGoogle /> Sign in with Google{" "}
-              {loadingProvider === "google" && <Spinner />}
+              <FcGoogle /> Google {loadingProvider === "google" && <Spinner />}
             </Button>
+
+            {/* Sign in with github button */}
             <Button
               variant="outline"
               disabled={loadingProvider !== null}
               onClick={() => handleSocialSignIn("github")}
               className="w-full"
             >
-              <FaGithub /> Sign in with Github
+              <FaGithub /> Github
               {loadingProvider === "github" && <Spinner />}
             </Button>
           </div>
         </CardContent>
+
+        <CardFooter>
+          <div className="flex w-full justify-center">
+            <p className="text-muted-foreground text-center text-sm">
+              Don&apos;t have an account?{" "}
+              <CustomLink href="/sign-up" className="underline">
+                Sign up
+              </CustomLink>
+            </p>
+          </div>
+        </CardFooter>
       </Card>
     </div>
   );
