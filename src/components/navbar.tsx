@@ -18,7 +18,7 @@ import { Session as UserSession } from "@/lib/auth";
 import { useAutoCloseOnGreaterThanOrEqualToBreakpoint } from "@/hooks/useAutoCloseModalOnBreakPoint";
 
 // components
-import { CustomLink } from "./custom-link";
+import { CustomLink } from "./shared/custom-link";
 import { ThemeSwitch } from "./theme-switch";
 import { ProfileDropdownMenu } from "./profile-dropdown-menu";
 import { ThemeSwitchMobile } from "./theme-switch-mobile";

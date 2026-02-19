@@ -12,10 +12,9 @@ import { ROUTES } from "@/lib/routes";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
 
 // components
-import { CustomLink } from "../custom-link";
+import { ActionButton } from "../shared/action-button";
+import { CustomLink } from "../shared/custom-link";
 import { PasswordField } from "../shared/password-field";
-import { Spinner } from "../spinner";
-import { Button } from "../ui/button";
 import {
   Card,
   CardHeader,
@@ -171,13 +170,9 @@ export function SignUpForm() {
             </FieldGroup>
 
             {/* Sign up button */}
-            <Button
-              variant="brand"
-              disabled={loading}
-              className="w-full mt-4 font-semibold"
-            >
-              Create an account {loading && <Spinner />}
-            </Button>
+            <ActionButton loading={loading} className="w-full mt-4">
+              Create an account
+            </ActionButton>
           </form>
         </CardContent>
         <CardFooter>

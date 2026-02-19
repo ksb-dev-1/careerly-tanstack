@@ -25,15 +25,12 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // console.log("Session : ", session?.user.id);
-
   // 1️⃣ Not logged in
   if (!session?.user.id) {
     if (
       pathname === ROUTES.HOME ||
       pathname === ROUTES.SIGN_IN ||
       pathname === ROUTES.SIGN_UP
-      // pathname === ROUTES.VERIFY_EMAIL
     ) {
       return NextResponse.next();
     }

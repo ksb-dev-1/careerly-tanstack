@@ -17,16 +17,13 @@ export const auth = betterAuth({
   },
   emailVerification: {
     sendOnSignUp: true,
+    autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }) => {
-      const customUrl = new URL(url);
-
-      customUrl.searchParams.set("callbackURL", "/sign-in");
-
       void sendEmail({
         from: process.env.EMAIL_FROM!,
         to: user.email,
         name: user.name,
-        url: customUrl.toString(),
+        url,
       });
     },
   },

@@ -1,15 +1,21 @@
 "use client";
 
+// ========================================
+// Imports
+// ========================================
 import { useState } from "react";
+
+// components
+import { CustomLink } from "../shared/custom-link";
+import { Field, FieldError, FieldLabel } from "../ui/field";
+import { Input } from "../ui/input";
+
+// 3rd party
 import {
   ControllerRenderProps,
   ControllerFieldState,
   FieldValues,
 } from "react-hook-form";
-
-import { CustomLink } from "../custom-link";
-import { Field, FieldError, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
 
 import { Eye, EyeOff } from "lucide-react";
 

@@ -13,9 +13,8 @@ import { UserRole } from "@/generated/prisma/browser";
 import { assignUserRole } from "@/actions/assign-user-role";
 
 // components
-import { Spinner } from "@/components/spinner";
+import { ActionButton } from "../shared/action-button";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 // // 3rd party
 // import { useSession } from "next-auth/react";
@@ -118,21 +117,13 @@ export function SelectUserRole() {
 
         {/* Submit Button */}
         <div className="flex justify-end mt-6">
-          <Button
-            type="button"
+          <ActionButton
             onClick={handleRoleAssign}
-            disabled={isPending}
-            className="bg-brand hover:bg-brand-hover rounded-full font-semibold"
+            loading={isPending}
+            className="w-fit rounded-full"
           >
-            {isPending ? (
-              <span className="flex items-center gap-2">
-                Submit
-                <Spinner color="text-white dark:text-background" />
-              </span>
-            ) : (
-              "Submit"
-            )}
-          </Button>
+            Submit
+          </ActionButton>
         </div>
       </Card>
     </div>

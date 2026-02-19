@@ -36,8 +36,7 @@ export default function VerifyEmail({ url, name = "there" }: VerifyEmailProps) {
 
             <Text style={text}>
               Welcome to <strong>Careerly</strong> 👋 Please confirm your email
-              address to activate your account and start exploring
-              opportunities.
+              address to activate your account and start exploring.
             </Text>
 
             <Section style={buttonContainer}>

@@ -15,7 +15,7 @@ import { authClient } from "@/lib/auth-client";
 import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES, ROUTES } from "@/lib/routes";
 
 // components
-import { CustomLink } from "./custom-link";
+import { CustomLink } from "./shared/custom-link";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
   DropdownMenu,

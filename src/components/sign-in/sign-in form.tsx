@@ -12,9 +12,11 @@ import { ROUTES } from "@/lib/routes";
 import { signInSchema, SignInValues } from "@/lib/validation";
 
 // components
-import { CustomLink } from "../custom-link";
+import { ActionButton } from "../shared/action-button";
+import { Spinner } from "../shared/spinner";
+import { CustomLink } from "../shared/custom-link";
 import { PasswordField } from "../shared/password-field";
-import { Spinner } from "../spinner";
+
 import { Button } from "../ui/button";
 import {
   Card,
@@ -180,13 +182,9 @@ export function SignInForm() {
             />
 
             {/* Sign in button */}
-            <Button
-              variant="brand"
-              disabled={loading}
-              className="w-full mt-4 font-semibold"
-            >
-              Sign in {loading && <Spinner />}
-            </Button>
+            <ActionButton loading={loading} className="w-full mt-4">
+              Sign in
+            </ActionButton>
           </form>
 
           <div className="grid grid-cols-2 gap-4 border-t pt-6 mt-6">
