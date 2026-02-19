@@ -25,6 +25,7 @@ export const auth = betterAuth({
       void sendEmail({
         from: process.env.EMAIL_FROM!,
         to: user.email,
+        name: user.name,
         url: customUrl.toString(),
       });
     },

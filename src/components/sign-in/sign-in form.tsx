@@ -118,6 +118,7 @@ export function SignInForm() {
               {errorMessage}
             </Alert>
           )}
+
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup>
               {/* Email */}

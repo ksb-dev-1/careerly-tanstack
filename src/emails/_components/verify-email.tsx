@@ -13,13 +13,10 @@ import {
 
 type VerifyEmailProps = {
   url: string;
-  firstName?: string;
+  name?: string;
 };
 
-export default function VerifyEmail({
-  url,
-  firstName = "there",
-}: VerifyEmailProps) {
+export default function VerifyEmail({ url, name = "there" }: VerifyEmailProps) {
   return (
     <Html lang="en">
       <Head />
@@ -34,7 +31,7 @@ export default function VerifyEmail({
             <Heading style={heading}>Verify your email</Heading>
 
             <Text style={text}>
-              Hi <span style={highlight}>{firstName}</span>,
+              Hi <span style={highlight}>{name}</span>,
             </Text>
 
             <Text style={text}>

@@ -41,7 +41,9 @@ export default function RootLayout({
         <Suspense>
           <NavigationProgress />
         </Suspense>
-        <Providers>{children}</Providers>
+        <Providers>
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );
