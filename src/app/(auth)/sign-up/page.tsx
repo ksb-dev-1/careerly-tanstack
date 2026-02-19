@@ -1,22 +1,15 @@
-// ========================================
-// Imports
-// ========================================
+// External libraries
 import { Metadata } from "next";
 
-// components
-import { SignUpForm } from "@/components/sign-up/sign-up-form";
+// Absolute imports
+import { SignUpForm } from "@/components/auth/sign-up-form";
 
-// ========================================
-// Metadata
-// ========================================
+// Page metadata
 export const metadata: Metadata = {
   title: "Sign up - Careerly",
-  description: "Create your careerly account",
 };
 
-// ========================================
-// Sign-in page
-// ========================================
+// Sign-up page component
 export default function SignUpPage() {
   return <SignUpForm />;
 }

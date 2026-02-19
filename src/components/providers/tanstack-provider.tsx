@@ -22,12 +22,12 @@
 
 "use client";
 
-// lib
-import { getTanstackQueryClient } from "@/lib/getTanstackQueryClient";
-
-// 3rd party
+// External libraries
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+// Absolute imports
+import { getTanstackQueryClient } from "@/lib/getTanstackQueryClient";
 
 export function TanstackProvider({ children }: { children: React.ReactNode }) {
   // NOTE: Avoid useState when initializing the query client if you don't

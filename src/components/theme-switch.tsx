@@ -1,9 +1,15 @@
 "use client";
 
-// ----------------------------------------
+// ========================================
 // Imports
-// ----------------------------------------
-// components
+// ========================================
+
+// External libraries
+import { useTheme } from "next-themes";
+
+import { Computer, Moon, Sun } from "lucide-react";
+
+// Relative imports
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -12,13 +18,9 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-// 3rd party
-import { useTheme } from "next-themes";
-import { Computer, Moon, Sun } from "lucide-react";
-
-// ----------------------------------------
+// ========================================
 // Theme switch component
-// ----------------------------------------
+// ========================================
 export function ThemeSwitch() {
   const { setTheme } = useTheme();
 

@@ -1,13 +1,15 @@
-// ========================================
-// Imports
-// ========================================
+// External libraries
+import { Metadata } from "next";
 
-// components
-import { SelectUserRole } from "@/components/select-user-role/select-user-role";
+// Internal absolute imports (@/)
+import { SelectUserRole } from "./select-user-role";
 
-// ========================================
-// Select role page
-// ========================================
+// Page metadata
+export const metadata: Metadata = {
+  title: "Select your role - Careerly",
+};
+
+// Select role page component
 export default async function SelectRolePage() {
   return <SelectUserRole />;
 }

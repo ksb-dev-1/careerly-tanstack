@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+// External libraries
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export function ThemeProvider({

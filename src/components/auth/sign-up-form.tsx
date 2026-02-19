@@ -3,18 +3,25 @@
 // ========================================
 // Imports
 // ========================================
+
+// External libraries
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-// lib
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+
+// Absolute imports
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
 
-// components
+// Relative imports
 import { ActionButton } from "../shared/action-button";
 import { CustomLink } from "../shared/custom-link";
 import { PasswordField } from "../shared/password-field";
+
 import {
   Card,
   CardHeader,
@@ -27,11 +34,9 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Alert } from "../ui/alert";
 
-// 3rd party
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-
+// ========================================
+// Sign-up form component
+// ========================================
 export function SignUpForm() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -46,15 +51,12 @@ export function SignUpForm() {
     },
   });
 
+  // Reset form on mount
   useEffect(() => {
-    form.reset({
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-    });
-  }, []);
+    form.reset(form.formState.defaultValues);
+  }, [form]);
 
+  // Handle form submit
   async function onSubmit({ email, password, name }: SignUpValues) {
     setError(null);
 
@@ -85,7 +87,9 @@ export function SignUpForm() {
             Fill in the fields below to sign up to your account.
           </CardDescription>
         </CardHeader>
+
         <CardContent>
+          {/* Error message */}
           {error && (
             <Alert
               variant="custom"
@@ -94,6 +98,7 @@ export function SignUpForm() {
               {error}
             </Alert>
           )}
+
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup>
               {/* Name */}
@@ -175,6 +180,7 @@ export function SignUpForm() {
             </ActionButton>
           </form>
         </CardContent>
+
         <CardFooter>
           <div className="flex w-full justify-center">
             <p className="text-muted-foreground text-center text-sm">

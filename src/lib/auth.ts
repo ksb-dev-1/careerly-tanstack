@@ -1,10 +1,10 @@
-// lib
-import { sendEmail } from "@/emails/_lib/send-verification-email";
-import { prisma } from "@/lib/prisma";
-
-// 3rd party
+// External libraries
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+
+// Absolute imports
+import { sendEmail } from "@/emails/_lib/send-verification-email";
+import { prisma } from "@/lib/prisma";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -12,8 +12,6 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
-    // requireEmailVerification: true,
-    // autoSignIn: false,
   },
   emailVerification: {
     sendOnSignUp: true,

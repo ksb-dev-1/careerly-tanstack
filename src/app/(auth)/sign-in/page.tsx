@@ -1,22 +1,15 @@
-// ========================================
-// Imports
-// ========================================
+// External libraries
 import { Metadata } from "next";
 
-// components
-import { SignInForm } from "@/components/sign-in/sign-in form";
+// Internal absolute imports (@/)
+import { SignInForm } from "@/components/auth/sign-in form";
 
-// ========================================
-// Metadata
-// ========================================
+// Page metadata
 export const metadata: Metadata = {
   title: "Sign in - Careerly",
-  description: "Sign in to your Careerly account",
 };
 
-// ========================================
-// Sign-in page
-// ========================================
+// Sign-in page component
 export default function SignInPage() {
   return <SignInForm />;
 }

@@ -3,18 +3,23 @@
 // ========================================
 // Imports
 // ========================================
+
+// External libraries
 import { useState } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
-// generated
+import { toast } from "sonner";
+
+import { LogOut, User } from "lucide-react";
+
+// Absolute imports
 import { UserRole } from "@/generated/prisma/browser";
 
-// lib
 import { authClient } from "@/lib/auth-client";
 import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES, ROUTES } from "@/lib/routes";
 
-// components
+// Relative imports
 import { CustomLink } from "./shared/custom-link";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
@@ -26,22 +31,13 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-// 3rd party
-import { toast } from "sonner";
-import { LogOut, User } from "lucide-react";
-
-// ========================================
 // Types
-// ========================================
 interface ProfileDropdownProps {
   image?: string | null;
   role?: UserRole;
 }
 
-// ========================================
 // Constants
-// ========================================
-
 const AVATAR_SIZE = 32;
 
 // ========================================

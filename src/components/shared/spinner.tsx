@@ -1,25 +1,19 @@
-// ========================================
-// Imports
-// ========================================
+"use client";
 
-// lib
-import { cn } from "@/lib/utils";
-
-// 3rd party
+// External libraries
 import { LoaderCircle } from "lucide-react";
 
-// ========================================
+// Absolute imports
+import { cn } from "@/lib/utils";
+
 // Types
-// ========================================
 interface SpinnerProps {
   className?: string;
   size?: number;
   color?: string;
 }
 
-// ========================================
 // Spinner component
-// ========================================
 export function Spinner({ size = 16, color, className }: SpinnerProps) {
   return (
     <LoaderCircle

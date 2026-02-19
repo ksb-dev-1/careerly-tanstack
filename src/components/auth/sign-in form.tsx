@@ -3,15 +3,24 @@
 // ========================================
 // Imports
 // ========================================
+
+// External libraries
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-// lib
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+
+// Absolute imports
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
 import { signInSchema, SignInValues } from "@/lib/validation";
 
-// components
+// Relative imports
 import { ActionButton } from "../shared/action-button";
 import { Spinner } from "../shared/spinner";
 import { CustomLink } from "../shared/custom-link";
@@ -31,18 +40,10 @@ import { Input } from "../ui/input";
 import { Alert } from "../ui/alert";
 import { Checkbox } from "../ui/checkbox";
 
-// 3rd party
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
-
 // ========================================
-// SignInForm component
+// Sign-in form component
 // ========================================
 export function SignInForm() {
-  // const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loadingProvider, setLoadingProvider] = useState<
     "google" | "github" | null
@@ -58,14 +59,12 @@ export function SignInForm() {
     },
   });
 
+  // Reset form on mount
   useEffect(() => {
-    form.reset({
-      email: "",
-      password: "",
-      rememberMe: false,
-    });
-  }, []);
+    form.reset(form.formState.defaultValues);
+  }, [form]);
 
+  // Handle form submit
   async function onSubmit({ email, password, rememberMe }: SignInValues) {
     setErrorMessage(null);
 
@@ -83,6 +82,7 @@ export function SignInForm() {
     }
   }
 
+  // Handle social sign-in
   async function handleSocialSignIn(provider: "github" | "google") {
     setLoadingProvider(provider);
     setErrorMessage(null);
@@ -94,8 +94,9 @@ export function SignInForm() {
 
     if (result?.error) {
       setErrorMessage(result.error.message ?? "Something went wrong");
-      setLoadingProvider(null);
     }
+
+    setLoadingProvider(null);
   }
 
   const loading = form.formState.isSubmitting;

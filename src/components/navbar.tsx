@@ -3,21 +3,31 @@
 // ========================================
 // Imports
 // ========================================
+
+// External libraries
 import { Suspense, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// generated
+import { toast } from "sonner";
+
+import {
+  Bookmark,
+  BriefcaseBusiness,
+  FileText,
+  LogOut,
+  Menu,
+} from "lucide-react";
+
+// Absolute imports
 import { UserRole } from "@/generated/prisma/browser";
 
-// lib
 import { authClient } from "@/lib/auth-client";
 import { Session as UserSession } from "@/lib/auth";
 
-// hooks
 import { useAutoCloseOnGreaterThanOrEqualToBreakpoint } from "@/hooks/useAutoCloseModalOnBreakPoint";
 
-// components
+// Relative imports
 import { CustomLink } from "./shared/custom-link";
 import { ThemeSwitch } from "./theme-switch";
 import { ProfileDropdownMenu } from "./profile-dropdown-menu";
@@ -32,20 +42,7 @@ import {
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
 
-// 3rd party
-import {
-  Bookmark,
-  BriefcaseBusiness,
-  FileText,
-  LogOut,
-  Menu,
-  User,
-} from "lucide-react";
-import { toast } from "sonner";
-
-// ========================================
 // Types
-// ========================================
 type Session = typeof authClient.$Infer.Session | null;
 
 type NavItem = {
@@ -54,9 +51,7 @@ type NavItem = {
   icon: React.ReactNode;
 };
 
-// ========================================
 // Navigation items
-// ========================================
 const JOB_SEEKER_NAV_ITEMS: NavItem[] = [
   {
     href: "/job-seeker/jobs?page=1",

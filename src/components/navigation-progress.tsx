@@ -1,8 +1,6 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
+// External libraries
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import NProgress from "nprogress";
@@ -16,9 +14,7 @@ NProgress.configure({
   minimum: 0.08,
 });
 
-// ========================================
-// NavigationProgress component
-// ========================================
+// Navigation progress component
 export function NavigationProgress() {
   const pathname = usePathname();
   const searchParams = useSearchParams();

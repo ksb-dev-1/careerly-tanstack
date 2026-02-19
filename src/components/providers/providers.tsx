@@ -1,6 +1,6 @@
 "use client";
 
-// components
+// Relative imports
 import { ThemeProvider } from "./theme-provider";
 import { TanstackProvider } from "./tanstack-provider";
 import { Toaster } from "../ui/sonner";

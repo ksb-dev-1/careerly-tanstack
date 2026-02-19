@@ -1,22 +1,17 @@
-// ========================================
-// Imports
-// ========================================
-
-// components
-import { Button } from "@/components/ui/button";
+// Absolute imports
 import { cn } from "@/lib/utils";
 
-/// 3rd party
-import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+// Relative imports
 import { Spinner } from "./spinner";
 
+// Types
 interface ActionButtonProps extends React.ComponentProps<typeof Button> {
   loading: boolean;
 }
 
-// ========================================
-// Loading button
-// ========================================
+// Action button component
 export function ActionButton({
   loading,
   disabled,

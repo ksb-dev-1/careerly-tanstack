@@ -1,7 +1,8 @@
+// External libraries
 import { cache } from "react";
 import { headers } from "next/headers";
 
-// auth
+// Absolute imports
 import { auth } from "@/lib/auth";
 
 export const getServerSession = cache(async () => {

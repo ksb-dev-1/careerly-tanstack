@@ -1,16 +1,10 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
-
-// 3rd party
+// External libraries
 import { useTheme } from "next-themes";
 import { Computer, Sun, Moon } from "lucide-react";
 
-// ========================================
-// Theme switch component
-// ========================================
+// Theme switch mobile component
 export function ThemeSwitchMobile() {
   const { theme, setTheme } = useTheme();
 

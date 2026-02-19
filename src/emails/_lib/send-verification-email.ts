@@ -23,10 +23,3 @@ export async function sendEmail({ from, to, name, url }: SendEmailParams) {
     }),
   });
 }
-
-// await resend.emails.send({
-//   from,
-//   to,
-//   subject: "Verify your Careerly account",
-//   text: url,
-// });
