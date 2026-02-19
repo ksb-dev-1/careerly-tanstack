@@ -52,3 +52,6 @@ export const auth = betterAuth({
   // If your application runs on a port other than 3000, you must add it to the trustedOrigins
   //   trustedOrigins: ["http://localhost:3001"],
 });
+
+export type Session = typeof auth.$Infer.Session;
+export type User = typeof auth.$Infer.Session.user;

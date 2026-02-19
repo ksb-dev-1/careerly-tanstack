@@ -12,6 +12,7 @@ import { UserRole } from "@/generated/prisma/browser";
 
 // lib
 import { authClient } from "@/lib/auth-client";
+import { Session as UserSession } from "@/lib/auth";
 
 // hooks
 import { useAutoCloseOnGreaterThanOrEqualToBreakpoint } from "@/hooks/useAutoCloseModalOnBreakPoint";
@@ -43,14 +44,19 @@ import {
 import { toast } from "sonner";
 
 // ========================================
-// Navigation items
+// Types
 // ========================================
+type Session = typeof authClient.$Infer.Session | null;
+
 type NavItem = {
   href: string;
   label: string;
   icon: React.ReactNode;
 };
 
+// ========================================
+// Navigation items
+// ========================================
 const JOB_SEEKER_NAV_ITEMS: NavItem[] = [
   {
     href: "/job-seeker/jobs?page=1",
@@ -78,10 +84,15 @@ const EMPLOYER_NAV_ITEMS: NavItem[] = [
 ];
 
 // ========================================
-// Navbar wrapper component
+// Navbar Wrapper
 // ========================================
-function NavbarWrapper({ children }: { children: React.ReactNode }) {
-  const { data: session } = authClient.useSession();
+function NavbarWrapper({
+  children,
+  session,
+}: {
+  children: React.ReactNode;
+  session: Session;
+}) {
   const path = usePathname();
 
   return (
@@ -89,11 +100,11 @@ function NavbarWrapper({ children }: { children: React.ReactNode }) {
       <nav className="w-full flex items-center justify-between px-4">
         <div className="flex items-center">
           <Suspense>
-            <SideMenu />
+            <SideMenu session={session} />
           </Suspense>
 
-          {session?.user.role === UserRole.JOB_SEEKER ||
-          session?.user.role === UserRole.EMPLOYER ? (
+          {session?.user?.role === UserRole.JOB_SEEKER ||
+          session?.user?.role === UserRole.EMPLOYER ? (
             <Link
               href="/"
               className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
@@ -121,35 +132,33 @@ function NavbarWrapper({ children }: { children: React.ReactNode }) {
 }
 
 // ========================================
-// Navbar loading component
+// Loading
 // ========================================
 function NavbarLoading() {
   return (
-    <NavbarWrapper>
-      <div className="flex items-center gap-2">
-        {Array.from({ length: 3 }, (_, i) => (
-          <Skeleton
-            key={`skeleton-${i}`}
-            className="skeleton flex items-center gap-2 w-18 h-8"
-          />
-        ))}
-        <span className="inline-block h-5 border-r-2 mx-2" />
-
-        <Skeleton className="skeleton h-8 w-8 rounded-xl" />
-      </div>
-    </NavbarWrapper>
+    <header className="w-full border-b h-16 bg-background flex items-center justify-center">
+      <nav className="w-full flex items-center justify-between px-4">
+        <Skeleton className="h-8 w-24" />
+        <div className="flex items-center gap-2">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton key={i} className="h-8 w-20" />
+          ))}
+          <Skeleton className="h-8 w-8 rounded-xl" />
+        </div>
+      </nav>
+    </header>
   );
 }
 
 // ========================================
-// Navbar without auth component
+// Without Auth
 // ========================================
-function NavbarWithoutAuth() {
+function NavbarWithoutAuth({ session }: { session: Session }) {
   const path = usePathname();
 
   return (
-    <NavbarWrapper>
-      <Button asChild size="sm" variant="outline" className="ml-2">
+    <NavbarWrapper session={session}>
+      <Button asChild size="sm" variant="outline">
         <CustomLink href="/sign-in" isActive={path === "/sign-in"}>
           Sign in
         </CustomLink>
@@ -159,38 +168,27 @@ function NavbarWithoutAuth() {
 }
 
 // ========================================
-// Navbar without auth component
+// With Auth (No Role)
 // ========================================
-function NavbarWithAuth() {
-  const { data: session } = authClient.useSession();
-
-  const role =
-    session?.user.role &&
-    Object.values(UserRole).includes(session.user.role as UserRole)
-      ? (session.user.role as UserRole)
-      : undefined;
-
+function NavbarWithAuth({ session }: { session: UserSession }) {
   return (
-    <NavbarWrapper>
-      <ProfileDropdownMenu image={session?.user.image} role={role} />
+    <NavbarWrapper session={session}>
+      <ProfileDropdownMenu
+        image={session.user.image}
+        role={session.user.role as UserRole}
+      />
     </NavbarWrapper>
   );
 }
 
 // ========================================
-// Job seeker navbar component
+// Job Seeker
 // ========================================
-function JobSeekerNavbar() {
-  const { data: session } = authClient.useSession();
+function JobSeekerNavbar({ session }: { session: UserSession }) {
   const path = usePathname();
-  const role =
-    session?.user.role &&
-    Object.values(UserRole).includes(session.user.role as UserRole)
-      ? (session.user.role as UserRole)
-      : undefined;
 
   return (
-    <NavbarWrapper>
+    <NavbarWrapper session={session}>
       <div className="flex items-center gap-2">
         {JOB_SEEKER_NAV_ITEMS.map(({ href, label, icon }) => {
           const isActive = path === href.split("?")[0];
@@ -201,7 +199,7 @@ function JobSeekerNavbar() {
               asChild
               size="sm"
               variant="ghost"
-              className={`${isActive ? "text-brand hover:text-brand" : ""}`}
+              className={isActive ? "text-brand hover:text-brand" : ""}
             >
               <CustomLink href={href} prefetch={false} isActive={isActive}>
                 {icon}
@@ -213,25 +211,22 @@ function JobSeekerNavbar() {
         <span className="inline-block h-5 border-r-2" />
       </div>
 
-      <ProfileDropdownMenu image={session?.user.image} role={role} />
+      <ProfileDropdownMenu
+        image={session.user.image}
+        role={session.user.role as UserRole}
+      />
     </NavbarWrapper>
   );
 }
 
 // ========================================
-// Employer navbar component
+// Employer
 // ========================================
-function EmployerNavbar() {
-  const { data: session } = authClient.useSession();
+function EmployerNavbar({ session }: { session: UserSession }) {
   const path = usePathname();
-  const role =
-    session?.user.role &&
-    Object.values(UserRole).includes(session.user.role as UserRole)
-      ? (session.user.role as UserRole)
-      : undefined;
 
   return (
-    <NavbarWrapper>
+    <NavbarWrapper session={session}>
       <div className="flex items-center gap-2">
         {EMPLOYER_NAV_ITEMS.map(({ href, label, icon }) => {
           const isActive = path === href.split("?")[0];
@@ -242,7 +237,7 @@ function EmployerNavbar() {
               asChild
               size="sm"
               variant="ghost"
-              className={`${isActive ? "text-brand hover:text-brand" : ""}`}
+              className={isActive ? "text-brand hover:text-brand" : ""}
             >
               <CustomLink href={href} prefetch={false} isActive={isActive}>
                 {icon}
@@ -254,13 +249,18 @@ function EmployerNavbar() {
         <span className="inline-block h-5 border-r-2" />
       </div>
 
-      <ProfileDropdownMenu image={session?.user.image} role={role} />
+      <ProfileDropdownMenu
+        image={session.user.image}
+        role={session.user.role as UserRole}
+      />
     </NavbarWrapper>
   );
 }
 
-export function SideMenu() {
-  const { data: session, isPending } = authClient.useSession();
+// ========================================
+// Side Menu
+// ========================================
+function SideMenu({ session }: { session: Session }) {
   const [isOpen, setIsOpen] = useState(false);
   const path = usePathname();
 
@@ -268,35 +268,21 @@ export function SideMenu() {
 
   const handleSignOut = async () => {
     setIsOpen(false);
-
     try {
       await authClient.signOut();
       toast.success("Signed out successfully");
-    } catch (error) {
-      console.error("Sign out error:", error);
-      toast.error("Failed to sign out. Please try again.");
+    } catch {
+      toast.error("Failed to sign out.");
     }
   };
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      {isPending ? (
-        <Skeleton
-          className="mr-3 md:hidden rounded-md h-9 w-9"
-          aria-label="Open navigation loading"
-        />
-      ) : (
-        <SheetTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="mr-3 md:hidden"
-            aria-label="Open navigation menu"
-          >
-            <Menu />
-          </Button>
-        </SheetTrigger>
-      )}
+      <SheetTrigger asChild>
+        <Button variant="outline" size="icon" className="mr-3 md:hidden">
+          <Menu />
+        </Button>
+      </SheetTrigger>
 
       <SheetContent side="left" className="w-48 gap-0 p-0!">
         <SheetHeader className="p-0!">
@@ -305,127 +291,32 @@ export function SideMenu() {
           </SheetTitle>
         </SheetHeader>
 
-        <div className="h-full flex flex-col justify-between">
-          <div className="flex flex-col">
-            {!session?.user.id && (
-              <nav className="flex flex-col gap-1 mt-4">
-                <Button
-                  asChild
-                  variant="link"
-                  size="sm"
-                  className="justify-start w-fit"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <CustomLink href="/sign-in" isActive={path === "/sign-in"}>
-                    Sign In
-                  </CustomLink>
-                </Button>
-              </nav>
+        <div className="h-full flex flex-col justify-between p-4">
+          <div className="flex flex-col gap-2">
+            {!session?.user?.id && (
+              <CustomLink href="/sign-in" isActive={path === "/sign-in"}>
+                Sign In
+              </CustomLink>
             )}
 
-            {session?.user.role === UserRole.JOB_SEEKER && (
-              <nav className="flex flex-col gap-2 mt-4">
-                {JOB_SEEKER_NAV_ITEMS.map(({ href, label, icon }) => {
-                  const isActive = path === href.split("?")[0];
-
-                  return (
-                    <Button
-                      key={href}
-                      asChild
-                      size="sm"
-                      variant="link"
-                      onClick={() => setIsOpen(false)}
-                      className={`${isActive ? "text-brand hover:text-brand" : ""} justify-start w-fit`}
-                    >
-                      <CustomLink
-                        href={href}
-                        prefetch={false}
-                        isActive={isActive}
-                      >
-                        {icon}
-                        {label}
-                      </CustomLink>
-                    </Button>
-                  );
-                })}
-              </nav>
-            )}
-
-            {session?.user.role === UserRole.EMPLOYER && (
-              <nav className="flex flex-col gap-2 mt-4">
-                {EMPLOYER_NAV_ITEMS.map(({ href, label, icon }) => {
-                  const isActive = path === href.split("?")[0];
-
-                  return (
-                    <Button
-                      key={href}
-                      asChild
-                      size="sm"
-                      variant="link"
-                      onClick={() => setIsOpen(false)}
-                      className={`${isActive ? "text-brand hover:text-brand" : ""} justify-start w-fit`}
-                    >
-                      <CustomLink
-                        href={href}
-                        prefetch={false}
-                        isActive={isActive}
-                      >
-                        {icon}
-                        {label}
-                      </CustomLink>
-                    </Button>
-                  );
-                })}
-              </nav>
-            )}
-
-            {session?.user.role === UserRole.JOB_SEEKER && (
-              <Button
-                asChild
-                variant="link"
-                onClick={() => setIsOpen(false)}
-                className={`${path === "/job-seeker/profile" ? "text-brand hover:text-brand" : ""} justify-start w-fit mt-2`}
-              >
-                <CustomLink
-                  href="/job-seeker/profile"
-                  prefetch={false}
-                  isActive={path === "/job-seeker/profile"}
-                >
-                  <User className="h-4 w-4" aria-hidden="true" />
-                  Profile
+            {session?.user?.role === UserRole.JOB_SEEKER &&
+              JOB_SEEKER_NAV_ITEMS.map(({ href, label }) => (
+                <CustomLink key={href} href={href}>
+                  {label}
                 </CustomLink>
-              </Button>
-            )}
+              ))}
 
-            {session?.user.role === UserRole.EMPLOYER && (
-              <Button
-                asChild
-                variant="link"
-                onClick={() => setIsOpen(false)}
-                className={`${path === "/employer/profile" ? "text-brand hover:text-brand" : ""} justify-start w-fit mt-2`}
-              >
-                <CustomLink
-                  href="/employer/profile"
-                  prefetch={false}
-                  isActive={path === "/employer/profile"}
-                >
-                  <User className="h-4 w-4" aria-hidden="true" />
-                  Profile
+            {session?.user?.role === UserRole.EMPLOYER &&
+              EMPLOYER_NAV_ITEMS.map(({ href, label }) => (
+                <CustomLink key={href} href={href}>
+                  {label}
                 </CustomLink>
-              </Button>
-            )}
+              ))}
 
-            {session?.user.id && (
-              <Button
-                asChild
-                variant="link"
-                onClick={handleSignOut}
-                className="justify-start w-fit mt-1"
-              >
-                <span className="flex items-center gap-2">
-                  <LogOut className="h-4 w-4" aria-hidden="true" />
-                  Sign out
-                </span>
+            {session?.user?.id && (
+              <Button variant="link" onClick={handleSignOut}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Sign out
               </Button>
             )}
           </div>
@@ -438,26 +329,20 @@ export function SideMenu() {
 }
 
 // ========================================
-// Navbar component
+// Main Navbar
 // ========================================
 export function Navbar() {
   const { data: session, isPending } = authClient.useSession();
 
-  if (isPending) {
-    return <NavbarLoading />;
-  }
+  if (isPending) return <NavbarLoading />;
 
-  if (session?.user.role === UserRole.JOB_SEEKER) {
-    return <JobSeekerNavbar />;
-  }
+  if (session?.user?.role === UserRole.JOB_SEEKER)
+    return <JobSeekerNavbar session={session} />;
 
-  if (session?.user.role === UserRole.EMPLOYER) {
-    return <EmployerNavbar />;
-  }
+  if (session?.user?.role === UserRole.EMPLOYER)
+    return <EmployerNavbar session={session} />;
 
-  if (session?.user.id) {
-    return <NavbarWithAuth />;
-  }
+  if (session?.user?.id) return <NavbarWithAuth session={session} />;
 
-  return <NavbarWithoutAuth />;
+  return <NavbarWithoutAuth session={session} />;
 }

@@ -12,7 +12,7 @@ import { UserRole } from "@/generated/prisma/browser";
 
 // lib
 import { authClient } from "@/lib/auth-client";
-import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES } from "@/lib/routes";
+import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES, ROUTES } from "@/lib/routes";
 
 // components
 import { CustomLink } from "./custom-link";
@@ -61,7 +61,7 @@ export function ProfileDropdownMenu({ image, role }: ProfileDropdownProps) {
       await authClient.signOut({
         fetchOptions: {
           onSuccess: () => {
-            router.push("/sign-in");
+            router.push(ROUTES.SIGN_IN);
             toast.success("Signed out successfully");
           },
           onError: (error) => {
