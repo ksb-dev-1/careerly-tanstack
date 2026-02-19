@@ -78,7 +78,7 @@ export function SignUpForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <Card className="max-w-sm w-full mx-auto">
+      <Card className="max-w-md w-full mx-auto">
         <CardHeader>
           <CardTitle className="text-lg font-bold">
             Create your <span className="text-brand">Careerly</span> account
@@ -91,10 +91,7 @@ export function SignUpForm() {
         <CardContent>
           {/* Error message */}
           {error && (
-            <Alert
-              variant="custom"
-              className="mb-4 flex items-center flex-wrap"
-            >
+            <Alert variant="error" className="mb-4 flex items-center flex-wrap">
               {error}
             </Alert>
           )}

@@ -55,7 +55,7 @@ export function PasswordField<T extends FieldValues>({
         <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
 
         {showForgotPassword && (
-          <CustomLink href="#" className="underline text-sm">
+          <CustomLink href="/forgot-password" className="underline text-sm">
             Forgot your password?
           </CustomLink>
         )}

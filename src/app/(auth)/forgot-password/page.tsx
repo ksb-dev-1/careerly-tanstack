@@ -1,7 +1,7 @@
 // External libraries
 import { Metadata } from "next";
 
-// Internal absolute imports (@/)
+// Absolute imports
 import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
 
 // Page metadata

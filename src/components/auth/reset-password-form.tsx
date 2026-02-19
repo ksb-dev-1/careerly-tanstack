@@ -6,6 +6,7 @@
 
 // External libraries
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,11 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 // Absolute imports
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
-import { forgotPasswordSchema, ForgotPasswordValues } from "@/lib/validation";
+import { resetPasswordSchema, ResetPasswordValues } from "@/lib/validation";
 
 // Relative imports
 import { ActionButton } from "../shared/action-button";
-import { CustomLink } from "../shared/custom-link";
+import { PasswordField } from "../shared/password-field";
 
 import {
   Card,
@@ -25,24 +26,23 @@ import {
   CardTitle,
   CardContent,
   CardDescription,
-  CardFooter,
 } from "../ui/card";
-import { Field, FieldError, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+import { FieldGroup } from "../ui/field";
 import { Alert } from "../ui/alert";
-import { MoveLeft } from "lucide-react";
 
 // ========================================
 // Sign-in form component
 // ========================================
-export function ForgotPasswordForm() {
+export function ResetPasswordForm({ token }: { token: string }) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const router = useRouter();
 
-  const form = useForm<ForgotPasswordValues>({
-    resolver: zodResolver(forgotPasswordSchema),
+  const form = useForm<ResetPasswordValues>({
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
-      email: "",
+      newPassword: "",
+      passwordConfirmation: "",
     },
   });
 
@@ -52,21 +52,20 @@ export function ForgotPasswordForm() {
   }, [form]);
 
   // Handle form submit
-  async function onSubmit({ email }: ForgotPasswordValues) {
+  async function onSubmit({ newPassword }: ResetPasswordValues) {
     setSuccessMessage(null);
     setErrorMessage(null);
 
-    const { error } = await authClient.requestPasswordReset({
-      email,
-      redirectTo: ROUTES.RESET_PASSWORD,
+    const { error } = await authClient.resetPassword({
+      newPassword,
+      token,
     });
 
     if (error) {
       setErrorMessage(error.message || "Something went wrong");
     } else {
-      setSuccessMessage(
-        "If an account exists for this email, we've sent a password reset link.",
-      );
+      setSuccessMessage("Password has been reset. You can now sign in.");
+      setTimeout(() => router.push(ROUTES.SIGN_IN), 3000);
       form.reset();
     }
   }
@@ -77,9 +76,9 @@ export function ForgotPasswordForm() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <Card className="max-w-md w-full mx-auto">
         <CardHeader>
-          <CardTitle className="text-lg font-bold">Forgot Password</CardTitle>
+          <CardTitle className="text-lg font-bold">Reset Password</CardTitle>
           <CardDescription>
-            Enter your email below to receive a password reset link.
+            Set a new password for your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -99,27 +98,35 @@ export function ForgotPasswordForm() {
           )}
 
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            {/* Email */}
-            <Controller
-              name="email"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={field.name}>Email</FieldLabel>
-                  <Input
-                    {...field}
-                    id={field.name}
-                    aria-invalid={fieldState.invalid}
-                    placeholder="your@email.com"
-                    autoComplete="off"
+            <FieldGroup>
+              {/* Password */}
+              <Controller
+                name="newPassword"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <PasswordField
+                    field={field}
+                    fieldState={fieldState}
+                    label="Password"
+                    placeholder="Create a password"
                   />
+                )}
+              />
 
-                  {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )}
-            />
+              {/* Confirm Password */}
+              <Controller
+                name="passwordConfirmation"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <PasswordField
+                    field={field}
+                    fieldState={fieldState}
+                    label="Confirm Password"
+                    placeholder="Re-enter your password"
+                  />
+                )}
+              />
+            </FieldGroup>
 
             {/* Send password reset link button */}
             <ActionButton loading={loading} className="w-full mt-4">
@@ -127,14 +134,6 @@ export function ForgotPasswordForm() {
             </ActionButton>
           </form>
         </CardContent>
-        <CardFooter>
-          <CustomLink
-            href="/sign-in"
-            className="text-slate-600 dark:text-muted-foreground text-sm underline flex items-center gap-2"
-          >
-            <MoveLeft size={12} /> Bcak to Sign in
-          </CustomLink>
-        </CardFooter>
       </Card>
     </div>
   );

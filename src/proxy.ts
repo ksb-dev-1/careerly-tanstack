@@ -30,7 +30,9 @@ export async function proxy(request: NextRequest) {
     if (
       pathname === ROUTES.HOME ||
       pathname === ROUTES.SIGN_IN ||
-      pathname === ROUTES.SIGN_UP
+      pathname === ROUTES.SIGN_UP ||
+      pathname === ROUTES.FORGOT_PASSWORD ||
+      pathname === ROUTES.RESET_PASSWORD
     ) {
       return NextResponse.next();
     }

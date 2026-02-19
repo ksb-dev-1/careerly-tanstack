@@ -1,8 +1,8 @@
 // External libraries
 import type { Metadata } from "next";
 
-// Relative imports
-import { VerifyEmailContent } from "./verify-email-content";
+// Absolute imports
+import { VerifyEmailContent } from "@/components/auth/verify-email-content";
 
 // Page metadata
 export const metadata: Metadata = {

@@ -5,6 +5,8 @@ export const ROUTES = {
   SIGN_UP: "/sign-up",
   SELECT_USER_ROLE: "/select-user-role",
   VERIFY_EMAIL: "/verify-email",
+  FORGOT_PASSWORD: "/forgot-password",
+  RESET_PASSWORD: "/reset-password",
 } as const;
 
 export const JOB_SEEKER_ROUTES = {

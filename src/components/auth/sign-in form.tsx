@@ -103,7 +103,7 @@ export function SignInForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <Card className="max-w-sm w-full mx-auto">
+      <Card className="max-w-md w-full mx-auto">
         <CardHeader>
           <CardTitle className="text-lg font-bold">
             Sign in to <span className="text-brand">Careerly</span>
@@ -114,10 +114,7 @@ export function SignInForm() {
         </CardHeader>
         <CardContent>
           {errorMessage && (
-            <Alert
-              variant="custom"
-              className="mb-4 flex items-center flex-wrap"
-            >
+            <Alert variant="error" className="mb-4 flex items-center flex-wrap">
               {errorMessage}
             </Alert>
           )}

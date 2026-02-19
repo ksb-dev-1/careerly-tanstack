@@ -3,7 +3,8 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
 // Absolute imports
-import { sendEmail } from "@/emails/_lib/send-verification-email";
+import { sendEmailVerify } from "@/emails/_lib/send-verification-email";
+import { sendResetPasswordEmail } from "@/emails/_lib/send-reset-password-email";
 import { prisma } from "@/lib/prisma";
 
 export const auth = betterAuth({
@@ -12,12 +13,20 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    sendResetPassword: async ({ user, url }) => {
+      void sendResetPasswordEmail({
+        from: process.env.EMAIL_FROM!,
+        to: user.email,
+        name: user.name,
+        url,
+      });
+    },
   },
   emailVerification: {
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }) => {
-      void sendEmail({
+      void sendEmailVerify({
         from: process.env.EMAIL_FROM!,
         to: user.email,
         name: user.name,
