@@ -25,16 +25,28 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // console.log("Session : ", session?.user.id);
+
   // 1️⃣ Not logged in
   if (!session?.user.id) {
     if (
       pathname === ROUTES.HOME ||
       pathname === ROUTES.SIGN_IN ||
       pathname === ROUTES.SIGN_UP
+      // pathname === ROUTES.VERIFY_EMAIL
     ) {
       return NextResponse.next();
     }
     return NextResponse.redirect(new URL(ROUTES.HOME, request.url));
+  }
+
+  // 2️⃣ Logged in but email not verified
+  if (!session.user.emailVerified) {
+    if (pathname === ROUTES.VERIFY_EMAIL) {
+      return NextResponse.next();
+    }
+
+    return NextResponse.redirect(new URL(ROUTES.VERIFY_EMAIL, request.url));
   }
 
   // 2️⃣ Logged in but no role

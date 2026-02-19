@@ -9,6 +9,7 @@ import "./globals.css";
 // components
 import { Providers } from "@/components/providers/providers";
 import { NavigationProgress } from "@/components/navigation-progress";
+import { Toaster } from "sonner";
 
 // ========================================
 // Font family

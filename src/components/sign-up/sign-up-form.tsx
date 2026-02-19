@@ -3,7 +3,7 @@
 // ========================================
 // Imports
 // ========================================
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 // lib
@@ -12,9 +12,9 @@ import { ROUTES } from "@/lib/routes";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
 
 // components
+import { CustomLink } from "../custom-link";
 import { PasswordField } from "../shared/password-field";
 import { Spinner } from "../spinner";
-import { CustomLink } from "../custom-link";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -27,18 +27,14 @@ import {
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Alert } from "../ui/alert";
-import { Checkbox } from "../ui/checkbox";
 
 // 3rd party
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 
 export function SignUpForm() {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const form = useForm<SignUpValues>({
@@ -51,7 +47,33 @@ export function SignUpForm() {
     },
   });
 
-  async function onSubmit() {}
+  useEffect(() => {
+    form.reset({
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+    });
+  }, []);
+
+  async function onSubmit({ email, password, name }: SignUpValues) {
+    setError(null);
+
+    const { error } = await authClient.signUp.email({
+      email,
+      password,
+      name,
+    });
+
+    if (error) {
+      setError(error.message || "Something went wrong");
+    } else {
+      toast.success("Signed up successfully");
+      router.push(ROUTES.VERIFY_EMAIL);
+    }
+  }
+
+  const loading = form.formState.isSubmitting;
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -65,6 +87,14 @@ export function SignUpForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {error && (
+            <Alert
+              variant="custom"
+              className="mb-4 flex items-center flex-wrap"
+            >
+              {error}
+            </Alert>
+          )}
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup>
               {/* Name */}
@@ -146,7 +176,7 @@ export function SignUpForm() {
               disabled={loading}
               className="w-full mt-4 font-semibold"
             >
-              Sign up
+              Create an account {loading && <Spinner />}
             </Button>
           </form>
         </CardContent>

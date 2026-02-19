@@ -1,4 +1,5 @@
 // lib
+import { sendEmail } from "@/emails/_lib/send-verification-email";
 import { prisma } from "@/lib/prisma";
 
 // 3rd party
@@ -11,7 +12,22 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
-    autoSignIn: false,
+    // requireEmailVerification: true,
+    // autoSignIn: false,
+  },
+  emailVerification: {
+    sendOnSignUp: true,
+    sendVerificationEmail: async ({ user, url }) => {
+      const customUrl = new URL(url);
+
+      customUrl.searchParams.set("callbackURL", "/sign-in");
+
+      void sendEmail({
+        from: process.env.EMAIL_FROM!,
+        to: user.email,
+        url: customUrl.toString(),
+      });
+    },
   },
   socialProviders: {
     google: {
@@ -27,7 +43,7 @@ export const auth = betterAuth({
     additionalFields: {
       role: {
         type: "string",
-        required: true,
+        // required: true,
         input: false,
       },
     },

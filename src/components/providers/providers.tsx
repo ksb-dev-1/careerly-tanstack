@@ -1,8 +1,9 @@
 "use client";
 
 // components
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { TanstackProvider } from "@/components/providers/tanstack-provider";
+import { ThemeProvider } from "./theme-provider";
+import { TanstackProvider } from "./tanstack-provider";
+import { Toaster } from "../ui/sonner";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -14,6 +15,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disableTransitionOnChange
       >
         {children}
+        <Toaster position="top-center" />
       </ThemeProvider>
     </TanstackProvider>
   );

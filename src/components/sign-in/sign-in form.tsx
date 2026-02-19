@@ -3,7 +3,7 @@
 // ========================================
 // Imports
 // ========================================
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 // lib
@@ -12,9 +12,9 @@ import { ROUTES } from "@/lib/routes";
 import { signInSchema, SignInValues } from "@/lib/validation";
 
 // components
+import { CustomLink } from "../custom-link";
 import { PasswordField } from "../shared/password-field";
 import { Spinner } from "../spinner";
-import { CustomLink } from "../custom-link";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -40,8 +40,8 @@ import { FaGithub } from "react-icons/fa";
 // SignInForm component
 // ========================================
 export function SignInForm() {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  // const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loadingProvider, setLoadingProvider] = useState<
     "google" | "github" | null
   >(null);
@@ -56,17 +56,22 @@ export function SignInForm() {
     },
   });
 
+  useEffect(() => {
+    form.reset({
+      email: "",
+      password: "",
+      rememberMe: false,
+    });
+  }, []);
+
   async function onSubmit({ email, password, rememberMe }: SignInValues) {
-    setErrorMessage("");
-    setLoading(true);
+    setErrorMessage(null);
 
     const { error } = await authClient.signIn.email({
       email,
       password,
       rememberMe,
     });
-
-    setLoading(false);
 
     if (error) {
       setErrorMessage(error.message || "Something went wrong");
@@ -78,7 +83,7 @@ export function SignInForm() {
 
   async function handleSocialSignIn(provider: "github" | "google") {
     setLoadingProvider(provider);
-    setErrorMessage("");
+    setErrorMessage(null);
 
     const result = await authClient.signIn.social({
       provider,
@@ -90,6 +95,8 @@ export function SignInForm() {
       setLoadingProvider(null);
     }
   }
+
+  const loading = form.formState.isSubmitting;
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -104,7 +111,10 @@ export function SignInForm() {
         </CardHeader>
         <CardContent>
           {errorMessage && (
-            <Alert variant="custom" className="mb-4">
+            <Alert
+              variant="custom"
+              className="mb-4 flex items-center flex-wrap"
+            >
               {errorMessage}
             </Alert>
           )}
@@ -174,7 +184,7 @@ export function SignInForm() {
               disabled={loading}
               className="w-full mt-4 font-semibold"
             >
-              Sign in
+              Sign in {loading && <Spinner />}
             </Button>
           </form>
 
