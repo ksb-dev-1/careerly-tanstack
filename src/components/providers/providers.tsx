@@ -1,10 +1,15 @@
 "use client";
 
-// Relative imports
-import { ThemeProvider } from "./theme-provider";
-import { TanstackProvider } from "./tanstack-provider";
+// ========================================
+// Imports
+// ========================================
 import { Toaster } from "../ui/sonner";
+import { TanstackProvider } from "./tanstack-provider";
+import { ThemeProvider } from "./theme-provider";
 
+// ========================================
+// Providers component
+// ========================================
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <TanstackProvider>

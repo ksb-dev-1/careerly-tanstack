@@ -1,20 +1,16 @@
-// External libraries
 import { Suspense } from "react";
+
 import { Metadata } from "next";
 
-// Absolute imports
-import { ROUTES } from "@/lib/routes";
-
-import { LoadingFallback } from "@/components/shared/loading-fallback";
 import { ResetPasswordForm } from "@/components/auth/reset-password-form";
 import { CustomLink } from "@/components/shared/custom-link";
+import { LoadingFallback } from "@/components/shared/loading-fallback";
+import { ROUTES } from "@/lib/routes";
 
-// Page metadata
 export const metadata: Metadata = {
   title: "Reset password - Careerly",
 };
 
-// Get token component
 async function GetToken({
   searchParams,
 }: {
@@ -41,7 +37,6 @@ async function GetToken({
   return <ResetPasswordForm token={token} />;
 }
 
-// Reset password page component
 export default function ResetPasswordPage({
   searchParams,
 }: {

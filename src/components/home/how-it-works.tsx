@@ -1,0 +1,176 @@
+"use client";
+
+// ========================================
+// Imports
+// ========================================
+import { motion } from "framer-motion";
+import { BriefcaseBusiness, User } from "lucide-react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { Separator } from "../ui/separator";
+
+// ========================================
+// Constants
+// ========================================
+const jobSeekerSteps = [
+  {
+    id: "j1",
+    number: "1",
+    title: "Create Job Seeker Account",
+    description:
+      "Sign up quickly with your professional email address or using OAuth",
+  },
+  {
+    id: "j2",
+    number: "2",
+    title: "Upload Your Resume",
+    description: "Add your resume and let employers discover your skills",
+  },
+  {
+    id: "j3",
+    number: "3",
+    title: "Apply & Track",
+    description: "Submit applications and monitor your progress easily",
+  },
+];
+
+const employerSteps = [
+  {
+    id: "e1",
+    number: "1",
+    title: "Create Employer Account",
+    description:
+      "Sign up quickly with your professional email address or using OAuth",
+  },
+  {
+    id: "e2",
+    number: "2",
+    title: "Post Job Openings",
+    description:
+      "Create detailed listings that attract quality candidates to apply for jobs",
+  },
+  {
+    id: "e3",
+    number: "3",
+    title: "Manage Candidates",
+    description: "Review applications and connect with potential hires",
+  },
+];
+
+// ========================================
+// Types
+// ========================================
+interface ReusableCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  steps: {
+    id: string;
+    number: string;
+    title: string;
+    description: string;
+  }[];
+}
+
+// ========================================
+// Types
+// ========================================
+function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
+  return (
+    <Card>
+      <CardHeader className="flex items-center gap-4">
+        <div className="relative bg-brand/20 border border-brand/30 h-12 w-12 rounded-full">
+          {icon}
+        </div>
+        <div>
+          <CardTitle className="text-lg font-bold text-brand">
+            {title}
+          </CardTitle>
+          <CardDescription className="mt-1 font-medium text-slate-600 dark:text-muted-foreground">
+            {description}
+          </CardDescription>
+        </div>
+      </CardHeader>
+
+      <Separator />
+
+      <CardContent className="space-y-8 ml-2">
+        {steps.map((step) => (
+          <div key={step.id} className="flex gap-4">
+            <div className="shrink-0 h-8 w-8 rounded-full bg-brand/20 border border-brand/30 text-brand flex items-center justify-center">
+              <span className="text-sm font-bold">{step.number}</span>
+            </div>
+            <div>
+              <p className="font-bold mb-1">{step.title}</p>
+              <p className="font-medium text-slate-600 dark:text-muted-foreground">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}
+
+// ========================================
+// How it works component
+// ========================================
+export function HowItWorks() {
+  return (
+    <section className="w-full max-w-custom mx-auto px-6 overflow--x-hidden">
+      {/* Header */}
+      <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+          How It <span className="text-brand">Works</span>
+        </h2>
+        <p className="text-lg font-medium text-slate-600 dark:text-muted-foreground max-w-2xl mx-auto">
+          Whether you&apos;re seeking opportunities or talent, our platform
+          makes the process seamless, efficient, and effective.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Job Seekers Card */}
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <ReusableCard
+            icon={
+              <User className="text-brand absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            }
+            title="Job Seekers"
+            description="Find your dream role in 3 simple steps"
+            steps={jobSeekerSteps}
+          />
+        </motion.div>
+
+        {/* Employers Card */}
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <ReusableCard
+            icon={
+              <BriefcaseBusiness className="text-brand absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            }
+            title="Employers"
+            description="Find perfect candidates effortlessly"
+            steps={employerSteps}
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
+}

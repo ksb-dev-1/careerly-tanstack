@@ -1,15 +1,8 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
-
-// External libraries
 import { Suspense, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-import { toast } from "sonner";
+import { usePathname } from "next/navigation";
 
 import {
   Bookmark,
@@ -18,20 +11,18 @@ import {
   LogOut,
   Menu,
 } from "lucide-react";
+import { toast } from "sonner";
 
-// Absolute imports
 import { UserRole } from "@/generated/prisma/browser";
-
-import { authClient } from "@/lib/auth-client";
-import { Session as UserSession } from "@/lib/auth";
-
 import { useAutoCloseOnGreaterThanOrEqualToBreakpoint } from "@/hooks/useAutoCloseModalOnBreakPoint";
+import { Session as UserSession } from "@/lib/auth";
+import { authClient } from "@/lib/auth-client";
 
-// Relative imports
+import { ProfileDropdownMenu } from "./profile-dropdown-menu";
 import { CustomLink } from "./shared/custom-link";
 import { ThemeSwitch } from "./theme-switch";
-import { ProfileDropdownMenu } from "./profile-dropdown-menu";
 import { ThemeSwitchMobile } from "./theme-switch-mobile";
+import { Button } from "./ui/button";
 import {
   Sheet,
   SheetContent,
@@ -40,9 +31,7 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { Skeleton } from "./ui/skeleton";
-import { Button } from "./ui/button";
 
-// Types
 type Session = typeof authClient.$Infer.Session | null;
 
 type NavItem = {
@@ -51,7 +40,6 @@ type NavItem = {
   icon: React.ReactNode;
 };
 
-// Navigation items
 const JOB_SEEKER_NAV_ITEMS: NavItem[] = [
   {
     href: "/job-seeker/jobs?page=1",
@@ -78,9 +66,6 @@ const EMPLOYER_NAV_ITEMS: NavItem[] = [
   },
 ];
 
-// ========================================
-// Navbar Wrapper
-// ========================================
 function NavbarWrapper({
   children,
   session,
@@ -98,23 +83,13 @@ function NavbarWrapper({
             <SideMenu session={session} />
           </Suspense>
 
-          {session?.user?.role === UserRole.JOB_SEEKER ||
-          session?.user?.role === UserRole.EMPLOYER ? (
-            <Link
-              href="/"
-              className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
-            >
-              Careerly
-            </Link>
-          ) : (
-            <CustomLink
-              href="/"
-              className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
-              isActive={path === "/"}
-            >
-              Careerly
-            </CustomLink>
-          )}
+          <CustomLink
+            href="/"
+            className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
+            isActive={path === "/"}
+          >
+            Careerly
+          </CustomLink>
         </div>
 
         <div className="hidden md:flex items-center gap-2">
@@ -126,28 +101,20 @@ function NavbarWrapper({
   );
 }
 
-// ========================================
-// Loading
-// ========================================
-function NavbarLoading() {
+function NavbarLoading({ session }: { session: Session }) {
   return (
-    <header className="w-full border-b h-16 bg-background flex items-center justify-center">
-      <nav className="w-full flex items-center justify-between px-4">
-        <Skeleton className="h-8 w-24" />
-        <div className="flex items-center gap-2">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <Skeleton key={i} className="h-8 w-20" />
-          ))}
-          <Skeleton className="h-8 w-8 rounded-xl" />
-        </div>
-      </nav>
-    </header>
+    <NavbarWrapper session={session}>
+      <div className="flex items-center gap-2">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <Skeleton key={i} className="h-8 w-20" />
+        ))}
+        <span className="inline-block h-5 border-r-2 mx-2" />
+        <Skeleton className="h-8 w-8 rounded-xl" />
+      </div>
+    </NavbarWrapper>
   );
 }
 
-// ========================================
-// Without Auth
-// ========================================
 function NavbarWithoutAuth({ session }: { session: Session }) {
   const path = usePathname();
 
@@ -162,9 +129,6 @@ function NavbarWithoutAuth({ session }: { session: Session }) {
   );
 }
 
-// ========================================
-// With Auth (No Role)
-// ========================================
 function NavbarWithAuth({ session }: { session: UserSession }) {
   return (
     <NavbarWrapper session={session}>
@@ -176,9 +140,6 @@ function NavbarWithAuth({ session }: { session: UserSession }) {
   );
 }
 
-// ========================================
-// Job Seeker
-// ========================================
 function JobSeekerNavbar({ session }: { session: UserSession }) {
   const path = usePathname();
 
@@ -214,9 +175,6 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
   );
 }
 
-// ========================================
-// Employer
-// ========================================
 function EmployerNavbar({ session }: { session: UserSession }) {
   const path = usePathname();
 
@@ -252,9 +210,6 @@ function EmployerNavbar({ session }: { session: UserSession }) {
   );
 }
 
-// ========================================
-// Side Menu
-// ========================================
 function SideMenu({ session }: { session: Session }) {
   const [isOpen, setIsOpen] = useState(false);
   const path = usePathname();
@@ -323,13 +278,10 @@ function SideMenu({ session }: { session: Session }) {
   );
 }
 
-// ========================================
-// Main Navbar
-// ========================================
 export function Navbar() {
   const { data: session, isPending } = authClient.useSession();
 
-  if (isPending) return <NavbarLoading />;
+  if (isPending) return <NavbarLoading session={session} />;
 
   if (session?.user?.role === UserRole.JOB_SEEKER)
     return <JobSeekerNavbar session={session} />;

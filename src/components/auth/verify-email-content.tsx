@@ -1,16 +1,18 @@
 "use client";
 
-// External libraries
+// ========================================
+// Imports
+// ========================================
 import { useRouter } from "next/navigation";
-
-// Absolute imports
-import { authClient } from "@/lib/auth-client";
-import { ROUTES } from "@/lib/routes";
 
 import { ResendVerificationButton } from "@/components/resend-verification-button";
 import { LoadingFallback } from "@/components/shared/loading-fallback";
+import { authClient } from "@/lib/auth-client";
+import { ROUTES } from "@/lib/routes";
 
+// ========================================
 // Verify email content component
+// ========================================
 export function VerifyEmailContent() {
   const { data: session, isPending, error } = authClient.useSession();
   const user = session?.user;

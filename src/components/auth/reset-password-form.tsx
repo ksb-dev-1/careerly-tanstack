@@ -3,32 +3,28 @@
 // ========================================
 // Imports
 // ========================================
+import { useEffect, useState } from "react";
 
-// External libraries
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
 
-// Absolute imports
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
-import { resetPasswordSchema, ResetPasswordValues } from "@/lib/validation";
+import { ResetPasswordValues, resetPasswordSchema } from "@/lib/validation";
 
-// Relative imports
 import { ActionButton } from "../shared/action-button";
 import { PasswordField } from "../shared/password-field";
-
+import { Alert } from "../ui/alert";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardDescription,
+  CardHeader,
+  CardTitle,
 } from "../ui/card";
 import { FieldGroup } from "../ui/field";
-import { Alert } from "../ui/alert";
 
 // ========================================
 // Sign-in form component

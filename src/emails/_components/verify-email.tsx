@@ -1,14 +1,14 @@
 import {
-  Html,
-  Head,
   Body,
-  Container,
-  Section,
-  Heading,
-  Text,
   Button,
+  Container,
+  Head,
+  Heading,
   Hr,
+  Html,
   Preview,
+  Section,
+  Text,
 } from "@react-email/components";
 
 type VerifyEmailProps = {

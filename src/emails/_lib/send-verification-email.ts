@@ -16,8 +16,6 @@ export async function sendEmailVerify({
   name,
   url,
 }: SendEmailVerifyParams) {
-  // const firstName = to.split("@")[0].charAt(0) + to.split("@")[0].slice(1);
-
   await resend.emails.send({
     from,
     to,

@@ -1,12 +1,9 @@
 "use server";
 
-// Absolute imports
 import { UserRole } from "@/generated/prisma/client";
-
 import { getServerSession } from "@/lib/get-server-session";
 import { prisma } from "@/lib/prisma";
 
-// Types
 export type AssignUserRoleActionResponse = {
   success: boolean;
   status: number;
@@ -14,7 +11,6 @@ export type AssignUserRoleActionResponse = {
   message?: string;
 };
 
-// Assign role server action
 export async function assignUserRole(
   role: UserRole,
 ): Promise<AssignUserRoleActionResponse> {

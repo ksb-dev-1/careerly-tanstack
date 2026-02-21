@@ -3,34 +3,29 @@
 // ========================================
 // Imports
 // ========================================
+import { useEffect, useState } from "react";
 
-// External libraries
-import { useState, useEffect } from "react";
-
-import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { MoveLeft } from "lucide-react";
+import { Controller, useForm } from "react-hook-form";
 
-// Absolute imports
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
-import { forgotPasswordSchema, ForgotPasswordValues } from "@/lib/validation";
+import { ForgotPasswordValues, forgotPasswordSchema } from "@/lib/validation";
 
-// Relative imports
 import { ActionButton } from "../shared/action-button";
 import { CustomLink } from "../shared/custom-link";
-
+import { Alert } from "../ui/alert";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardDescription,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "../ui/card";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
-import { Alert } from "../ui/alert";
-import { MoveLeft } from "lucide-react";
 
 // ========================================
 // Sign-in form component

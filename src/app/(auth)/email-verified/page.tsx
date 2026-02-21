@@ -1,22 +1,13 @@
-// ========================================
-// Imports
-// ========================================
-import type { Metadata } from "next";
 import Link from "next/link";
 
-// components
+import type { Metadata } from "next";
+
 import { Button } from "@/components/ui/button";
 
-// ========================================
-// Metadata
-// ========================================
 export const metadata: Metadata = {
   title: "Email Verified",
 };
 
-// ========================================
-// Email verified page
-// ========================================
 export default function EmailVerifiedPage() {
   return (
     <main className="flex flex-1 items-center justify-center px-4 text-center">

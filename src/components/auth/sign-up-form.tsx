@@ -3,36 +3,32 @@
 // ========================================
 // Imports
 // ========================================
+import { useEffect, useState } from "react";
 
-// External libraries
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-// Absolute imports
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
-import { signUpSchema, SignUpValues } from "@/lib/validation";
+import { SignUpValues, signUpSchema } from "@/lib/validation";
 
-// Relative imports
 import { ActionButton } from "../shared/action-button";
 import { CustomLink } from "../shared/custom-link";
 import { PasswordField } from "../shared/password-field";
-
+import { Alert } from "../ui/alert";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardDescription,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "../ui/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
-import { Alert } from "../ui/alert";
 
 // ========================================
 // Sign-up form component

@@ -1,14 +1,10 @@
 "use client";
 
-// External libraries
 import { useState } from "react";
 
-// Absolute imports
+import { ActionButton } from "@/components/shared/action-button";
 import { authClient } from "@/lib/auth-client";
 
-import { ActionButton } from "@/components/shared/action-button";
-
-// Resend verification button component
 export function ResendVerificationButton({ email }: { email: string }) {
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);

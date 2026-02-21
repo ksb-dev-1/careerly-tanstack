@@ -1,10 +1,8 @@
-// External libraries
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
-// Absolute imports
-import { sendEmailVerify } from "@/emails/_lib/send-verification-email";
 import { sendResetPasswordEmail } from "@/emails/_lib/send-reset-password-email";
+import { sendEmailVerify } from "@/emails/_lib/send-verification-email";
 import { prisma } from "@/lib/prisma";
 
 export const auth = betterAuth({

@@ -1,28 +1,18 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
-
-// External libraries
 import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 
-import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
-import { useClientSession } from "@/hooks/useClientSession";
-
-// Absolute imports
-import { UserRole } from "@/generated/prisma/browser";
+import { toast } from "sonner";
 
 import { assignUserRole } from "@/actions/assign-user-role";
-
 import { ActionButton } from "@/components/shared/action-button";
 import { Card } from "@/components/ui/card";
+import { UserRole } from "@/generated/prisma/browser";
+import { useClientSession } from "@/hooks/useClientSession";
 
-// ========================================
-// Select user role component
-// ========================================
 const ROLE_REDIRECT_MAP: Record<UserRole, string> = {
   JOB_SEEKER: "/job-seeker/jobs?page=1",
   EMPLOYER: "/employer/jobs",

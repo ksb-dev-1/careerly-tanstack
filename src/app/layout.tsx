@@ -1,12 +1,14 @@
 // External libraries
 import { Suspense } from "react";
-import type { Metadata } from "next";
+
 import { Mulish } from "next/font/google";
+
+import type { Metadata } from "next";
 import "./globals.css";
 
 // Absolute imports
-import { Providers } from "@/components/providers/providers";
 import { NavigationProgress } from "@/components/navigation-progress";
+import { Providers } from "@/components/providers/providers";
 
 // Font family
 const fontFamily = Mulish({

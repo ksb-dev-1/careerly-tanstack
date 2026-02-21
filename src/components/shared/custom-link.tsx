@@ -1,19 +1,26 @@
 "use client";
 
-// External libraries
+// ========================================
+// Imports
+// ========================================
 import { MouseEvent, ReactNode } from "react";
+
 import Link, { LinkProps } from "next/link";
 
 import NProgress from "nprogress";
 
+// ========================================
 // Types
+// ========================================
 interface CustomLinkProps extends LinkProps {
   children: ReactNode;
   isActive?: boolean;
   className?: string;
 }
 
+// ========================================
 // Custom link component
+// ========================================
 export function CustomLink({
   children,
   isActive = false,

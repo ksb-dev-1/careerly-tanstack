@@ -1,8 +1,9 @@
 "use client";
 
-// External libraries
 import { useEffect } from "react";
+
 import { usePathname, useSearchParams } from "next/navigation";
+
 import NProgress from "nprogress";
 
 let progressStarted = false;
@@ -14,14 +15,11 @@ NProgress.configure({
   minimum: 0.08,
 });
 
-// Navigation progress component
 export function NavigationProgress() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const url = pathname + searchParams.toString();
-
     // Complete progress when route changes
     if (progressStarted) {
       NProgress.done();

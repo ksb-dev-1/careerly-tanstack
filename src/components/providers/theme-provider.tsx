@@ -1,8 +1,13 @@
 "use client";
 
-// External libraries
+// ========================================
+// Imports
+// ========================================
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
+// ========================================
+// Theme provider component
+// ========================================
 export function ThemeProvider({
   children,
   ...props

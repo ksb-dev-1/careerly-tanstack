@@ -1,14 +1,15 @@
-// External libraries
+"use client";
+
 import { FaGithub } from "react-icons/fa";
 
-// Footer component
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="border-t bg-background h-16">
       <div className="w-full mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between">
         <p className="text-center sm:text-left text-sm text-slate-600 dark:text-muted-foreground">
-          {/* © {new Date().getFullYear()}  */}
-          Careerly. All rights reserved.
+          © {currentYear} Careerly. All rights reserved.
         </p>
 
         <div className="flex items-center gap-3 mt-4 sm:mt-0">

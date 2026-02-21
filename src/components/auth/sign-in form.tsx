@@ -3,42 +3,37 @@
 // ========================================
 // Imports
 // ========================================
+import { useEffect, useState } from "react";
 
-// External libraries
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { toast } from "sonner";
 
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
-
-// Absolute imports
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
-import { signInSchema, SignInValues } from "@/lib/validation";
+import { SignInValues, signInSchema } from "@/lib/validation";
 
-// Relative imports
 import { ActionButton } from "../shared/action-button";
-import { Spinner } from "../shared/spinner";
 import { CustomLink } from "../shared/custom-link";
 import { PasswordField } from "../shared/password-field";
-
+import { Spinner } from "../shared/spinner";
+import { Alert } from "../ui/alert";
 import { Button } from "../ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardDescription,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
-import { Alert } from "../ui/alert";
-import { Checkbox } from "../ui/checkbox";
 
 // ========================================
 // Sign-in form component

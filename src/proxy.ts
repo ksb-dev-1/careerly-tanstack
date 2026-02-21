@@ -1,13 +1,10 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { headers } from "next/headers";
 
-// generated
 import { UserRole } from "@/generated/prisma/enums";
-
-// lib
-import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES, ROUTES } from "@/lib/routes";
 import { auth } from "@/lib/auth";
+import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES, ROUTES } from "@/lib/routes";
 
 export async function proxy(request: NextRequest) {
   const session = await auth.api.getSession({
@@ -22,6 +19,10 @@ export async function proxy(request: NextRequest) {
     pathname.startsWith("/api") ||
     pathname.includes(".")
   ) {
+    return NextResponse.next();
+  }
+
+  if (pathname === ROUTES.HOME) {
     return NextResponse.next();
   }
 

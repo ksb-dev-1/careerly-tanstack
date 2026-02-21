@@ -1,25 +1,17 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
-
-// External libraries
 import { useState } from "react";
+
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
+import { LogOut, User } from "lucide-react";
 import { toast } from "sonner";
 
-import { LogOut, User } from "lucide-react";
-
-// Absolute imports
 import { UserRole } from "@/generated/prisma/browser";
-
 import { authClient } from "@/lib/auth-client";
 import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES, ROUTES } from "@/lib/routes";
 
-// Relative imports
 import { CustomLink } from "./shared/custom-link";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
@@ -31,18 +23,13 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-// Types
 interface ProfileDropdownProps {
   image?: string | null;
   role?: UserRole;
 }
 
-// Constants
 const AVATAR_SIZE = 32;
 
-// ========================================
-// Profile dropdown component
-// ========================================
 export function ProfileDropdownMenu({ image, role }: ProfileDropdownProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
@@ -66,8 +53,6 @@ export function ProfileDropdownMenu({ image, role }: ProfileDropdownProps) {
           },
         },
       });
-
-      toast.success("Signed out successfully");
     } catch (error) {
       console.error("Sign out error:", error);
       toast.error("Failed to sign out. Please try again.");
