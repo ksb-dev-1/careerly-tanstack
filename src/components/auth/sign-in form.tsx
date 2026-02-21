@@ -1,8 +1,5 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
@@ -35,9 +32,6 @@ import { Checkbox } from "../ui/checkbox";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
-// ========================================
-// Sign-in form component
-// ========================================
 export function SignInForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loadingProvider, setLoadingProvider] = useState<

@@ -1,13 +1,7 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { Variants, motion } from "framer-motion";
 
-// ========================================
-// Animation variant
-// ========================================
 const underlineItem: Variants = {
   hidden: { scaleX: 0 },
   show: {
@@ -20,9 +14,6 @@ const underlineItem: Variants = {
   },
 };
 
-// ========================================
-// Animated underline component
-// ========================================
 export function AnimatedUnderline() {
   return (
     <motion.div

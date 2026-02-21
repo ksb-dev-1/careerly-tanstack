@@ -1,8 +1,5 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { motion } from "framer-motion";
 import { BriefcaseBusiness, User } from "lucide-react";
 
@@ -15,9 +12,6 @@ import {
 } from "../ui/card";
 import { Separator } from "../ui/separator";
 
-// ========================================
-// Constants
-// ========================================
 const jobSeekerSteps = [
   {
     id: "j1",
@@ -63,9 +57,6 @@ const employerSteps = [
   },
 ];
 
-// ========================================
-// Types
-// ========================================
 interface ReusableCardProps {
   icon: React.ReactNode;
   title: string;
@@ -78,9 +69,6 @@ interface ReusableCardProps {
   }[];
 }
 
-// ========================================
-// Types
-// ========================================
 function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
   return (
     <Card>
@@ -119,9 +107,6 @@ function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
   );
 }
 
-// ========================================
-// How it works component
-// ========================================
 export function HowItWorks() {
   return (
     <section className="w-full max-w-custom mx-auto px-6 overflow--x-hidden">

@@ -1,8 +1,5 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import {
   Accordion,
   AccordionContent,
@@ -10,17 +7,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// ========================================
-// Types
-// ========================================
 interface FAQ {
   question: string;
   answer: string | React.ReactNode;
 }
 
-// ========================================
-// FAQ Data
-// ========================================
 const faqs: FAQ[] = [
   {
     question: "What is the purpose of this portal?",
@@ -53,9 +44,6 @@ const faqs: FAQ[] = [
   },
 ];
 
-// ========================================
-// Header Component
-// ========================================
 function Header() {
   return (
     <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
@@ -70,9 +58,6 @@ function Header() {
   );
 }
 
-// ========================================
-// Accordion section Component
-// ========================================
 function AccordionSection() {
   return (
     <Accordion type="single" collapsible defaultValue="item-1">
@@ -90,9 +75,6 @@ function AccordionSection() {
   );
 }
 
-// ========================================
-// Faq component
-// ========================================
 export function Faq() {
   return (
     <div className="w-full max-w-custom mx-auto px-6">

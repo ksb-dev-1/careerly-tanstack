@@ -1,8 +1,5 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
@@ -26,9 +23,6 @@ import {
 } from "../ui/card";
 import { FieldGroup } from "../ui/field";
 
-// ========================================
-// Sign-in form component
-// ========================================
 export function ResetPasswordForm({ token }: { token: string }) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

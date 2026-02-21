@@ -1,8 +1,5 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { useEffect, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,9 +24,6 @@ import {
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
-// ========================================
-// Sign-in form component
-// ========================================
 export function ForgotPasswordForm() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

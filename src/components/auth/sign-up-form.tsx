@@ -1,8 +1,5 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";

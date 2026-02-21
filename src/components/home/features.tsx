@@ -1,8 +1,5 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { useState } from "react";
 
 import { motion } from "framer-motion";
@@ -20,18 +17,12 @@ import {
 } from "lucide-react";
 import { IconType } from "react-icons";
 
-// ========================================
-// Types
-// ========================================
 interface Feature {
   icon: IconType;
   title: string;
   desc: string;
 }
 
-// ========================================
-// Job Seeker Features
-// ========================================
 const jobSeekerFeatures: Feature[] = [
   {
     icon: ListFilter,
@@ -65,9 +56,6 @@ const jobSeekerFeatures: Feature[] = [
   },
 ];
 
-// ========================================
-// Employer Features
-// ========================================
 const employerFeatures: Feature[] = [
   {
     icon: BriefcaseBusiness,
@@ -91,9 +79,6 @@ const employerFeatures: Feature[] = [
   },
 ];
 
-// ========================================
-// Header component
-// ========================================
 function Header() {
   return (
     <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
@@ -107,9 +92,6 @@ function Header() {
   );
 }
 
-// ========================================
-// Toggle component
-// ========================================
 function Toggle({
   mode,
   setMode,
@@ -160,9 +142,6 @@ function Toggle({
   );
 }
 
-// ========================================
-// Feature section component
-// ========================================
 function FeaturesSection({
   features,
   mode,
@@ -209,9 +188,6 @@ function FeaturesSection({
   );
 }
 
-// ========================================
-// Features component
-// ========================================
 export function Features() {
   const [mode, setMode] = useState<"jobseeker" | "employer">("jobseeker");
 

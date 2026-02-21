@@ -1,17 +1,11 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { CustomLink } from "@/components/shared/custom-link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserRole } from "@/generated/prisma/browser";
 import { useCustomRouter } from "@/hooks/useCustomRouter";
 import { authClient } from "@/lib/auth-client";
 
-// ========================================
-// Start exploring button component
-// ========================================
 export function StartExploringButton() {
   const { data: session, isPending } = authClient.useSession();
   const router = useCustomRouter();
