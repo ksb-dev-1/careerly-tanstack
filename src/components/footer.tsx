@@ -1,8 +1,10 @@
 "use client";
 
+import { Suspense } from "react";
+
 import { FaGithub } from "react-icons/fa";
 
-export function Footer() {
+function FooterContent() {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -37,5 +39,13 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+export function Footer() {
+  return (
+    <Suspense>
+      <FooterContent />
+    </Suspense>
   );
 }

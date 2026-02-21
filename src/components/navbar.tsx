@@ -10,6 +10,7 @@ import {
   FileText,
   LogOut,
   Menu,
+  User,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -228,11 +229,20 @@ function SideMenu({ session }: { session: Session }) {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="mr-3 md:hidden">
-          <Menu />
-        </Button>
-      </SheetTrigger>
+      {session?.user ? (
+        <SheetTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="mr-3 md:hidden"
+            aria-label="Open navigation menu"
+          >
+            <Menu />
+          </Button>
+        </SheetTrigger>
+      ) : (
+        <Skeleton className="h-9 w-9 rounded-md mr-3 md:hidden" />
+      )}
 
       <SheetContent side="left" className="w-48 gap-0 p-0!">
         <SheetHeader className="p-0!">
@@ -241,32 +251,127 @@ function SideMenu({ session }: { session: Session }) {
           </SheetTitle>
         </SheetHeader>
 
-        <div className="h-full flex flex-col justify-between p-4">
-          <div className="flex flex-col gap-2">
-            {!session?.user?.id && (
-              <CustomLink href="/sign-in" isActive={path === "/sign-in"}>
-                Sign In
-              </CustomLink>
+        <div className="h-full flex flex-col justify-between">
+          <div className="flex flex-col">
+            {!session?.user.id && (
+              <nav className="flex flex-col gap-1 mt-4">
+                <Button
+                  asChild
+                  variant="link"
+                  size="sm"
+                  className="justify-start w-fit"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <CustomLink href="/sign-in" isActive={path === "/sign-in"}>
+                    Sign In
+                  </CustomLink>
+                </Button>
+              </nav>
             )}
 
-            {session?.user?.role === UserRole.JOB_SEEKER &&
-              JOB_SEEKER_NAV_ITEMS.map(({ href, label }) => (
-                <CustomLink key={href} href={href}>
-                  {label}
-                </CustomLink>
-              ))}
+            {session?.user.role === UserRole.JOB_SEEKER && (
+              <nav className="flex flex-col gap-2 mt-4">
+                {JOB_SEEKER_NAV_ITEMS.map(({ href, label, icon }) => {
+                  const isActive = path === href.split("?")[0];
 
-            {session?.user?.role === UserRole.EMPLOYER &&
-              EMPLOYER_NAV_ITEMS.map(({ href, label }) => (
-                <CustomLink key={href} href={href}>
-                  {label}
-                </CustomLink>
-              ))}
+                  return (
+                    <Button
+                      key={href}
+                      asChild
+                      size="sm"
+                      variant="link"
+                      onClick={() => setIsOpen(false)}
+                      className={`${isActive ? "text-brand hover:text-brand" : ""} justify-start w-fit`}
+                    >
+                      <CustomLink
+                        href={href}
+                        prefetch={false}
+                        isActive={isActive}
+                      >
+                        <span className="mr-1">{icon}</span>
+                        {label}
+                      </CustomLink>
+                    </Button>
+                  );
+                })}
+              </nav>
+            )}
 
-            {session?.user?.id && (
-              <Button variant="link" onClick={handleSignOut}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Sign out
+            {session?.user.role === UserRole.EMPLOYER && (
+              <nav className="flex flex-col gap-2 mt-4">
+                {EMPLOYER_NAV_ITEMS.map(({ href, label, icon }) => {
+                  const isActive = path === href.split("?")[0];
+
+                  return (
+                    <Button
+                      key={href}
+                      asChild
+                      size="sm"
+                      variant="link"
+                      onClick={() => setIsOpen(false)}
+                      className={`${isActive ? "text-brand hover:text-brand" : ""} justify-start w-fit`}
+                    >
+                      <CustomLink
+                        href={href}
+                        prefetch={false}
+                        isActive={isActive}
+                      >
+                        <span className="mr-1">{icon}</span>
+                        {label}
+                      </CustomLink>
+                    </Button>
+                  );
+                })}
+              </nav>
+            )}
+
+            {session?.user.role === UserRole.JOB_SEEKER && (
+              <Button
+                asChild
+                variant="link"
+                onClick={() => setIsOpen(false)}
+                className={`${path === "/job-seeker/profile" ? "text-brand hover:text-brand" : ""} justify-start w-fit mt-2`}
+              >
+                <CustomLink
+                  href="/job-seeker/profile"
+                  prefetch={false}
+                  isActive={path === "/job-seeker/profile"}
+                >
+                  <User className="h-4 w-4 mr-1" aria-hidden="true" />
+                  Profile
+                </CustomLink>
+              </Button>
+            )}
+
+            {session?.user.role === UserRole.EMPLOYER && (
+              <Button
+                asChild
+                variant="link"
+                onClick={() => setIsOpen(false)}
+                className={`${path === "/employer/profile" ? "text-brand hover:text-brand" : ""} justify-start w-fit mt-2`}
+              >
+                <CustomLink
+                  href="/employer/profile"
+                  prefetch={false}
+                  isActive={path === "/employer/profile"}
+                >
+                  <User className="h-4 w-4 mr-1" aria-hidden="true" />
+                  Profile
+                </CustomLink>
+              </Button>
+            )}
+
+            {session?.user.id && (
+              <Button
+                asChild
+                variant="link"
+                onClick={handleSignOut}
+                className="justify-start w-fit mt-1"
+              >
+                <span className="flex items-center gap-2">
+                  <LogOut className="h-4 w-4" aria-hidden="true" />
+                  Sign out
+                </span>
               </Button>
             )}
           </div>
