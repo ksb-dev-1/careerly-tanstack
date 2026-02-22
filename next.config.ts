@@ -4,13 +4,6 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   cacheComponents: true,
-  // cacheLife: {
-  //   infinite: {
-  //     stale: Infinity,
-  //     revalidate: Infinity,
-  //     expire: Infinity,
-  //   },
-  // },
   images: {
     remotePatterns: [
       {
