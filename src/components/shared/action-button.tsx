@@ -1,21 +1,12 @@
-// ========================================
-// Imports
-// ========================================
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { Spinner } from "./spinner";
 
-// ========================================
-// Types
-// ========================================
 interface ActionButtonProps extends React.ComponentProps<typeof Button> {
   loading: boolean;
 }
 
-// ========================================
-// Action button component
-// ========================================
 export function ActionButton({
   loading,
   disabled,

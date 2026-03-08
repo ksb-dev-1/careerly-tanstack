@@ -1,12 +1,6 @@
-// ========================================
-// Imports
-// ========================================
 import { AnimatedUnderline } from "@/components/home/animated-underline";
 import { StartExploringButton } from "@/components/home/start-exploring-button";
 
-// ========================================
-// Hero section component
-// ========================================
 export function HeroSection() {
   return (
     <div className="min-h-screen w-full max-w-custom mx-auto px-6 flex flex-col items-center justify-center">

@@ -1,8 +1,5 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { useState } from "react";
 
 import { Eye, EyeOff } from "lucide-react";
@@ -16,9 +13,6 @@ import { CustomLink } from "../shared/custom-link";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
-// ========================================
-// Types
-// ========================================
 type PasswordFieldProps<T extends FieldValues> = {
   field: ControllerRenderProps<T, any>;
   fieldState: ControllerFieldState;
@@ -27,9 +21,6 @@ type PasswordFieldProps<T extends FieldValues> = {
   placeholder?: string;
 };
 
-// ========================================
-// Component
-// ========================================
 export function PasswordField<T extends FieldValues>({
   field,
   fieldState,

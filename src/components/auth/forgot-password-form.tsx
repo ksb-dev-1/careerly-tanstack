@@ -54,7 +54,7 @@ export function ForgotPasswordForm() {
       setErrorMessage(error.message || "Something went wrong");
     } else {
       setSuccessMessage(
-        "If an account exists for this email, we've sent a password reset link.",
+        "We've sent a password reset link to the email address you entered.",
       );
       form.reset();
     }

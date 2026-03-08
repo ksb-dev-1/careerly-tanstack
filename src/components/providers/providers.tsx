@@ -1,15 +1,9 @@
 "use client";
 
-// ========================================
-// Imports
-// ========================================
 import { Toaster } from "../ui/sonner";
 import { TanstackProvider } from "./tanstack-provider";
 import { ThemeProvider } from "./theme-provider";
 
-// ========================================
-// Providers component
-// ========================================
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <TanstackProvider>
@@ -20,7 +14,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disableTransitionOnChange
       >
         {children}
-        <Toaster position="top-center" />
+        <Toaster position="top-right" />
       </ThemeProvider>
     </TanstackProvider>
   );

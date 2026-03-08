@@ -22,10 +22,6 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (pathname === ROUTES.HOME) {
-    return NextResponse.next();
-  }
-
   // 1️⃣ Not logged in
   if (!session?.user.id) {
     if (
@@ -56,6 +52,10 @@ export async function proxy(request: NextRequest) {
     }
 
     return NextResponse.redirect(new URL(ROUTES.SELECT_USER_ROLE, request.url));
+  }
+
+  if (pathname === ROUTES.HOME) {
+    return NextResponse.next();
   }
 
   // 3️⃣ Job Seeker

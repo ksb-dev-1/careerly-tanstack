@@ -4,6 +4,10 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -12,10 +16,6 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
-
-// =======================================
-// ENUMS
-// =======================================
 
 enum JobStatus {
   OPEN
@@ -57,19 +57,6 @@ enum UserRole {
   EMPLOYER
   NOT_ASSIGNED
 }
-
-// enum Category {
-//   DEVELOPMENT
-//   UI_UX_DESIGN
-//   AI_SERVICES
-//   HUMAN_RESEARCH
-//   BUSINESS_ANALYSIS
-//   DIGITAL_MARKETING
-//   VIDEO_AND_ANIMATION
-//   MUSIC_AND_AUDIO
-//   CONSULTING
-//   CUSTOMER_SUPPORT
-// }
 
 model User {
   id               String    @id
@@ -158,6 +145,7 @@ model JobSkill {
 
   @@id([jobId, skillId])
 }
+
 model Job {
   id           String   @id @default(uuid())
   employerId   String?
@@ -185,7 +173,6 @@ model Job {
   description  String
 
   jobStatus    JobStatus @default(OPEN)
-  // category     Category
 
   isFeatured   Boolean @default(false)
   isDeleted    Boolean @default(false)
@@ -197,10 +184,8 @@ model Job {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // 🚀 Core query index
   @@index([jobStatus, isDeleted, createdAt(sort: Desc)])
 
-  // 🚀 Filter indexes (only what you actually filter by)
   @@index([jobType])
   @@index([jobMode])
   @@index([employerId])
@@ -262,8 +247,6 @@ model EmployerProfile {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   companyName         String?
-  companyLogo         String?
-  companyLogoPublicId String?
   industry            String?
   location            String?
   about               String?
@@ -315,3 +298,16 @@ model SocialLink {
 
   @@index([jobSeekerProfileId])
 }
+
+// enum Category {
+//   DEVELOPMENT
+//   UI_UX_DESIGN
+//   AI_SERVICES
+//   HUMAN_RESEARCH
+//   BUSINESS_ANALYSIS
+//   DIGITAL_MARKETING
+//   VIDEO_AND_ANIMATION
+//   MUSIC_AND_AUDIO
+//   CONSULTING
+//   CUSTOMER_SUPPORT
+// }
