@@ -6,7 +6,8 @@ import { HeroSection } from "@/components/home/hero-section";
 import { HowItWorks } from "@/components/home/how-it-works";
 
 export const metadata: Metadata = {
-  title: "Careerly Tanstack",
+  title: "Home - Careerly",
+  description: "A go to platform for job seekers and employers",
 };
 
 export default function HomePage() {
