@@ -14,7 +14,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         disableTransitionOnChange
       >
         {children}
-        <Toaster position="top-right" />
+        <Toaster position="bottom-right" />
       </ThemeProvider>
     </TanstackProvider>
   );
