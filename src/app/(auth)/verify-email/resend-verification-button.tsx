@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { ActionButton } from "@/components/shared/action-button";
+import { ActionButton } from "@/components/action-button";
 import { authClient } from "@/lib/auth-client";
 
 export function ResendVerificationButton({ email }: { email: string }) {

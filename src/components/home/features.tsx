@@ -169,7 +169,7 @@ function FeaturesSection({
         >
           <div className="h-full border p-4 md:p-6 rounded-xl shadow-sm bg-card">
             <div className="flex flex-col gap-4">
-              <div className="h-10 w-10 rounded-full bg-brand/20 text-brand border border-brand/30 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-lg bg-brand/20 text-brand border border-brand/30 flex items-center justify-center">
                 <feature.icon size={16} />
               </div>
 

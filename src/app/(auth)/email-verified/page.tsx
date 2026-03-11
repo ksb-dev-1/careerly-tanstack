@@ -5,7 +5,9 @@ import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Email Verified",
+  title: "Email Verified - Careerly",
+  description:
+    "Your email has been successfully verified. You can now access your Careerly account to find jobs or hire talented professionals.",
 };
 
 export default function EmailVerifiedPage() {

@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { assignUserRole } from "@/actions/assign-user-role";
-import { ActionButton } from "@/components/shared/action-button";
+import { ActionButton } from "@/components/action-button";
 import { Card } from "@/components/ui/card";
 import { UserRole } from "@/generated/prisma/browser";
 import { useClientSession } from "@/hooks/useClientSession";

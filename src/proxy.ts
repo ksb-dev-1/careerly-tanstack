@@ -22,7 +22,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 1️⃣ Not logged in
+  // Not logged in
   if (!session?.user.id) {
     if (
       pathname === ROUTES.HOME ||
@@ -36,7 +36,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(ROUTES.HOME, request.url));
   }
 
-  // 2️⃣ Logged in but email not verified
+  // Logged in but email not verified
   if (!session.user.emailVerified) {
     if (pathname === ROUTES.VERIFY_EMAIL) {
       return NextResponse.next();
@@ -45,7 +45,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(ROUTES.VERIFY_EMAIL, request.url));
   }
 
-  // 2️⃣ Logged in but no role
+  // Logged in but no role
   if (session.user.role === UserRole.NOT_ASSIGNED) {
     if (pathname === ROUTES.SELECT_USER_ROLE) {
       return NextResponse.next();
@@ -58,7 +58,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 3️⃣ Job Seeker
+  // Job Seeker
   if (session.user.role === UserRole.JOB_SEEKER) {
     if (pathname.startsWith(JOB_SEEKER_ROUTES.BASE)) {
       return NextResponse.next();
@@ -67,7 +67,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(JOB_SEEKER_ROUTES.JOBS, request.url));
   }
 
-  // 4️⃣ Employer
+  // Employer
   if (session.user.role === UserRole.EMPLOYER) {
     if (pathname.startsWith(EMPLOYER_ROUTES.BASE)) {
       return NextResponse.next();

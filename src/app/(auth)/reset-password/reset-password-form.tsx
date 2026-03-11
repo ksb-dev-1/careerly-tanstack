@@ -7,21 +7,20 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
-import { authClient } from "@/lib/auth-client";
-import { ROUTES } from "@/lib/routes";
-import { ResetPasswordValues, resetPasswordSchema } from "@/lib/validation";
-
-import { ActionButton } from "../shared/action-button";
-import { PasswordField } from "../shared/password-field";
-import { Alert } from "../ui/alert";
+import { ActionButton } from "@/components/action-button";
+import { PasswordField } from "@/components/password-field";
+import { Alert } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { FieldGroup } from "../ui/field";
+} from "@/components/ui/card";
+import { FieldGroup } from "@/components/ui/field";
+import { authClient } from "@/lib/auth-client";
+import { ROUTES } from "@/lib/routes";
+import { ResetPasswordValues, resetPasswordSchema } from "@/lib/validation";
 
 export function ResetPasswordForm({ token }: { token: string }) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);

@@ -2,13 +2,16 @@ import { Suspense } from "react";
 
 import { Metadata } from "next";
 
-import { ResetPasswordForm } from "@/components/auth/reset-password-form";
-import { CustomLink } from "@/components/shared/custom-link";
-import { LoadingFallback } from "@/components/shared/loading-fallback";
+import { CustomLink } from "@/components/custom-link";
+import { LoadingFallback } from "@/components/loading-fallback";
 import { ROUTES } from "@/lib/routes";
 
+import { ResetPasswordForm } from "./reset-password-form";
+
 export const metadata: Metadata = {
-  title: "Reset password - Careerly",
+  title: "Reset Password - Careerly",
+  description:
+    "Create a new password to securely access your Careerly account.",
 };
 
 async function GetToken({

@@ -1,4 +1,4 @@
-import { CustomLink } from "@/components/shared/custom-link";
+import { CustomLink } from "@/components/custom-link";
 import { ROUTES } from "@/lib/routes";
 
 export function StartExploringButton() {

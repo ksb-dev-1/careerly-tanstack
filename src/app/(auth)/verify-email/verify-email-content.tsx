@@ -2,10 +2,11 @@
 
 import { useRouter } from "next/navigation";
 
-import { ResendVerificationButton } from "@/components/resend-verification-button";
-import { LoadingFallback } from "@/components/shared/loading-fallback";
+import { LoadingFallback } from "@/components/loading-fallback";
 import { authClient } from "@/lib/auth-client";
 import { ROUTES } from "@/lib/routes";
+
+import { ResendVerificationButton } from "./resend-verification-button";
 
 export function VerifyEmailContent() {
   const { data: session, isPending, error } = authClient.useSession();

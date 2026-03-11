@@ -6,13 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { MoveLeft } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 
-import { authClient } from "@/lib/auth-client";
-import { ROUTES } from "@/lib/routes";
-import { ForgotPasswordValues, forgotPasswordSchema } from "@/lib/validation";
-
-import { ActionButton } from "../shared/action-button";
-import { CustomLink } from "../shared/custom-link";
-import { Alert } from "../ui/alert";
+import { ActionButton } from "@/components/action-button";
+import { CustomLink } from "@/components/custom-link";
+import { Alert } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -20,9 +16,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Field, FieldError, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+} from "@/components/ui/card";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { ROUTES } from "@/lib/routes";
+import { ForgotPasswordValues, forgotPasswordSchema } from "@/lib/validation";
 
 export function ForgotPasswordForm() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);

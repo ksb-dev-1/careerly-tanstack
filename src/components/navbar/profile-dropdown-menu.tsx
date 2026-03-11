@@ -12,8 +12,8 @@ import { UserRole } from "@/generated/prisma/browser";
 import { authClient } from "@/lib/auth-client";
 import { EMPLOYER_ROUTES, JOB_SEEKER_ROUTES, ROUTES } from "@/lib/routes";
 
-import { CustomLink } from "./shared/custom-link";
-import { Avatar, AvatarFallback } from "./ui/avatar";
+import { CustomLink } from "../custom-link";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +21,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 
 interface ProfileDropdownProps {
   image?: string | null;

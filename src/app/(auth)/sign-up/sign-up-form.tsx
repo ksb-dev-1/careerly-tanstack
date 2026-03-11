@@ -8,14 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { authClient } from "@/lib/auth-client";
-import { ROUTES } from "@/lib/routes";
-import { SignUpValues, signUpSchema } from "@/lib/validation";
-
-import { ActionButton } from "../shared/action-button";
-import { CustomLink } from "../shared/custom-link";
-import { PasswordField } from "../shared/password-field";
-import { Alert } from "../ui/alert";
+import { ActionButton } from "@/components/action-button";
+import { CustomLink } from "@/components/custom-link";
+import { PasswordField } from "@/components/password-field";
+import { Alert } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -23,9 +19,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+} from "@/components/ui/card";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { ROUTES } from "@/lib/routes";
+import { SignUpValues, signUpSchema } from "@/lib/validation";
 
 // ========================================
 // Sign-up form component

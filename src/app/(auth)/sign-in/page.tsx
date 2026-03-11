@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 
-import { SignInForm } from "@/components/auth/sign-in form";
+import { SignInForm } from "./sign-in form";
 
 export const metadata: Metadata = {
-  title: "Sign in - Careerly",
+  title: "Sign In - Careerly",
+  description: "Sign in to your Careerly account.",
 };
 
 export default function SignInPage() {

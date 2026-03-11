@@ -19,19 +19,19 @@ import { useAutoCloseOnGreaterThanOrEqualToBreakpoint } from "@/hooks/useAutoClo
 import { Session as UserSession } from "@/lib/auth";
 import { authClient } from "@/lib/auth-client";
 
-import { ProfileDropdownMenu } from "./profile-dropdown-menu";
-import { CustomLink } from "./shared/custom-link";
-import { ThemeSwitch } from "./theme-switch";
-import { ThemeSwitchMobile } from "./theme-switch-mobile";
-import { Button } from "./ui/button";
+import { CustomLink } from "../custom-link";
+import { Button } from "../ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
-import { Skeleton } from "./ui/skeleton";
+} from "../ui/sheet";
+import { Skeleton } from "../ui/skeleton";
+import { ProfileDropdownMenu } from "./profile-dropdown-menu";
+import { ThemeSwitch } from "./theme-switch";
+import { ThemeSwitchMobile } from "./theme-switch-mobile";
 
 type Session = typeof authClient.$Infer.Session | null;
 
@@ -159,7 +159,6 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
               className={isActive ? "text-brand hover:text-brand" : ""}
             >
               <CustomLink href={href} prefetch={false} isActive={isActive}>
-                {icon}
                 {label}
               </CustomLink>
             </Button>
@@ -194,7 +193,6 @@ function EmployerNavbar({ session }: { session: UserSession }) {
               className={isActive ? "text-brand hover:text-brand" : ""}
             >
               <CustomLink href={href} prefetch={false} isActive={isActive}>
-                {icon}
                 {label}
               </CustomLink>
             </Button>

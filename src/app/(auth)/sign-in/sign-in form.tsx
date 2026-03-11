@@ -10,16 +10,12 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "sonner";
 
-import { authClient } from "@/lib/auth-client";
-import { ROUTES } from "@/lib/routes";
-import { SignInValues, signInSchema } from "@/lib/validation";
-
-import { ActionButton } from "../shared/action-button";
-import { CustomLink } from "../shared/custom-link";
-import { PasswordField } from "../shared/password-field";
-import { Spinner } from "../shared/spinner";
-import { Alert } from "../ui/alert";
-import { Button } from "../ui/button";
+import { ActionButton } from "@/components/action-button";
+import { CustomLink } from "@/components/custom-link";
+import { PasswordField } from "@/components/password-field";
+import { Spinner } from "@/components/spinner";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -27,10 +23,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Checkbox } from "../ui/checkbox";
-import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { ROUTES } from "@/lib/routes";
+import { SignInValues, signInSchema } from "@/lib/validation";
 
 export function SignInForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

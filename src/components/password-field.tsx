@@ -9,9 +9,9 @@ import {
   FieldValues,
 } from "react-hook-form";
 
-import { CustomLink } from "../shared/custom-link";
-import { Field, FieldError, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+import { CustomLink } from "./custom-link";
+import { Field, FieldError, FieldLabel } from "./ui/field";
+import { Input } from "./ui/input";
 
 type PasswordFieldProps<T extends FieldValues> = {
   field: ControllerRenderProps<T, any>;

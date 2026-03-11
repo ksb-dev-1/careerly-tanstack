@@ -1,7 +1,13 @@
+import { Metadata } from "next";
+
 import { Faq } from "@/components/home/faq";
 import { Features } from "@/components/home/features";
 import { HeroSection } from "@/components/home/hero-section";
 import { HowItWorks } from "@/components/home/how-it-works";
+
+export const metadata: Metadata = {
+  title: "Careerly Tanstack",
+};
 
 export default function HomePage() {
   return (
