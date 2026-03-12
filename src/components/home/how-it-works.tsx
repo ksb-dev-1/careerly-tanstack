@@ -70,9 +70,9 @@ interface ReusableCardProps {
 
 function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
   return (
-    <Card>
+    <Card className="shadow-none!">
       <CardHeader className="flex items-center gap-4">
-        <div className="relative bg-brand/20 h-12 w-12 rounded-lg">{icon}</div>
+        <div className="relative bg-brand/10 h-12 w-12 rounded-lg">{icon}</div>
         <div>
           <CardTitle className="text-lg font-semibold text-brand">
             {title}
@@ -88,7 +88,7 @@ function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
       <CardContent className="space-y-8 ml-2">
         {steps.map((step) => (
           <div key={step.id} className="flex gap-4">
-            <div className="shrink-0 h-8 w-8 rounded-lg bg-brand/20 text-brand flex items-center justify-center">
+            <div className="shrink-0 h-8 w-8 rounded-lg bg-brand/10 text-brand flex items-center justify-center">
               <span className="text-sm font-bold">{step.number}</span>
             </div>
             <div>
@@ -156,3 +156,5 @@ export function HowItWorks() {
     </section>
   );
 }
+
+// ---------------------------------------------------------------------------------------------

@@ -101,7 +101,7 @@ function Toggle({
 }) {
   return (
     <div className="flex justify-center mb-10">
-      <div className="relative flex w-65 rounded-full border bg-card p-1 shadow-sm">
+      <div className="relative flex w-65 rounded-full border bg-card p-1 shadow-md">
         {/* Sliding Indicator */}
         <motion.div
           layout
@@ -167,9 +167,9 @@ function FeaturesSection({
           transition={{ duration: 0.5, delay: index * 0.1 }}
           viewport={{ once: true }}
         >
-          <div className="h-full border p-4 md:p-6 rounded-xl shadow-sm bg-card">
+          <div className="h-full border p-4 md:p-6 rounded-xl bg-card group transition-all duration-300">
             <div className="flex flex-col gap-4">
-              <div className="h-10 w-10 rounded-lg bg-brand/20 text-brand flex items-center justify-center">
+              <div className="h-10 w-10 rounded-lg bg-brand/10 text-brand group-hover:bg-brand/20 group-hover:rotate-12 group-hover:scale-110 flex items-center justify-center transition-all duration-300">
                 <feature.icon size={16} />
               </div>
 
@@ -206,3 +206,5 @@ export function Features() {
     </div>
   );
 }
+
+// ---------------------------------------------------------------------------------
