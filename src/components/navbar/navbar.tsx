@@ -121,7 +121,7 @@ function NavbarWithoutAuth({ session }: { session: Session }) {
     <NavbarWrapper session={session}>
       <div className="hidden md:flex items-center gap-2">
         <ThemeSwitch />
-        <Button asChild size="sm" variant="outline">
+        <Button variant="outline">
           <CustomLink href="/sign-in" isActive={path === "/sign-in"}>
             Sign in
           </CustomLink>
@@ -158,7 +158,6 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
             <Button
               key={href}
               asChild
-              size="sm"
               variant="ghost"
               className={isActive ? "text-brand hover:text-brand" : ""}
             >
@@ -194,7 +193,6 @@ function EmployerNavbar({ session }: { session: UserSession }) {
             <Button
               key={href}
               asChild
-              size="sm"
               variant="ghost"
               className={isActive ? "text-brand hover:text-brand" : ""}
             >
@@ -243,7 +241,7 @@ function SideMenu({ session }: { session: Session }) {
         <Skeleton className="h-9 w-9 rounded-md md:hidden" />
       )}
 
-      <SheetContent side="top" className="w-full gap-0 p-0!">
+      <SheetContent side="left" className="w-60 gap-0 p-0!">
         <SheetHeader className="p-0!">
           <SheetTitle className="text-brand text-2xl font-extrabold border-b h-16 p-4">
             Careerly
@@ -251,13 +249,12 @@ function SideMenu({ session }: { session: Session }) {
         </SheetHeader>
 
         <div className="h-full flex flex-col justify-between">
-          <div className="flex flex-col">
+          <div className="flex flex-col px-4">
             {!session?.user.id && (
               <nav className="flex flex-col gap-1 mt-4">
                 <Button
                   asChild
-                  variant="link"
-                  size="sm"
+                  variant="outline"
                   className="justify-start w-fit"
                   onClick={() => setIsOpen(false)}
                 >
@@ -269,7 +266,7 @@ function SideMenu({ session }: { session: Session }) {
             )}
 
             {session?.user.role === UserRole.JOB_SEEKER && (
-              <nav className="flex flex-col gap-2 mt-4">
+              <nav className="flex flex-col gap-3 mt-4">
                 {JOB_SEEKER_NAV_ITEMS.map(({ href, label, icon }) => {
                   const isActive = path === href.split("?")[0];
 
@@ -277,10 +274,9 @@ function SideMenu({ session }: { session: Session }) {
                     <Button
                       key={href}
                       asChild
-                      size="sm"
-                      variant="link"
+                      variant="outline"
                       onClick={() => setIsOpen(false)}
-                      className={`${isActive ? "text-brand hover:text-brand" : ""} justify-start w-fit`}
+                      className={`${isActive ? "text-brand hover:text-brand" : ""} justify-start w-full`}
                     >
                       <CustomLink
                         href={href}
@@ -305,10 +301,9 @@ function SideMenu({ session }: { session: Session }) {
                     <Button
                       key={href}
                       asChild
-                      size="sm"
-                      variant="link"
+                      variant="outline"
                       onClick={() => setIsOpen(false)}
-                      className={`${isActive ? "text-brand hover:text-brand" : ""} justify-start w-fit`}
+                      className={`${isActive ? "text-brand hover:text-brand" : ""} justify-start w-full`}
                     >
                       <CustomLink
                         href={href}
@@ -327,16 +322,16 @@ function SideMenu({ session }: { session: Session }) {
             {session?.user.role === UserRole.JOB_SEEKER && (
               <Button
                 asChild
-                variant="link"
+                variant="outline"
                 onClick={() => setIsOpen(false)}
-                className={`${path === "/job-seeker/profile" ? "text-brand hover:text-brand" : ""} justify-start w-fit mt-2`}
+                className={`${path === "/job-seeker/profile" ? "text-brand hover:text-brand" : ""} justify-start w-full mt-3`}
               >
                 <CustomLink
                   href="/job-seeker/profile"
                   prefetch={false}
                   isActive={path === "/job-seeker/profile"}
                 >
-                  <User className="h-4 w-4 mr-1" aria-hidden="true" />
+                  <User className="mr-1" size={16} aria-hidden="true" />
                   Profile
                 </CustomLink>
               </Button>
@@ -345,16 +340,16 @@ function SideMenu({ session }: { session: Session }) {
             {session?.user.role === UserRole.EMPLOYER && (
               <Button
                 asChild
-                variant="link"
+                variant="outline"
                 onClick={() => setIsOpen(false)}
-                className={`${path === "/employer/profile" ? "text-brand hover:text-brand" : ""} justify-start w-fit mt-2`}
+                className={`${path === "/employer/profile" ? "text-brand hover:text-brand" : ""} justify-start w-full mt-3`}
               >
                 <CustomLink
                   href="/employer/profile"
                   prefetch={false}
                   isActive={path === "/employer/profile"}
                 >
-                  <User className="h-4 w-4 mr-1" aria-hidden="true" />
+                  <User className="mr-1" size={16} aria-hidden="true" />
                   Profile
                 </CustomLink>
               </Button>
@@ -363,9 +358,9 @@ function SideMenu({ session }: { session: Session }) {
             {session?.user.id && (
               <Button
                 asChild
-                variant="link"
+                variant="outline"
                 onClick={handleSignOut}
-                className="justify-start w-fit mt-1 cursor-pointer"
+                className="justify-start w-full mt-3 cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <LogOut className="h-4 w-4" aria-hidden="true" />

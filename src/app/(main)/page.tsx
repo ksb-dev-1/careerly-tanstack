@@ -15,12 +15,12 @@ export default function HomePage() {
     <>
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden border-b">
         <HeroSection />
-        <div className="absolute w-175 h-175 bg-brand/20 blur-[140px] rounded-full"></div>
+        <div className="absolute w-175 h-175 bg-brand/20 dark:bg-brand/10 blur-[140px] rounded-full"></div>
         <div className="absolute flex items-center justify-center">
           <div className="relative h-360 w-360 rounded-full border flex items-center justify-center">
             <div className="relative h-280 w-280 rounded-full border flex items-center justify-center">
               <div className="relative h-200 w-200 rounded-full border flex items-center justify-center">
-                <div className="w-40 h-40 rounded-full bg-linear-to-br from-brand/40 to-brand/10 blur-2xl"></div>
+                <div className="w-40 h-40 rounded-full bg-linear-to-br from-brand/20 to-brand/10 dark:from-brand/15 dark:to-brand/10 blur-2xl"></div>
               </div>
             </div>
           </div>
