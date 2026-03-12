@@ -77,26 +77,21 @@ function NavbarWrapper({
   const path = usePathname();
 
   return (
-    <header className="w-full border-b h-16 bg-background flex items-center justify-center">
-      <nav className="w-full flex items-center justify-between px-4">
-        <div className="flex items-center">
-          <Suspense>
-            <SideMenu session={session} />
-          </Suspense>
+    <header className="sticky z-10 top-0 right-0 border-b h-16 bg-background px-4">
+      <nav className="max-w-custom h-full mx-auto flex items-center justify-between">
+        <CustomLink
+          href="/"
+          className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
+          isActive={path === "/"}
+        >
+          Careerly
+        </CustomLink>
 
-          <CustomLink
-            href="/"
-            className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
-            isActive={path === "/"}
-          >
-            Careerly
-          </CustomLink>
-        </div>
+        <Suspense>
+          <SideMenu session={session} />
+        </Suspense>
 
-        <div className="hidden md:flex items-center gap-2">
-          {children}
-          <ThemeSwitch />
-        </div>
+        {children}
       </nav>
     </header>
   );
@@ -105,12 +100,15 @@ function NavbarWrapper({
 function NavbarLoading({ session }: { session: Session }) {
   return (
     <NavbarWrapper session={session}>
-      <div className="flex items-center gap-2">
+      <div className="hidden md:flex items-center gap-2">
         {Array.from({ length: 3 }).map((_, i) => (
           <Skeleton key={i} className="h-8 w-20" />
         ))}
-        <span className="inline-block h-5 border-r-2 mx-2" />
-        <Skeleton className="h-8 w-8 rounded-xl" />
+      </div>
+
+      <div className="hidden md:flex items-center gap-2">
+        <ThemeSwitch />
+        <Skeleton className="h-9 w-9 rounded-full" />
       </div>
     </NavbarWrapper>
   );
@@ -121,11 +119,14 @@ function NavbarWithoutAuth({ session }: { session: Session }) {
 
   return (
     <NavbarWrapper session={session}>
-      <Button asChild size="sm" variant="outline">
-        <CustomLink href="/sign-in" isActive={path === "/sign-in"}>
-          Sign in
-        </CustomLink>
-      </Button>
+      <div className="hidden md:flex items-center gap-2">
+        <ThemeSwitch />
+        <Button asChild size="sm" variant="outline">
+          <CustomLink href="/sign-in" isActive={path === "/sign-in"}>
+            Sign in
+          </CustomLink>
+        </Button>
+      </div>
     </NavbarWrapper>
   );
 }
@@ -133,10 +134,13 @@ function NavbarWithoutAuth({ session }: { session: Session }) {
 function NavbarWithAuth({ session }: { session: UserSession }) {
   return (
     <NavbarWrapper session={session}>
-      <ProfileDropdownMenu
-        image={session.user.image}
-        role={session.user.role as UserRole}
-      />
+      <div className="hidden md:flex items-center gap-2">
+        <ThemeSwitch />
+        <ProfileDropdownMenu
+          image={session.user.image}
+          role={session.user.role as UserRole}
+        />
+      </div>
     </NavbarWrapper>
   );
 }
@@ -146,7 +150,7 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
 
   return (
     <NavbarWrapper session={session}>
-      <div className="flex items-center gap-2">
+      <div className="hidden md:flex items-center gap-4">
         {JOB_SEEKER_NAV_ITEMS.map(({ href, label, icon }) => {
           const isActive = path === href.split("?")[0];
 
@@ -164,13 +168,15 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
             </Button>
           );
         })}
-        <span className="inline-block h-5 border-r-2" />
       </div>
 
-      <ProfileDropdownMenu
-        image={session.user.image}
-        role={session.user.role as UserRole}
-      />
+      <div className="hidden md:flex items-center gap-2">
+        <ThemeSwitch />
+        <ProfileDropdownMenu
+          image={session.user.image}
+          role={session.user.role as UserRole}
+        />
+      </div>
     </NavbarWrapper>
   );
 }
@@ -180,7 +186,7 @@ function EmployerNavbar({ session }: { session: UserSession }) {
 
   return (
     <NavbarWrapper session={session}>
-      <div className="flex items-center gap-2">
+      <div className="hidden md:flex items-center gap-2">
         {EMPLOYER_NAV_ITEMS.map(({ href, label, icon }) => {
           const isActive = path === href.split("?")[0];
 
@@ -198,13 +204,15 @@ function EmployerNavbar({ session }: { session: UserSession }) {
             </Button>
           );
         })}
-        <span className="inline-block h-5 border-r-2" />
       </div>
 
-      <ProfileDropdownMenu
-        image={session.user.image}
-        role={session.user.role as UserRole}
-      />
+      <div className="hidden md:flex items-center gap-2">
+        <ThemeSwitch />
+        <ProfileDropdownMenu
+          image={session.user.image}
+          role={session.user.role as UserRole}
+        />
+      </div>
     </NavbarWrapper>
   );
 }
@@ -229,20 +237,13 @@ function SideMenu({ session }: { session: Session }) {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       {session?.user ? (
         <SheetTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="mr-3 md:hidden"
-            aria-label="Open navigation menu"
-          >
-            <Menu />
-          </Button>
+          <Menu className="md:hidden" />
         </SheetTrigger>
       ) : (
-        <Skeleton className="h-9 w-9 rounded-md mr-3 md:hidden" />
+        <Skeleton className="h-9 w-9 rounded-md md:hidden" />
       )}
 
-      <SheetContent side="left" className="w-48 gap-0 p-0!">
+      <SheetContent side="left" className="w-60 gap-0 p-0!">
         <SheetHeader className="p-0!">
           <SheetTitle className="text-brand text-2xl font-extrabold border-b h-16 p-4">
             Careerly
@@ -364,7 +365,7 @@ function SideMenu({ session }: { session: Session }) {
                 asChild
                 variant="link"
                 onClick={handleSignOut}
-                className="justify-start w-fit mt-1"
+                className="justify-start w-fit mt-1 cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <LogOut className="h-4 w-4" aria-hidden="true" />

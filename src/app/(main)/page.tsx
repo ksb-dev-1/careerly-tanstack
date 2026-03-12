@@ -13,16 +13,16 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <section className="border-b">
+      <section className="border-b px-4">
         <HeroSection />
       </section>
-      <section className="py-16 border-b">
+      <section className="py-16 border-b px-4">
         <Features />
       </section>
-      <section className="py-16 border-b">
+      <section className="py-16 border-b px-4">
         <HowItWorks />
       </section>
-      <section className="py-16">
+      <section className="py-16 px-4">
         <Faq />
       </section>
     </>

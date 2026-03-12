@@ -1,13 +1,13 @@
 import { Suspense } from "react";
 
-import { Mulish } from "next/font/google";
+import { Public_Sans } from "next/font/google";
 
 import { NavigationProgress } from "@/components/navigation-progress";
 import { Providers } from "@/components/providers/providers";
 
 import "./globals.css";
 
-const fontFamily = Mulish({
+const fontFamily = Public_Sans({
   subsets: ["latin"],
   display: "swap",
 });

@@ -46,8 +46,7 @@ const employerSteps = [
     id: "e2",
     number: "2",
     title: "Post Job Openings",
-    description:
-      "Create detailed listings that attract quality candidates to apply for jobs",
+    description: "Create detailed listings that attract quality candidates",
   },
   {
     id: "e3",
@@ -73,11 +72,9 @@ function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
   return (
     <Card>
       <CardHeader className="flex items-center gap-4">
-        <div className="relative bg-brand/20 border border-brand/30 h-12 w-12 rounded-full">
-          {icon}
-        </div>
+        <div className="relative bg-brand/20 h-12 w-12 rounded-lg">{icon}</div>
         <div>
-          <CardTitle className="text-lg font-bold text-brand">
+          <CardTitle className="text-lg font-semibold text-brand">
             {title}
           </CardTitle>
           <CardDescription className="mt-1 font-medium text-slate-600 dark:text-muted-foreground">
@@ -91,12 +88,12 @@ function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
       <CardContent className="space-y-8 ml-2">
         {steps.map((step) => (
           <div key={step.id} className="flex gap-4">
-            <div className="shrink-0 h-8 w-8 rounded-full bg-brand/20 border border-brand/30 text-brand flex items-center justify-center">
+            <div className="shrink-0 h-8 w-8 rounded-lg bg-brand/20 text-brand flex items-center justify-center">
               <span className="text-sm font-bold">{step.number}</span>
             </div>
             <div>
-              <p className="font-bold mb-1">{step.title}</p>
-              <p className="font-medium text-slate-600 dark:text-muted-foreground">
+              <p className="font-semibold mb-1">{step.title}</p>
+              <p className="text-base text-slate-600 dark:text-muted-foreground">
                 {step.description}
               </p>
             </div>
@@ -109,13 +106,13 @@ function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
 
 export function HowItWorks() {
   return (
-    <section className="w-full max-w-custom mx-auto px-6 overflow--x-hidden">
+    <section className="w-full max-w-custom mx-auto overflow--x-hidden">
       {/* Header */}
       <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
           How It <span className="text-brand">Works</span>
         </h2>
-        <p className="text-lg font-medium text-slate-600 dark:text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-lg text-slate-600 dark:text-muted-foreground max-w-2xl mx-auto">
           Whether you&apos;re seeking opportunities or talent, our platform
           makes the process seamless, efficient, and effective.
         </p>

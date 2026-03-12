@@ -115,7 +115,7 @@ function Toggle({
         {/* Job Seeker */}
         <button
           onClick={() => setMode("jobseeker")}
-          className={`relative z-10 w-1/2 py-2 font-semibold transition-colors
+          className={`relative z-10 w-1/2 py-2 font-medium transition-colors
         ${
           mode === "jobseeker"
             ? "text-white dark:text-background"
@@ -128,7 +128,7 @@ function Toggle({
         {/* Employer */}
         <button
           onClick={() => setMode("employer")}
-          className={`relative z-10 w-1/2 py-2 font-semibold transition-colors
+          className={`relative z-10 w-1/2 py-2 font-medium transition-colors
         ${
           mode === "employer"
             ? "text-white dark:text-background"
@@ -169,15 +169,15 @@ function FeaturesSection({
         >
           <div className="h-full border p-4 md:p-6 rounded-xl shadow-sm bg-card">
             <div className="flex flex-col gap-4">
-              <div className="h-10 w-10 rounded-lg bg-brand/20 text-brand border border-brand/30 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-lg bg-brand/20 text-brand flex items-center justify-center">
                 <feature.icon size={16} />
               </div>
 
-              <div className="text-lg font-bold">{feature.title}</div>
+              <div className="text-lg font-semibold">{feature.title}</div>
             </div>
 
             <div className="mt-2">
-              <p className="font-medium text-slate-600 dark:text-muted-foreground">
+              <p className="text-slate-600 dark:text-muted-foreground">
                 {feature.desc}
               </p>
             </div>
@@ -194,7 +194,7 @@ export function Features() {
   const features = mode === "employer" ? employerFeatures : jobSeekerFeatures;
 
   return (
-    <div className="w-full max-w-custom mx-auto px-6">
+    <div className="w-full max-w-custom mx-auto">
       {/* Header */}
       <Header />
 

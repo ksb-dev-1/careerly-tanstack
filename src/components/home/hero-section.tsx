@@ -3,27 +3,25 @@ import { StartExploringButton } from "@/components/home/start-exploring-button";
 
 export function HeroSection() {
   return (
-    <div className="min-h-screen w-full max-w-custom mx-auto px-6 flex flex-col items-center justify-center">
-      {/* Main Headline */}
-      <h1 className="font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight text-center">
-        Unlock Your <span className="text-brand">Career</span> Potential
+    <div className="min-h-screen w-full max-w-4xl mx-auto flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+      {/* Headline */}
+      <h1 className="font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-center leading-snug">
+        Your Next <span className="text-brand">Opportunity</span> or Your Next{" "}
+        <span className="text-brand">Hire</span> Starts Here
       </h1>
 
-      {/* Subheadline */}
-      <p className="text-xl sm:text-2xl md:text-4xl font-extrabold text-center max-w-3xl mx-auto mt-8">
-        Discover <span className="text-brand">Dream Jobs</span> That Inspire You
-      </p>
-
       {/* Description */}
-      <p className="text-lg font-medium text-center max-w-2xl mx-auto mt-8 text-slate-600 dark:text-muted-foreground">
-        Discover jobs effortlessly with intelligent filtering, instant search
-        results, and an elegant, modern UI designed for your success.
+      <p className="mt-6 md:mt-8 text-center text-base md:text-lg text-slate-600 dark:text-slate-300">
+        Find the perfect job or the right talent effortlessly, with intelligent
+        filtering, instant search results, and a modern, intuitive interface
+        designed for your success.
       </p>
 
+      {/* Animated underline */}
       <AnimatedUnderline />
 
       {/* CTA Section */}
-      <div className="mt-10 sm:mt-12">
+      <div className="mt-8">
         <StartExploringButton />
       </div>
     </div>

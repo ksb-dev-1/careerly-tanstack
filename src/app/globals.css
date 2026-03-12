@@ -50,9 +50,11 @@
 }
 
 :root {
-  --width: 64rem;
+  --width: 80rem;
   --brand: #0a66c2;
   --brand-hover: #0d59a5;
+  /* --brand: #228b22;
+  --brand-hover: #0d770d; */
   --radius: 0.625rem;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -88,9 +90,11 @@
 }
 
 .dark {
-  --width: 64rem;
+  --width: 80rem;
   --brand: #f4b400;
   --brand-hover: #d9a001;
+  /* --brand: #42d392;
+  --brand-hover: #18c074; */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -193,14 +197,21 @@
   }
 }
 
+/* html {
+  scrollbar-gutter: stable;
+} */
+/* html {
+  scrollbar-gutter: stable;
+} */
+
 body {
   overflow-x: hidden;
-  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* body[data-scroll-locked] .fixed {
+body[data-scroll-locked] .fixed {
   padding-right: 15px;
-} */
+}
 
 /* Custom NProgress styles */
 #nprogress {
