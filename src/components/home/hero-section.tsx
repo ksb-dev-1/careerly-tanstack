@@ -3,11 +3,11 @@ import { StartExploringButton } from "@/components/home/start-exploring-button";
 
 export function HeroSection() {
   return (
-    <div className="min-h-screen w-full max-w-4xl mx-auto flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="absolute inset-0 z-10 min-h-screen w-full max-w-3xl mx-auto flex flex-col items-center justify-center px-4">
       {/* Headline */}
       <h1 className="font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-center leading-snug">
-        Your Next <span className="text-brand">Opportunity</span> or Your Next{" "}
-        <span className="text-brand">Hire</span> Starts Here
+        Find Your Next <span className="text-brand">Opportunity</span> or
+        <span className="text-brand"> Hire</span> Top Talent
       </h1>
 
       {/* Description */}

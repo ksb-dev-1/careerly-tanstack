@@ -106,7 +106,7 @@ function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
 
 export function HowItWorks() {
   return (
-    <section className="w-full max-w-custom mx-auto overflow--x-hidden">
+    <section className="w-full max-w-custom mx-auto overflow-x-hidden pb-0.5 px-4">
       {/* Header */}
       <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">

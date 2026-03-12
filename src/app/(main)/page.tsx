@@ -13,16 +13,26 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <section className="border-b px-4">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden border-b">
         <HeroSection />
+        <div className="absolute w-175 h-175 bg-brand/20 blur-[140px] rounded-full"></div>
+        <div className="absolute flex items-center justify-center">
+          <div className="relative h-360 w-360 rounded-full border flex items-center justify-center">
+            <div className="relative h-280 w-280 rounded-full border flex items-center justify-center">
+              <div className="relative h-200 w-200 rounded-full border flex items-center justify-center">
+                <div className="w-40 h-40 rounded-full bg-linear-to-br from-brand/40 to-brand/10 blur-2xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
-      <section className="py-16 border-b px-4">
+      <section className="py-16 border-b">
         <Features />
       </section>
-      <section className="py-16 border-b px-4">
+      <section className="py-16 border-b">
         <HowItWorks />
       </section>
-      <section className="py-16 px-4">
+      <section className="py-16">
         <Faq />
       </section>
     </>

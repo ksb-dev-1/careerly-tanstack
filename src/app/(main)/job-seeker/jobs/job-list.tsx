@@ -26,33 +26,17 @@ export function JobList() {
   });
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen max-w-custom w-full mx-auto my-16">
-        Loading...
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    if (error.status === 401)
-      return (
-        <div className="min-h-screen max-w-custom w-full mx-auto my-16">
-          {error.message}
-        </div>
-      );
-
-    if (error.status === 500)
-      return (
-        <div className="min-h-screen max-w-custom w-full mx-auto my-16">
-          {error.message}
-        </div>
-      );
-
+    if (error.status === 401) return <div>{error.message}</div>;
+    if (error.status === 500) return <div>{error.message}</div>;
     return <div>Error: {error.message}</div>;
   }
 
   return (
-    <div className="min-h-screen max-w-custom w-full mx-auto my-16">
+    <div>
       {data?.map((job) => (
         <div key={job.id}>{job.companyName}</div>
       ))}

@@ -77,8 +77,8 @@ function NavbarWrapper({
   const path = usePathname();
 
   return (
-    <header className="sticky z-10 top-0 right-0 border-b h-16 bg-background px-4">
-      <nav className="max-w-custom h-full mx-auto flex items-center justify-between">
+    <header className="fixed z-20 top-0 left-0 right-0 w-full border-b h-16 flex items-center justify-center bg-background">
+      <nav className="flex items-center justify-between max-w-custom w-full px-4">
         <CustomLink
           href="/"
           className="font-extrabold text-2xl text-brand hover:text-brand-hover transition-colors"
@@ -243,7 +243,7 @@ function SideMenu({ session }: { session: Session }) {
         <Skeleton className="h-9 w-9 rounded-md md:hidden" />
       )}
 
-      <SheetContent side="left" className="w-60 gap-0 p-0!">
+      <SheetContent side="top" className="w-full gap-0 p-0!">
         <SheetHeader className="p-0!">
           <SheetTitle className="text-brand text-2xl font-extrabold border-b h-16 p-4">
             Careerly

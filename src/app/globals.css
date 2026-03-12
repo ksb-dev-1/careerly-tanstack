@@ -50,7 +50,7 @@
 }
 
 :root {
-  --width: 80rem;
+  --width: 72rem;
   --brand: #0a66c2;
   --brand-hover: #0d59a5;
   /* --brand: #228b22;
@@ -90,7 +90,7 @@
 }
 
 .dark {
-  --width: 80rem;
+  --width: 72rem;
   --brand: #f4b400;
   --brand-hover: #d9a001;
   /* --brand: #42d392;
@@ -196,13 +196,6 @@
     margin-bottom: 0.25em;
   }
 }
-
-/* html {
-  scrollbar-gutter: stable;
-} */
-/* html {
-  scrollbar-gutter: stable;
-} */
 
 body {
   overflow-x: hidden;

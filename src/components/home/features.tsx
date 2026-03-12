@@ -194,7 +194,7 @@ export function Features() {
   const features = mode === "employer" ? employerFeatures : jobSeekerFeatures;
 
   return (
-    <div className="w-full max-w-custom mx-auto">
+    <div className="w-full max-w-custom mx-auto px-4">
       {/* Header */}
       <Header />
 
