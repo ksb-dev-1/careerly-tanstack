@@ -1,14 +1,15 @@
 import { Suspense } from "react";
 
-import { Public_Sans } from "next/font/google";
+import { Mulish } from "next/font/google";
 
 import { NavigationProgress } from "@/components/navigation-progress";
 import { Providers } from "@/components/providers/providers";
 
 import "./globals.css";
 
-const fontFamily = Public_Sans({
+const fontFamily = Mulish({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 

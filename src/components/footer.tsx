@@ -24,7 +24,7 @@ function FooterContent() {
             babaleshwarkedar@gmail.com
           </a>
 
-          <span aria-hidden="true">|</span>
+          <span className="inline-block h-6 border-r-2" aria-hidden="true" />
 
           <a
             href="https://github.com/ksb-dev-1"

@@ -150,7 +150,7 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
 
   return (
     <NavbarWrapper session={session}>
-      <div className="hidden md:flex items-center gap-4">
+      <div className="hidden md:flex items-center gap-2">
         {JOB_SEEKER_NAV_ITEMS.map(({ href, label, icon }) => {
           const isActive = path === href.split("?")[0];
 
@@ -161,7 +161,12 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
               variant="ghost"
               className={isActive ? "text-brand hover:text-brand" : ""}
             >
-              <CustomLink href={href} prefetch={false} isActive={isActive}>
+              <CustomLink
+                href={href}
+                prefetch={false}
+                isActive={isActive}
+                className="font-semibold"
+              >
                 {label}
               </CustomLink>
             </Button>

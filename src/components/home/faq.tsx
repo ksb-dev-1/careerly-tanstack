@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 import {
   Accordion,
   AccordionContent,
@@ -46,11 +48,22 @@ const faqs: FAQ[] = [
 
 function Header() {
   return (
-    <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-        Frequently Asked <span className="text-brand">Questions</span>
+    <div className="text-center mb-10 sm:mb-16 max-w-3xl mx-auto">
+      <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-6">
+        Frequently Asked{" "}
+        <span className="text-brand relative">
+          Questions
+          <motion.span
+            initial={{ width: 0 }}
+            whileInView={{ width: "100%" }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="absolute bottom-0 left-0 h-1 bg-linear-to-r from-brand to-transparent rounded-full"
+          />
+        </span>
       </h2>
-      <p className="text-lg text-slate-600 dark:text-muted-foreground max-w-2xl mx-auto">
+
+      <p className="text-base sm:text-lg text-slate-600 dark:text-muted-foreground max-w-2xl mx-auto leading-relaxed">
         Find answers to common questions about using our platform for job
         searching and hiring.
       </p>
@@ -63,7 +76,7 @@ function AccordionSection() {
     <Accordion type="single" collapsible defaultValue="item-1">
       {faqs.map((faq, index) => (
         <AccordionItem key={index} value={`item-${index}`}>
-          <AccordionTrigger className="text-base font-medium">
+          <AccordionTrigger className="sm:text-lg font-semibold">
             {faq.question}
           </AccordionTrigger>
           <AccordionContent className="text-base text-slate-600 dark:text-muted-foreground">
@@ -78,10 +91,7 @@ function AccordionSection() {
 export function Faq() {
   return (
     <div className="w-full max-w-custom mx-auto px-4">
-      {/* Header */}
       <Header />
-
-      {/* Accordion */}
       <AccordionSection />
     </div>
   );
