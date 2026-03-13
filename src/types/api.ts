@@ -32,7 +32,7 @@ export type JobListItem = {
 
 export type JobListApiResponse = {
   success: boolean;
-  data?: JobListItem[];
+  jobs?: JobListItem[];
   totalCount?: number;
   totalPages?: number;
   error?: string;

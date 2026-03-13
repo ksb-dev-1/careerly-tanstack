@@ -36,7 +36,7 @@ export type JobListItem = {
 
 export type JobListApiResponse = {
   success: boolean;
-  data?: JobListItem[];
+  jobs?: JobListItem[];
   totalCount?: number;
   totalPages?: number;
   error?: string;
@@ -60,8 +60,8 @@ export async function GET(
   try {
     const { searchParams } = new URL(request.url);
 
-    const page = Number(searchParams.get("page") ?? "1");
-    const limit = Number(searchParams.get("limit") ?? "10");
+    const page = Math.max(Number(searchParams.get("page") ?? "1"), 1);
+    const limit = Math.min(Number(searchParams.get("limit") ?? "10"), 50);
 
     const skip = (page - 1) * limit;
 
@@ -128,13 +128,9 @@ export async function GET(
     return NextResponse.json(
       {
         success: true,
-        data: formattedJobs,
-        pagination: {
-          page,
-          limit,
-          totalCount,
-          totalPages,
-        },
+        jobs: formattedJobs,
+        totalCount,
+        totalPages,
       },
       { status: 200 },
     );

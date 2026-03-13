@@ -52,7 +52,7 @@ export function JobList() {
     return <div>Error: {error.message}</div>;
   }
 
-  const jobs = data?.data;
+  const jobs = data?.jobs;
   const totalPages = data?.totalPages;
 
   return (
