@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Metadata } from "next";
 
 import { JobList } from "./job-list";
@@ -10,7 +12,9 @@ export const metadata: Metadata = {
 export default function JobsPage() {
   return (
     <div className="min-h-screen max-w-custom w-full mx-auto mt-32 mb-16 px-4">
-      <JobList />
+      <Suspense fallback={<div>Loading...</div>}>
+        <JobList />
+      </Suspense>
     </div>
   );
 }

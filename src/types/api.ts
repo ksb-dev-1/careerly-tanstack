@@ -1,4 +1,5 @@
 import {
+  ApplicationStatus,
   Currency,
   JobMode,
   JobStatus,
@@ -8,7 +9,6 @@ import {
 
 export type JobListItem = {
   id: string;
-  employerId: string | null;
   companyLogo: string | null;
   companyName: string;
   role: string;
@@ -26,10 +26,18 @@ export type JobListItem = {
   createdAt: Date;
   updatedAt: Date;
   isBookmarked: boolean;
+  appliedOn: Date | null;
+  applicationStatus: ApplicationStatus | null;
 };
 
 export type JobListApiResponse = {
   success: boolean;
   data?: JobListItem[];
+  pagination?: {
+    page: number;
+    limit: number;
+    totalCount: number;
+    totalPages: number;
+  };
   error?: string;
 };

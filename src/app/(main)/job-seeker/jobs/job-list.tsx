@@ -1,17 +1,38 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import { useQuery } from "@tanstack/react-query";
 
-import { JobListApiResponse, JobListItem } from "@/types/api";
+import { pagination } from "@/app/api/jobs/route";
+import { JobPagination } from "@/components/pagination";
+import { JobListApiResponse } from "@/types/api";
 
 export function JobList() {
+  const searchParams = useSearchParams();
+
+  const page = searchParams.get("page") ?? "1";
+  const limit = searchParams.get("limit") ?? "6";
+  const jobType = searchParams.get("jobType");
+  const jobMode = searchParams.get("jobMode");
+  const experience = searchParams.get("experience");
+
   const { data, isLoading, error } = useQuery<
-    JobListItem[],
+    JobListApiResponse,
     { status: number; message?: string }
   >({
-    queryKey: ["jobs"],
+    queryKey: ["jobs", page, limit, jobType, jobMode, experience],
+
     queryFn: async () => {
-      const res = await fetch("/api/jobs");
+      const params = new URLSearchParams();
+
+      params.set("page", page);
+      params.set("limit", limit);
+      if (jobType) params.set("jobType", jobType);
+      if (jobMode) params.set("jobMode", jobMode);
+      if (experience) params.set("experience", experience);
+
+      const res = await fetch(`/api/jobs?${params.toString()}`);
       const body: JobListApiResponse = await res.json();
 
       if (!body.success) {
@@ -20,14 +41,11 @@ export function JobList() {
           message: body.error,
         };
       }
-
-      return body.data ?? [];
+      return body;
     },
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return <div>Loading...</div>;
 
   if (error) {
     if (error.status === 401) return <div>{error.message}</div>;
@@ -35,11 +53,18 @@ export function JobList() {
     return <div>Error: {error.message}</div>;
   }
 
+  const jobs = data?.data;
+  const pagination: pagination | undefined = data?.pagination;
+
   return (
     <div>
-      {data?.map((job) => (
-        <div key={job.id}>{job.companyName}</div>
+      {jobs?.map((job) => (
+        <div key={job.id}>
+          <p>{job.companyName}</p>
+        </div>
       ))}
+
+      {pagination && <JobPagination totalPages={pagination.totalPages} />}
     </div>
   );
 }
