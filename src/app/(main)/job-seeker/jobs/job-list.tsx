@@ -4,7 +4,6 @@ import { useSearchParams } from "next/navigation";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { pagination } from "@/app/api/jobs/route";
 import { JobPagination } from "@/components/pagination";
 import { JobListApiResponse } from "@/types/api";
 
@@ -54,7 +53,7 @@ export function JobList() {
   }
 
   const jobs = data?.data;
-  const pagination: pagination | undefined = data?.pagination;
+  const totalPages = data?.totalPages;
 
   return (
     <div>
@@ -64,7 +63,7 @@ export function JobList() {
         </div>
       ))}
 
-      {pagination && <JobPagination totalPages={pagination.totalPages} />}
+      {totalPages && <JobPagination totalPages={totalPages} />}
     </div>
   );
 }

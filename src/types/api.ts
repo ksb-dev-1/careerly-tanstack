@@ -33,11 +33,7 @@ export type JobListItem = {
 export type JobListApiResponse = {
   success: boolean;
   data?: JobListItem[];
-  pagination?: {
-    page: number;
-    limit: number;
-    totalCount: number;
-    totalPages: number;
-  };
+  totalCount?: number;
+  totalPages?: number;
   error?: string;
 };

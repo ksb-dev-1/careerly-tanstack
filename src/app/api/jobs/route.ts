@@ -34,17 +34,11 @@ export type JobListItem = {
   applicationStatus: ApplicationStatus | null;
 };
 
-export type pagination = {
-  page: number;
-  limit: number;
-  totalCount: number;
-  totalPages: number;
-};
-
 export type JobListApiResponse = {
   success: boolean;
   data?: JobListItem[];
-  pagination?: pagination;
+  totalCount?: number;
+  totalPages?: number;
   error?: string;
 };
 
