@@ -1,47 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import {
-  ApplicationStatus,
-  Currency,
-  JobMode,
-  JobStatus,
-  JobType,
-  SalaryPeriod,
-} from "@/generated/prisma/browser";
-import { Prisma } from "@/generated/prisma/client";
+import { JobMode, JobStatus, JobType, Prisma } from "@/generated/prisma/client";
 import { getServerSession } from "@/lib/get-server-session";
 import { prisma } from "@/lib/prisma";
-
-export type JobListItem = {
-  id: string;
-  companyLogo: string | null;
-  companyName: string;
-  role: string;
-  jobType: JobType;
-  jobMode: JobMode;
-  location: string;
-  salary: number;
-  salaryPeriod: SalaryPeriod;
-  currency: Currency;
-  experienceMin: number | null;
-  experienceMax: number | null;
-  openings: number;
-  jobStatus: JobStatus;
-  isFeatured: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  isBookmarked: boolean;
-  appliedOn: Date | null;
-  applicationStatus: ApplicationStatus | null;
-};
-
-export type JobListApiResponse = {
-  success: boolean;
-  jobs?: JobListItem[];
-  totalCount?: number;
-  totalPages?: number;
-  error?: string;
-};
+import { JobListApiResponse, JobListItem } from "@/types/api";
 
 function parseJobTypes(value: string | null): JobType[] | undefined {
   if (!value) return undefined;
