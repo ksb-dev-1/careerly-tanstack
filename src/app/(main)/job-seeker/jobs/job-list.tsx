@@ -79,16 +79,12 @@
 
 "use client";
 
-import { Bookmark } from "lucide-react";
-
 import { EmptyState } from "@/components/errors/empty-state";
 import { ServerError } from "@/components/errors/server-error";
 import { Unauthenticated } from "@/components/errors/unauthenticated";
+import { JobCard } from "@/components/job-card";
 import { JobPagination } from "@/components/pagination";
 import { JobListSkeleton } from "@/components/skeletons/job-list-skeleton";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useFetchJobs } from "@/hooks/useFetchJobs";
 
 export function JobList() {
@@ -107,92 +103,12 @@ export function JobList() {
   if (!jobs || jobs.length === 0) return <EmptyState />;
 
   return (
-    <div className="space-y-4">
-      {jobs.map((job) => {
-        const {
-          companyLogo,
-          companyName,
-          role,
-          isFeatured,
-          isBookmarked,
-          jobMode,
-          jobType,
-          salary,
-          salaryPeriod,
-          currency,
-          experienceMin,
-          experienceMax,
-          applicationStatus,
-          location,
-          openings,
-          createdAt,
-        } = job;
-
-        return (
-          <Card
-            key={job.id}
-            className="hover:shadow-md transition cursor-pointer"
-          >
-            <CardHeader className="flex flex-row items-start justify-between">
-              <div className="flex gap-3 items-center">
-                {companyLogo ? (
-                  <img
-                    src={companyLogo}
-                    alt={companyName}
-                    className="w-12 h-12 rounded-md border object-contain"
-                  />
-                ) : (
-                  <div className="w-12 h-12 rounded-md bg-muted border"></div>
-                )}
-
-                <div>
-                  <h3 className="font-semibold text-lg">{role}</h3>
-                  <p className="text-sm text-muted-foreground">{companyName}</p>
-                </div>
-              </div>
-
-              {isBookmarked && (
-                <Bookmark className="w-5 h-5 text-primary fill-primary" />
-              )}
-            </CardHeader>
-
-            <CardContent className="space-y-4">
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
-                {isFeatured && <Badge>Featured</Badge>}
-                <Badge variant="secondary">{jobType}</Badge>
-                <Badge variant="secondary">{jobMode}</Badge>
-                <Badge variant="outline">{location}</Badge>
-              </div>
-
-              {/* Job Info */}
-              <div className="grid grid-cols-2 gap-3 text-sm text-muted-foreground">
-                <p>
-                  💰 {currency} {salary} / {salaryPeriod}
-                </p>
-
-                <p>
-                  🧑‍💻 {experienceMin}-{experienceMax} yrs
-                </p>
-
-                <p>👥 {openings} openings</p>
-
-                <p>Posted {new Date(createdAt).toLocaleDateString()}</p>
-              </div>
-
-              {/* Footer */}
-              <div className="flex justify-between items-center">
-                {applicationStatus ? (
-                  <Badge variant="outline">Applied ({applicationStatus})</Badge>
-                ) : (
-                  <Button size="sm">Apply</Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        );
-      })}
-
+    <div>
+      <div className="flex flex-col gap-8">
+        {jobs.map((job) => (
+          <JobCard key={job.id} job={job} />
+        ))}
+      </div>
       {totalPages && totalPages > 1 && (
         <JobPagination totalPages={totalPages} />
       )}
