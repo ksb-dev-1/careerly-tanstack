@@ -2,6 +2,8 @@ import { Suspense } from "react";
 
 import { Metadata } from "next";
 
+import { JobListSkeleton } from "@/components/skeletons/job-list-skeleton";
+
 import { JobList } from "./job-list";
 
 export const metadata: Metadata = {
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 export default function JobsPage() {
   return (
     <div className="min-h-screen max-w-custom w-full mx-auto mt-32 mb-16 px-4">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<JobListSkeleton />}>
         <JobList />
       </Suspense>
     </div>

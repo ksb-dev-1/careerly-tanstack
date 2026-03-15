@@ -1,15 +1,16 @@
 "use client";
+
 import Link from "next/link";
 
 import {
   BriefcaseBusiness,
   Building,
+  Building2,
   MapPin,
   Timer,
   Wallet,
-  Wallet2,
 } from "lucide-react";
-import { DollarSign, Euro, IndianRupee } from "lucide-react";
+import { FaStar } from "react-icons/fa6";
 
 import {
   Currency,
@@ -28,6 +29,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { Separator } from "./ui/separator";
 
 export function JobCard({ job }: { job: JobListItem }) {
   const {
@@ -52,17 +54,6 @@ export function JobCard({ job }: { job: JobListItem }) {
     createdAt,
   } = job;
 
-  function getCurrencyIcon(currency: Currency, size = 16): React.ReactNode {
-    switch (currency) {
-      case Currency.INR:
-        return <IndianRupee size={size} />;
-      case Currency.EUR:
-        return <Euro size={size} />;
-      default:
-        return <DollarSign size={size} />;
-    }
-  }
-
   function getSalaryPeriod(period: SalaryPeriod): string {
     switch (period) {
       case SalaryPeriod.MONTHLY:
@@ -72,7 +63,34 @@ export function JobCard({ job }: { job: JobListItem }) {
     }
   }
 
-  function formatJobTypeOrMode(value: JobType | JobMode): string {
+  function formatMoney(
+    amount: number,
+    currency: Currency = Currency.INR,
+    locale?: string,
+  ) {
+    // Default locale for each currency
+    const currencyLocales: Record<string, string> = {
+      USD: "en-US",
+      INR: "en-IN",
+      EUR: "de-DE",
+    };
+
+    // If locale is not provided, use the default locale for that currency
+    const selectedLocale = locale || currencyLocales[currency];
+
+    // Create a number formatter for currency
+    const formatter = new Intl.NumberFormat(selectedLocale, {
+      style: "currency",
+      currency: currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+
+    // Format the amount and return it
+    return formatter.format(amount);
+  }
+
+  function formatEnums(value: JobType | JobMode): string {
     return value
       .toLowerCase()
       .split("_")
@@ -85,30 +103,26 @@ export function JobCard({ job }: { job: JobListItem }) {
       <Link href={`/job-seeker/jobs/${id}`}>
         <Card className={`h-full hover:border-brand/60 transition-all`}>
           <CardHeader>
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-0">
+            <div className="flex items-start justify-between gap-4 md:gap-0">
               <div>
                 <CardTitle className="text-lg font-bold">{role}</CardTitle>
-                <CardDescription className="mt-2">
-                  {companyName}
+                <CardDescription className="font-bold mt-2 flex items-center gap-2">
+                  <Building2 size={20} /> {companyName}
                 </CardDescription>
               </div>
-              <div className="flex items-center gap-2">
-                {isFeatured && (
-                  <Badge className="bg-brand text-white dark:text-background">
-                    Featured
-                  </Badge>
-                )}
-                <Badge variant="default">
-                  <Timer /> {formatJobTypeOrMode(jobType)}
+
+              {isFeatured && (
+                <Badge className="bg-brand/10 text-brand border border-brand/20">
+                  <FaStar /> Featured
                 </Badge>
-                <Badge variant="default">
-                  <Building /> {formatJobTypeOrMode(jobMode)}
-                </Badge>
-              </div>
+              )}
             </div>
           </CardHeader>
+
+          <Separator />
+
           <CardContent>
-            <div className="text-gray-600 dark:text-muted-foreground flex items-center flex-wrap gap-6 md:gap-8">
+            <div className="max-w-xl grid grid-cols-2 gap-5 text-gray-600 dark:text-muted-foreground">
               <div className="flex items-center gap-2">
                 <BriefcaseBusiness size={16} />
                 <span className="text-sm">
@@ -118,9 +132,17 @@ export function JobCard({ job }: { job: JobListItem }) {
               <div className="flex items-center gap-2">
                 <Wallet size={16} />
                 <span className="text-sm flex items-center">
-                  {getCurrencyIcon(currency)}
-                  {salary} / {getSalaryPeriod(salaryPeriod)}
+                  {formatMoney(salary, currency)} /{" "}
+                  {getSalaryPeriod(salaryPeriod)}
                 </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Timer size={16} />
+                <span className="text-sm">{formatEnums(jobType)}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Building size={16} />
+                <span className="text-sm">{formatEnums(jobMode)}</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={16} />
