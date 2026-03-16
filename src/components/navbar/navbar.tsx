@@ -84,8 +84,6 @@ function NavbarWrapper({
           className="font-extrabold text-xl text-brand hover:text-brand-hover transition-colors flex items-center gap-1"
           isActive={path === "/"}
         >
-          <span className="inline-block h-3 w-3 rounded-full bg-brand" />
-          <span className="inline-block h-3 w-3 rounded-full bg-brand/40" />
           Careerly
         </CustomLink>
 
@@ -251,8 +249,6 @@ function SideMenu({ session }: { session: Session }) {
       <SheetContent side="left" className="w-60 gap-0 p-0!">
         <SheetHeader className="p-0!">
           <SheetTitle className="text-brand text-xl font-extrabold border-b h-16 p-4 flex items-center gap-1">
-            <span className="inline-block h-3 w-3 rounded-full bg-brand" />
-            <span className="inline-block h-3 w-3 rounded-full bg-brand/40" />
             Careerly
           </SheetTitle>
         </SheetHeader>

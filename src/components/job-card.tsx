@@ -26,6 +26,7 @@ import {
 } from "@/generated/prisma/browser";
 import { JobListItem } from "@/types/api";
 
+import { BookmarkButton } from "./bookmark-button";
 import { CustomLink } from "./custom-link";
 import { Markdown } from "./markdown";
 import { Badge } from "./ui/badge";
@@ -128,14 +129,19 @@ export function JobCard({ job }: { job: JobListItem }) {
       <Card>
         <CardHeader>
           <div className="flex items-start gap-4">
-            <div className="h-12 w-12 bg-brand/10 text-brand border border-brand/20 rounded-lg flex items-center justify-center">
+            <div className="hidden sm:flex items-center justify-center h-12 w-12 bg-brand/10 text-brand border border-brand/20 rounded-lg">
               <Building2 size={20} />
             </div>
-            <div className="w-fit">
-              <CardTitle className="font-bold">{role}</CardTitle>
-              <CardDescription className="mt-2 flex items-center gap-2 text-brand">
-                {companyName}
-              </CardDescription>
+            <div className="w-full sm:w-fit">
+              <div className="flex items-start justify-between">
+                <div>
+                  <CardTitle className="font-bold">{role}</CardTitle>
+                  <CardDescription className="mt-2 flex items-center gap-2 text-brand">
+                    {companyName}
+                  </CardDescription>
+                </div>
+                <BookmarkButton jobId={id} isBookmarked={isBookmarked} />
+              </div>
               <div className="hidden sm:block mt-2 text-sm">
                 {shortDescription.length > 250 ? (
                   <Markdown>
