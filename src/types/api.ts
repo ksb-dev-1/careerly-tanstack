@@ -28,6 +28,7 @@ export type JobListItem = {
   isBookmarked: boolean;
   appliedOn: Date | null;
   applicationStatus: ApplicationStatus | null;
+  description: string;
 };
 
 export type JobListApiResponse = {

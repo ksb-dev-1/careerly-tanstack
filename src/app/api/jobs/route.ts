@@ -105,6 +105,7 @@ export async function GET(
           openings: true,
           jobStatus: true,
           isFeatured: true,
+          description: true,
           createdAt: true,
           updatedAt: true,
 

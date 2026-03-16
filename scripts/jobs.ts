@@ -26,8 +26,7 @@ export const placeholderJobs = [
     isFeatured: false,
     // category: Category.UI_UX_DESIGN,
     description: `
-#### About the Role
-As a UI/UX Designer, you will shape intuitive and visually engaging user experiences for Adobe’s creative products used by millions worldwide.
+As a UI/UX Designer at Adobe, you will shape intuitive and visually engaging user experiences for creative products used by millions of designers, photographers, and creators worldwide. You will work closely with product managers and engineers to translate complex ideas into elegant, user-friendly interfaces. Your work will help define how users interact with Adobe’s tools, ensuring seamless workflows, accessibility, and delightful visual design. This role is ideal for someone passionate about solving real user problems through thoughtful design and innovation.
 
 #### Responsibilities
 - Design user interfaces and user flows
@@ -67,8 +66,7 @@ As a UI/UX Designer, you will shape intuitive and visually engaging user experie
     isFeatured: false,
     // category: Category.HUMAN_RESEARCH,
     description: `
-#### About the Role
-We are seeking a User Research Analyst to generate actionable insights through qualitative and quantitative research methods.
+As a User Research Analyst at Nielsen, you will conduct qualitative and quantitative research to uncover user behaviors, motivations, and pain points, turning insights into clear recommendations that guide product teams in creating more effective and user-friendly experiences across digital platforms and data-driven services.
 
 #### Responsibilities
 - Conduct user interviews and surveys
@@ -106,8 +104,7 @@ We are seeking a User Research Analyst to generate actionable insights through q
     isFeatured: false,
     // category: Category.DIGITAL_MARKETING,
     description: `
-#### About the Role
-You will plan and execute digital marketing strategies to drive growth, engagement, and brand visibility.
+As a Digital Marketing Specialist at HubSpot, you will plan, execute, and optimize multi-channel digital marketing campaigns that increase brand visibility, generate qualified leads, and drive business growth by leveraging SEO, paid advertising, content marketing strategies, and data analytics to continuously improve campaign performance.
 
 #### Responsibilities
 - Manage SEO and paid advertising campaigns
@@ -145,8 +142,7 @@ You will plan and execute digital marketing strategies to drive growth, engageme
     isFeatured: false,
     // category: Category.VIDEO_AND_ANIMATION,
     description: `
-#### About the Role
-We are looking for a Motion Graphics Designer to create engaging visuals that support Netflix’s global storytelling.
+As a Motion Graphics Designer at Netflix, you will create visually compelling animations and motion design assets that enhance storytelling and marketing campaigns, collaborating with creative teams to produce engaging visuals that capture audience attention while maintaining brand consistency across global entertainment platforms.
 
 #### Responsibilities
 - Design motion graphics and animations
@@ -184,8 +180,7 @@ We are looking for a Motion Graphics Designer to create engaging visuals that su
     isFeatured: false,
     // category: Category.DEVELOPMENT,
     description: `
-#### About the Role
-As a Frontend Engineer, you will build performant and accessible web applications used by millions.
+As a Frontend Engineer at Google, you will build scalable, high-performance web interfaces that deliver fast, accessible, and reliable user experiences for millions of users worldwide while collaborating with designers and backend engineers to implement modern web technologies and improve performance, maintainability, and usability.
 
 #### Responsibilities
 - Develop scalable frontend features
@@ -223,8 +218,7 @@ As a Frontend Engineer, you will build performant and accessible web application
     isFeatured: true,
     // category: Category.DEVELOPMENT,
     description: `
-#### About the Role
-Join Amazon's backend team to design highly scalable and fault-tolerant systems.
+As a Backend Engineer at Amazon, you will design and develop highly scalable distributed systems and microservices that power large-scale applications, ensuring high performance, reliability, and fault tolerance while working with modern cloud technologies to handle massive amounts of data and user traffic.
 
 #### Responsibilities
 - Design REST and event-driven services
@@ -263,8 +257,7 @@ Join Amazon's backend team to design highly scalable and fault-tolerant systems.
     isFeatured: false,
     // category: Category.DEVELOPMENT,
     description: `
-#### About the Role
-Work across frontend and backend systems powering Microsoft cloud products.
+As a Full Stack Developer at Microsoft, you will build modern cloud-powered applications by developing both frontend and backend features, collaborating with cross-functional teams to deliver scalable, maintainable, and secure solutions that power enterprise and consumer products used by millions worldwide.
 
 #### Responsibilities
 - Build full-stack features
@@ -302,8 +295,7 @@ Work across frontend and backend systems powering Microsoft cloud products.
     isFeatured: false,
     // category: Category.DEVELOPMENT,
     description: `
-#### About the Role
-Help build highly reliable backend systems that serve millions of Netflix users.
+As a Senior Software Engineer at Netflix, you will design and optimize distributed backend systems that deliver reliable streaming experiences to millions of users, solving complex engineering challenges related to performance, scalability, and system reliability while mentoring engineers and driving technical innovation.
 
 #### Responsibilities
 - Design distributed systems
@@ -341,8 +333,7 @@ Help build highly reliable backend systems that serve millions of Netflix users.
     isFeatured: false,
     // category: Category.DEVELOPMENT,
     description: `
-#### About the Role
-Perfect opportunity for early-career developers to work on real-world products.
+As a Junior Software Developer at TechNova, you will work closely with experienced engineers to build real-world software features, improve application performance, and contribute to modern web development projects while gaining hands-on experience with industry best practices, collaborative development, and agile workflows.
 
 #### Responsibilities
 - Implement frontend features
@@ -381,8 +372,7 @@ Perfect opportunity for early-career developers to work on real-world products.
     isFeatured: false,
     // category: Category.MUSIC_AND_AUDIO,
     description: `
-#### About the Role
-You will manage and curate audio content to deliver high-quality listening experiences to users.
+As an Audio Content Specialist at Spotify, you will manage, curate, and enhance high-quality audio content and playlists to create engaging listening experiences for users while collaborating with editorial and content teams to ensure audio quality, relevance, and consistency across the platform.
 
 #### Responsibilities
 - Edit and review audio content
@@ -420,8 +410,7 @@ You will manage and curate audio content to deliver high-quality listening exper
     isFeatured: true,
     // category: Category.AI_SERVICES,
     description: `
-#### About the Role
-You will develop enterprise-grade machine learning solutions to solve complex business problems.
+As a Machine Learning Engineer at SAP, you will develop and deploy scalable machine learning solutions that analyze complex datasets, improve predictive capabilities, and power intelligent enterprise applications while collaborating with engineers and data scientists to bring AI innovations into production systems.
 
 #### Responsibilities
 - Build and deploy ML pipelines
@@ -459,8 +448,7 @@ You will develop enterprise-grade machine learning solutions to solve complex bu
     isFeatured: false,
     // category: Category.UI_UX_DESIGN,
     description: `
-#### About the Role
-Design seamless and intuitive experiences that help millions of users book travel effortlessly.
+As a Product Designer at Booking.com, you will design seamless and user-focused travel booking experiences, creating intuitive interfaces and workflows that help millions of travelers discover accommodations easily while collaborating with product managers and engineers to continuously improve usability and engagement.
 
 #### Responsibilities
 - Design user flows and interfaces
@@ -498,8 +486,7 @@ Design seamless and intuitive experiences that help millions of users book trave
     isFeatured: false,
     // category: Category.AI_SERVICES,
     description: `
-#### About the Role
-We are seeking an AI Engineer to develop and deploy machine learning models that power intelligent systems.
+As an AI Engineer at OpenAI Labs, you will design and build advanced machine learning models and intelligent systems that power next-generation AI applications, working with large datasets and deep learning frameworks to create scalable solutions that push the boundaries of artificial intelligence.
 
 #### Responsibilities
 - Build and train ML models
@@ -537,8 +524,7 @@ We are seeking an AI Engineer to develop and deploy machine learning models that
     isFeatured: false,
     // category: Category.AI_SERVICES,
     description: `
-#### About the Role
-As a Business Analyst, you will help organizations make informed decisions through data and process analysis.
+As a Business Analyst at Deloitte, you will analyze business processes and datasets to generate actionable insights that help organizations improve decision-making, optimize operations, and deliver strategic solutions while collaborating with stakeholders to identify opportunities for innovation and growth.
 
 #### Responsibilities
 - Gather and document business requirements
@@ -576,8 +562,7 @@ As a Business Analyst, you will help organizations make informed decisions throu
     isFeatured: false,
     // category: Category.DIGITAL_MARKETING,
     description: `
-#### About the Role
-Drive growth through experimentation, analytics, and performance marketing strategies.
+As a Growth Marketing Manager at Shopify, you will drive customer acquisition and product growth by designing data-driven marketing experiments, optimizing conversion funnels, and executing performance marketing campaigns that increase engagement and revenue across multiple digital channels.
 
 #### Responsibilities
 - Optimize acquisition funnels
@@ -615,8 +600,7 @@ Drive growth through experimentation, analytics, and performance marketing strat
     isFeatured: false,
     // category: Category.BUSINESS_ANALYSIS,
     description: `
-#### About the Role
-Enable data-driven decisions by building insights and dashboards for business teams.
+As a Business Intelligence Analyst at Amazon, you will transform large volumes of business data into meaningful insights by building dashboards, analyzing key metrics, and delivering data-driven recommendations that help leadership teams make strategic decisions and improve operational performance.
 
 #### Responsibilities
 - Design dashboards and reports
@@ -654,8 +638,7 @@ Enable data-driven decisions by building insights and dashboards for business te
     isFeatured: false,
     // category: Category.CONSULTING,
     description: `
-#### About the Role
-Help global organizations solve complex strategic and operational challenges.
+As a Management Consultant at McKinsey & Company, you will work with leading organizations to solve complex strategic and operational challenges by analyzing data, developing actionable recommendations, and collaborating with executives to drive impactful business transformations.
 
 #### Responsibilities
 - Analyze business problems
@@ -693,8 +676,7 @@ Help global organizations solve complex strategic and operational challenges.
     isFeatured: false,
     // category: Category.CUSTOMER_SUPPORT,
     description: `
-#### About the Role
-Deliver exceptional customer support experiences across digital channels.
+As a Customer Support Specialist at Zendesk, you will deliver exceptional customer service experiences by resolving product and account issues across digital channels while maintaining high satisfaction levels and collaborating with internal teams to improve overall customer support processes.
 
 #### Responsibilities
 - Handle customer inquiries via chat and email
@@ -732,8 +714,7 @@ Deliver exceptional customer support experiences across digital channels.
     isFeatured: false,
     // category: Category.VIDEO_AND_ANIMATION,
     description: `
-#### About the Role
-Create immersive and realistic animations for AAA video game titles.
+As a 3D Animation Artist at Ubisoft, you will create high-quality character and environment animations that bring immersive video game worlds to life, collaborating with designers and developers to ensure fluid movement, realism, and artistic excellence in globally recognized gaming titles.
 
 #### Responsibilities
 - Design high-quality 3D animations

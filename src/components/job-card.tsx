@@ -3,14 +3,20 @@
 import Link from "next/link";
 
 import {
+  ArrowRight,
   BriefcaseBusiness,
   Building,
   Building2,
+  DollarSign,
+  Euro,
+  IndianRupeeIcon,
   MapPin,
+  MoveRight,
   Timer,
   Wallet,
 } from "lucide-react";
 import { FaStar } from "react-icons/fa6";
+import TurndownService from "turndown";
 
 import {
   Currency,
@@ -20,7 +26,10 @@ import {
 } from "@/generated/prisma/browser";
 import { JobListItem } from "@/types/api";
 
+import { CustomLink } from "./custom-link";
+import { Markdown } from "./markdown";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 import {
   Card,
   CardContent,
@@ -50,9 +59,14 @@ export function JobCard({ job }: { job: JobListItem }) {
     appliedOn,
     applicationStatus,
     location,
+    description,
     openings,
     createdAt,
   } = job;
+
+  const turndown = new TurndownService();
+  const markdown = turndown.turndown(description);
+  const shortDescription = markdown.split("\n\n")[0];
 
   function getSalaryPeriod(period: SalaryPeriod): string {
     switch (period) {
@@ -60,6 +74,17 @@ export function JobCard({ job }: { job: JobListItem }) {
         return "month";
       default:
         return "year";
+    }
+  }
+
+  function getCurrencyIcon(currency: Currency): React.ReactNode {
+    switch (currency) {
+      case Currency.INR:
+        return <IndianRupeeIcon size={16} />;
+      case Currency.EUR:
+        return <Euro size={16} />;
+      default:
+        return <DollarSign size={16} />;
     }
   }
 
@@ -80,7 +105,7 @@ export function JobCard({ job }: { job: JobListItem }) {
 
     // Create a number formatter for currency
     const formatter = new Intl.NumberFormat(selectedLocale, {
-      style: "currency",
+      style: "decimal",
       currency: currency,
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
@@ -100,59 +125,63 @@ export function JobCard({ job }: { job: JobListItem }) {
 
   return (
     <div className="relative">
-      <Link href={`/job-seeker/jobs/${id}`}>
-        <Card className={`h-full hover:border-brand/60 transition-all`}>
-          <CardHeader>
-            <div className="flex items-start justify-between gap-4 md:gap-0">
-              <div>
-                <CardTitle className="text-lg font-bold">{role}</CardTitle>
-                <CardDescription className="font-bold mt-2 flex items-center gap-2">
-                  <Building2 size={20} /> {companyName}
-                </CardDescription>
-              </div>
-
-              {isFeatured && (
-                <Badge className="bg-brand/10 text-brand border border-brand/20">
-                  <FaStar /> Featured
-                </Badge>
-              )}
+      <Card>
+        <CardHeader>
+          <div className="flex items-start gap-4">
+            <div className="h-12 w-12 bg-brand/10 text-brand border border-brand/20 rounded-lg flex items-center justify-center">
+              <Building2 size={20} />
             </div>
-          </CardHeader>
+            <div className="w-fit">
+              <CardTitle className="font-bold">{role}</CardTitle>
+              <CardDescription className="mt-2 flex items-center gap-2 text-brand">
+                {companyName}
+              </CardDescription>
+              <div className="hidden sm:block mt-2 text-sm">
+                {shortDescription.length > 250 ? (
+                  <Markdown>
+                    {shortDescription.substring(0, 200) + "..."}
+                  </Markdown>
+                ) : (
+                  <Markdown>{shortDescription}</Markdown>
+                )}
+              </div>
+            </div>
+          </div>
+        </CardHeader>
 
-          <Separator />
-
-          <CardContent>
-            <div className="max-w-xl grid grid-cols-2 gap-5 text-gray-600 dark:text-muted-foreground">
-              <div className="flex items-center gap-2">
+        <CardContent>
+          <div className="flex items-end lg:items-center justify-between">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:flex lg:items-center lg:flex-wrap text-gray-600 dark:text-muted-foreground">
+              <Badge variant="secondary">
                 <BriefcaseBusiness size={16} />
-                <span className="text-sm">
-                  {experienceMin}-{experienceMax} years
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Wallet size={16} />
-                <span className="text-sm flex items-center">
-                  {formatMoney(salary, currency)} /{" "}
-                  {getSalaryPeriod(salaryPeriod)}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
+                {experienceMin}-{experienceMax} years
+              </Badge>
+              <Badge variant="secondary">
                 <Timer size={16} />
-                <span className="text-sm">{formatEnums(jobType)}</span>
-              </div>
-              <div className="flex items-center gap-2">
+                {formatEnums(jobType)}
+              </Badge>
+              <Badge variant="secondary">
                 <Building size={16} />
-                <span className="text-sm">{formatEnums(jobMode)}</span>
-              </div>
-              <div className="flex items-center gap-2">
+                {formatEnums(jobMode)}
+              </Badge>
+              <Badge variant="secondary">
+                {getCurrencyIcon(currency)} {formatMoney(salary, currency)} /{" "}
+                {getSalaryPeriod(salaryPeriod)}
+              </Badge>
+              <Badge variant="secondary">
                 <MapPin size={16} />
-                <span className="text-sm">{location}</span>
-              </div>
+                {location}
+              </Badge>
             </div>
-          </CardContent>
-          <CardFooter></CardFooter>
-        </Card>
-      </Link>
+
+            <Button asChild variant="brand" size="sm" className="rounded-full">
+              <CustomLink href={`/job-seeker/jobs/${id}`}>
+                Details <ArrowRight />
+              </CustomLink>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
