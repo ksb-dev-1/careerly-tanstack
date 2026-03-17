@@ -9,7 +9,7 @@ function buildJobsUrl(params: Record<string, string | null>): string {
   Object.entries(params).forEach(([key, value]) => {
     if (value) searchParams.set(key, value);
   });
-  return `/api/jobs?${searchParams.toString()}`;
+  return `/api/job-seeker/jobs?${searchParams.toString()}`;
 }
 
 export function useFetchJobs() {

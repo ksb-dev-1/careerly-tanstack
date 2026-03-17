@@ -16,7 +16,7 @@ export function Bookmarks() {
   >({
     queryKey: ["bookmarks"],
     queryFn: async () => {
-      const res = await fetch(`/api/bookmarks`);
+      const res = await fetch(`/api/job-seeker/bookmarks`);
       const body: BookmarksApiResponse = await res.json();
 
       if (!body.success) {
