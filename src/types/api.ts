@@ -38,3 +38,9 @@ export type JobListApiResponse = {
   totalPages?: number;
   error?: string;
 };
+
+export type BookmarksApiResponse = {
+  success: boolean;
+  bookmarks?: JobListItem[];
+  error?: string;
+};

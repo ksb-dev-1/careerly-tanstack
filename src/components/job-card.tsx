@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -11,11 +9,8 @@ import {
   Euro,
   IndianRupeeIcon,
   MapPin,
-  MoveRight,
   Timer,
-  Wallet,
 } from "lucide-react";
-import { FaStar } from "react-icons/fa6";
 import TurndownService from "turndown";
 
 import {
@@ -35,11 +30,9 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Separator } from "./ui/separator";
 
 export function JobCard({ job }: { job: JobListItem }) {
   const {

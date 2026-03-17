@@ -48,6 +48,7 @@
 //         setBookmarked(response.success ? !bookmarked : bookmarked);
 //         toast.success(response.message);
 //         queryClient.invalidateQueries({ queryKey: ["jobs"] });
+//         queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
 //       } else {
 //         toast.error(response.message);
 //       }
@@ -329,28 +330,30 @@ export function BookmarkButton({
   const jobSeekerId = session?.user.id;
   const queryClient = useQueryClient();
 
-  // sync with query data
   useEffect(() => {
     setBookmarked(isBookmarked);
   }, [isBookmarked]);
 
-  const { isPending: isMutating, mutate } = useMutation({
+  const { mutate, isPending: isMutating } = useMutation({
     mutationFn: async () => {
       if (!jobSeekerId) throw new Error("Authentication required");
       return ToggleBookmark(jobId);
     },
 
-    // 🔥 instant UI + cache update
+    // 🔥 Optimistic update
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: ["jobs"] });
+      await queryClient.cancelQueries({ queryKey: ["bookmarks"] });
 
       const previousJobs = queryClient.getQueryData(["jobs"]);
+      const previousBookmarks = queryClient.getQueryData(["bookmarks"]);
+
       const previousBookmarked = bookmarked;
 
-      // ⚡ instant UI
+      // instant UI
       setBookmarked((prev) => !prev);
 
-      // 🌍 update cache (for other components)
+      // update jobs cache
       queryClient.setQueryData(["jobs"], (old: any) => {
         if (!old) return old;
 
@@ -359,13 +362,33 @@ export function BookmarkButton({
         );
       });
 
-      return { previousJobs, previousBookmarked };
+      // update bookmarks cache
+      queryClient.setQueryData(["bookmarks"], (old: any) => {
+        if (!old) return old;
+
+        const exists = old.bookmarks?.some((job: any) => job.id === jobId);
+
+        if (exists) {
+          return {
+            ...old,
+            bookmarks: old.bookmarks.filter((job: any) => job.id !== jobId),
+          };
+        }
+
+        return old;
+      });
+
+      return { previousJobs, previousBookmarks, previousBookmarked };
     },
 
-    // ❌ rollback everything
+    // rollback if error
     onError: (error: ToggleBookmarkActionError, _, context) => {
       if (context?.previousJobs) {
         queryClient.setQueryData(["jobs"], context.previousJobs);
+      }
+
+      if (context?.previousBookmarks) {
+        queryClient.setQueryData(["bookmarks"], context.previousBookmarks);
       }
 
       if (context?.previousBookmarked !== undefined) {
@@ -375,19 +398,18 @@ export function BookmarkButton({
       toast.error(error.message);
     },
 
-    // ✅ feedback only
     onSuccess: (response) => {
       if (!response.success) {
         toast.error(response.message);
+      } else {
+        toast.success(response.message);
       }
-      // else {
-      //   toast.success(response.message);
-      // }
     },
 
-    // 🔄 ensure final sync
+    // ensure final sync
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
     },
   });
 
