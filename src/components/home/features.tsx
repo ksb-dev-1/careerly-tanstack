@@ -124,7 +124,7 @@ function Toggle({
 
         <button
           onClick={() => setMode("jobseeker")}
-          className={`relative z-10 w-1/2 py-2 font-medium transition-colors
+          className={`relative z-10 w-1/2 py-2 font-bold transition-colors
           ${
             mode === "jobseeker"
               ? "text-white dark:text-background"
@@ -136,7 +136,7 @@ function Toggle({
 
         <button
           onClick={() => setMode("employer")}
-          className={`relative z-10 w-1/2 py-2 font-medium transition-colors
+          className={`relative z-10 w-1/2 py-2 font-bold transition-colors
           ${
             mode === "employer"
               ? "text-white dark:text-background"
@@ -165,7 +165,7 @@ function FeaturesSection({
       transition={{ duration: 0.4 }}
       className={`grid grid-cols-1 sm:grid-cols-2 ${
         mode === "jobseeker" ? "lg:grid-cols-3" : ""
-      } gap-8`}
+      } gap-6`}
     >
       {features.map((feature, index) => (
         <motion.div
@@ -181,7 +181,7 @@ function FeaturesSection({
                 <feature.icon size={18} />
               </div>
 
-              <h3 className="mt-2 text-xl font-extrabold">{feature.title}</h3>
+              <h3 className="mt-2 text-lg font-bold">{feature.title}</h3>
             </div>
 
             <div className="mt-2">

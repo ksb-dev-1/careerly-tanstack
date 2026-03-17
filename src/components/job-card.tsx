@@ -180,9 +180,25 @@ export function JobCard({ job }: { job: JobListItem }) {
               </Badge>
             </div>
 
-            <Button asChild variant="brand" size="sm" className="rounded-full">
+            <Button
+              asChild
+              variant="brand"
+              size="sm"
+              className="hidden sm:flex rounded-full"
+            >
               <CustomLink href={`/job-seeker/jobs/${id}`}>
                 Details <ArrowRight />
+              </CustomLink>
+            </Button>
+
+            <Button
+              asChild
+              variant="brand"
+              size="icon"
+              className="sm:hidden rounded-full"
+            >
+              <CustomLink href={`/job-seeker/jobs/${id}`}>
+                <ArrowRight />
               </CustomLink>
             </Button>
           </div>

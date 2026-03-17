@@ -18,19 +18,19 @@ const jobSeekerSteps = [
     number: "1",
     title: "Create Job Seeker Account",
     description:
-      "Sign up quickly with your professional email address or using OAuth",
+      "Sign up quickly with your professional email address or using OAuth.",
   },
   {
     id: "j2",
     number: "2",
     title: "Upload Your Resume",
-    description: "Add your resume and let employers discover your skills",
+    description: "Add your resume and let employers discover your skills.",
   },
   {
     id: "j3",
     number: "3",
     title: "Apply & Track",
-    description: "Submit applications and monitor your progress easily",
+    description: "Submit applications and monitor your progress easily.",
   },
 ];
 
@@ -40,19 +40,19 @@ const employerSteps = [
     number: "1",
     title: "Create Employer Account",
     description:
-      "Sign up quickly with your professional email address or using OAuth",
+      "Sign up quickly with your professional email address or using OAuth.",
   },
   {
     id: "e2",
     number: "2",
     title: "Post Job Openings",
-    description: "Create detailed listings that attract quality candidates",
+    description: "Create detailed listings that attract quality candidates.",
   },
   {
     id: "e3",
     number: "3",
     title: "Manage Candidates",
-    description: "Review applications and connect with potential hires",
+    description: "Review applications and connect with potential hires.",
   },
 ];
 
@@ -101,7 +101,7 @@ function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
           {icon}
         </div>
         <div>
-          <CardTitle className="text-xl font-extrabold">{title}</CardTitle>
+          <CardTitle className="text-lg font-bold">{title}</CardTitle>
           <CardDescription className="mt-1 text-slate-600 dark:text-muted-foreground">
             {description}
           </CardDescription>
@@ -134,7 +134,7 @@ export function HowItWorks() {
     <section className="w-full max-w-custom mx-auto overflow-x-hidden pb-0.5 px-4">
       <Header />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Job Seekers Card */}
         <motion.div
           initial={{ opacity: 0, x: -60 }}
