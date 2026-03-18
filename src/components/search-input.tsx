@@ -13,12 +13,19 @@ export function SearchInput() {
   const [search, setSearch] = useState("");
 
   const handleSearch = () => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(window.location.search);
+    const currentSearch = params.get("search") || "";
+
+    if (currentSearch === search.trim()) return;
 
     if (search.trim()) {
       params.set("search", search);
-      router.push(`?${params.toString()}`);
+    } else {
+      params.delete("search");
     }
+    params.set("page", "1");
+
+    router.push(`?${params.toString()}`);
   };
 
   return (
