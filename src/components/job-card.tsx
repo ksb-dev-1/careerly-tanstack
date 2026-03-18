@@ -8,6 +8,7 @@ import {
   DollarSign,
   Euro,
   IndianRupeeIcon,
+  Layers,
   MapPin,
   Timer,
 } from "lucide-react";
@@ -19,7 +20,7 @@ import {
   JobType,
   SalaryPeriod,
 } from "@/generated/prisma/browser";
-import { JobListItem } from "@/types/api";
+import { JobListItem, Skill } from "@/types/api";
 
 import { BookmarkButton } from "./bookmark-button";
 import { CustomLink } from "./custom-link";
@@ -40,6 +41,7 @@ export function JobCard({ job }: { job: JobListItem }) {
     companyLogo,
     companyName,
     role,
+    skills,
     isFeatured,
     isBookmarked,
     jobStatus,
@@ -118,85 +120,91 @@ export function JobCard({ job }: { job: JobListItem }) {
   }
 
   return (
-    <div className="relative">
-      <Card>
-        <CardHeader>
-          <div className="flex items-start gap-4">
-            <div className="hidden sm:flex items-center justify-center h-12 w-12 bg-brand/10 text-brand border border-brand/20 rounded-lg">
-              <Building2 size={20} />
+    <Card>
+      <CardHeader>
+        <div className="w-full flex items-start gap-4">
+          <div className="hidden sm:flex items-center justify-center h-12 w-12 bg-brand/10 text-brand border border-brand/20 rounded-lg">
+            <Building2 size={20} />
+          </div>
+          <div className="w-full sm:w-fit">
+            <div className="flex items-start justify-between">
+              <div>
+                <CardTitle className="font-bold">{role}</CardTitle>
+                <CardDescription className="font-bold mt-2 flex items-center gap-2 text-brand">
+                  {companyName}
+                </CardDescription>
+              </div>
+              <BookmarkButton jobId={id} isBookmarked={isBookmarked} />
             </div>
-            <div className="w-full sm:w-fit">
-              <div className="flex items-start justify-between">
-                <div>
-                  <CardTitle className="font-bold">{role}</CardTitle>
-                  <CardDescription className="mt-2 flex items-center gap-2 text-brand">
-                    {companyName}
-                  </CardDescription>
-                </div>
-                <BookmarkButton jobId={id} isBookmarked={isBookmarked} />
-              </div>
-              <div className="hidden sm:block mt-2 text-sm">
-                {shortDescription.length > 250 ? (
-                  <Markdown>
-                    {shortDescription.substring(0, 200) + "..."}
-                  </Markdown>
-                ) : (
-                  <Markdown>{shortDescription}</Markdown>
-                )}
-              </div>
+            <div className="hidden sm:block mt-2 text-sm">
+              {shortDescription.length > 250 ? (
+                <Markdown>
+                  {shortDescription.substring(0, 175) + "..."}
+                </Markdown>
+              ) : (
+                <Markdown>{shortDescription}</Markdown>
+              )}
+            </div>
+            <div className="flex items-center flex-wrap gap-4 mt-4 text-sm">
+              <Layers size={16} />
+              {skills.map((js) => (
+                <span key={js.skillId} className="capitalize">
+                  {js.skill.name}
+                </span>
+              ))}
             </div>
           </div>
-        </CardHeader>
+        </div>
+      </CardHeader>
 
-        <CardContent>
-          <div className="flex items-end lg:items-center justify-between">
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:flex lg:items-center lg:flex-wrap text-gray-600 dark:text-muted-foreground">
-              <Badge variant="secondary">
-                <BriefcaseBusiness size={16} />
-                {experienceMin}-{experienceMax} years
-              </Badge>
-              <Badge variant="secondary">
-                <Timer size={16} />
-                {formatEnums(jobType)}
-              </Badge>
-              <Badge variant="secondary">
-                <Building size={16} />
-                {formatEnums(jobMode)}
-              </Badge>
-              <Badge variant="secondary">
-                {getCurrencyIcon(currency)} {formatMoney(salary, currency)} /{" "}
-                {getSalaryPeriod(salaryPeriod)}
-              </Badge>
-              <Badge variant="secondary">
-                <MapPin size={16} />
-                {location}
-              </Badge>
-            </div>
-
-            <Button
-              asChild
-              variant="brand"
-              size="sm"
-              className="hidden sm:flex rounded-full"
-            >
-              <CustomLink href={`/job-seeker/jobs/${id}`}>
-                Details <ArrowRight />
-              </CustomLink>
-            </Button>
-
-            <Button
-              asChild
-              variant="brand"
-              size="icon"
-              className="sm:hidden rounded-full"
-            >
-              <CustomLink href={`/job-seeker/jobs/${id}`}>
-                <ArrowRight />
-              </CustomLink>
-            </Button>
+      <CardContent>
+        <div className="flex items-end lg:items-center justify-between">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:flex lg:items-center lg:flex-wrap text-gray-600 dark:text-muted-foreground">
+            <Badge variant="secondary">
+              <BriefcaseBusiness size={16} />
+              {experienceMin}-{experienceMax} years
+            </Badge>
+            <Badge variant="secondary">
+              <Timer size={16} />
+              {formatEnums(jobType)}
+            </Badge>
+            <Badge variant="secondary">
+              <Building size={16} />
+              {formatEnums(jobMode)}
+            </Badge>
+            <Badge variant="secondary">
+              {getCurrencyIcon(currency)} {formatMoney(salary, currency)} /{" "}
+              {getSalaryPeriod(salaryPeriod)}
+            </Badge>
+            <Badge variant="secondary">
+              <MapPin size={16} />
+              {location}
+            </Badge>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+
+          <Button
+            asChild
+            variant="brand"
+            size="sm"
+            className="hidden sm:flex rounded-full"
+          >
+            <CustomLink href={`/job-seeker/jobs/${id}`}>
+              Details <ArrowRight />
+            </CustomLink>
+          </Button>
+
+          <Button
+            asChild
+            variant="brand"
+            size="icon"
+            className="sm:hidden rounded-full"
+          >
+            <CustomLink href={`/job-seeker/jobs/${id}`}>
+              <ArrowRight />
+            </CustomLink>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

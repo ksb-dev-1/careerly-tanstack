@@ -21,6 +21,7 @@ export function useFetchJobs() {
     jobType: searchParams.get("jobType"),
     jobMode: searchParams.get("jobMode"),
     experience: searchParams.get("experience"),
+    search: searchParams.get("search"),
   };
 
   return useQuery<JobListApiResponse, { status: number; message?: string }>({

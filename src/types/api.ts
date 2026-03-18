@@ -7,11 +7,23 @@ import {
   SalaryPeriod,
 } from "@/generated/prisma/browser";
 
+export type Skill = {
+  id: string;
+  name: string;
+};
+
+export type JobSkill = {
+  jobId: string;
+  skillId: string;
+  skill: Skill;
+};
+
 export type JobListItem = {
   id: string;
   companyLogo: string | null;
   companyName: string;
   role: string;
+  skills: JobSkill[];
   jobType: JobType;
   jobMode: JobMode;
   location: string;

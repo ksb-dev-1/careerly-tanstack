@@ -92,7 +92,7 @@ export function ProfileDropdownMenu({ image, role }: ProfileDropdownProps) {
         </Avatar>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="w-40">
+      <DropdownMenuContent align="end" className="w-36">
         <DropdownMenuLabel className="font-bold">My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
 

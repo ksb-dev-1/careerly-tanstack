@@ -49,38 +49,83 @@ export async function GET(
       parseInt(searchParams.get("limit") ?? "10", 10) || 10,
       50,
     );
+    const search = searchParams.get("search");
     const jobTypes = parseJobTypes(searchParams.get("jobType"));
     const jobModes = parseJobModes(searchParams.get("jobMode"));
     const experience = searchParams.get("experience");
+
     const [expMinStr, expMaxStr] = (experience ?? "").split("-");
-    const expMin = parseInt(expMinStr, 10);
-    const expMax = parseInt(expMaxStr, 10);
+    const expMin = Number(expMinStr);
+    const expMax = Number(expMaxStr);
+
     const hasExperience = !isNaN(expMin) && !isNaN(expMax);
     const skip = (page - 1) * limit;
 
-    const where: Prisma.JobWhereInput = {
+    // ✅ Collect all conditions here
+    const conditions: Prisma.JobWhereInput[] = [];
+
+    // ✅ Base conditions
+    conditions.push({
       isDeleted: false,
       jobStatus: JobStatus.OPEN,
-    };
+    });
 
-    if (jobTypes) {
-      where.jobType = { in: jobTypes };
+    // ✅ Search filter (FIXED)
+    if (search?.trim()) {
+      const searchTerm = search.trim();
+
+      conditions.push({
+        OR: [
+          { role: { contains: searchTerm, mode: "insensitive" } },
+          { companyName: { contains: searchTerm, mode: "insensitive" } },
+          {
+            skills: {
+              some: {
+                skill: {
+                  name: {
+                    contains: searchTerm,
+                    mode: "insensitive",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      });
     }
 
-    if (jobModes) {
-      where.jobMode = { in: jobModes };
+    // ✅ Job Type filter
+    if (jobTypes?.length) {
+      conditions.push({
+        jobType: { in: jobTypes },
+      });
     }
 
+    // ✅ Job Mode filter
+    if (jobModes?.length) {
+      conditions.push({
+        jobMode: { in: jobModes },
+      });
+    }
+
+    // ✅ Experience filter
     if (hasExperience) {
-      where.AND = [
-        {
-          OR: [{ experienceMin: null }, { experienceMin: { lte: expMax } }],
-        },
-        {
-          OR: [{ experienceMax: null }, { experienceMax: { gte: expMin } }],
-        },
-      ];
+      conditions.push({
+        AND: [
+          {
+            OR: [{ experienceMin: null }, { experienceMin: { lte: expMax } }],
+          },
+          {
+            OR: [{ experienceMax: null }, { experienceMax: { gte: expMin } }],
+          },
+        ],
+      });
     }
+
+    // ✅ Final where
+    const where: Prisma.JobWhereInput = {
+      AND: conditions,
+    };
 
     const [jobs, totalCount] = await Promise.all([
       prisma.job.findMany({
@@ -94,6 +139,11 @@ export async function GET(
           companyLogo: true,
           companyName: true,
           role: true,
+          skills: {
+            include: {
+              skill: true,
+            },
+          },
           jobType: true,
           jobMode: true,
           location: true,
