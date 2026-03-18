@@ -30,22 +30,15 @@ export function JobList() {
 
   return (
     <div>
-      <div className="max-w-custom w-full mx-auto mb-6 flex flex-col items-center px-4">
-        <h2 className="mb-4 font-bold">Find your perfect job</h2>
-        <SearchInput />
-      </div>
-
-      <Separator className="my-8" />
-
       <div className="max-w-custom w-full mx-auto px-4 flex items-center justify-between gap-4 mb-6">
         <h3 className="font-bold">All Jobs</h3>
-        <Button variant="outline" className="font-bold!">
+        <Button variant="outline" size="sm" className="font-bold!">
           <ListFilter />
-          Filters
+          Filter
         </Button>
       </div>
 
-      <div className="max-w-custom w-full mx-auto px-4 grid gap-6">
+      <div className="max-w-custom w-full mx-auto px-4 grid grid-cols-1 gap-6">
         {jobs.map((job) => (
           <JobCard key={job.id} job={job} />
         ))}

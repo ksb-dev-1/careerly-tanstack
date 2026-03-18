@@ -46,11 +46,6 @@ export function SearchInput() {
       >
         <Search size={18} className="mr-2" /> Search
       </button>
-
-      <p className="mt-3 text-sm text-gray-600 dark:text-muted-foreground flex items-center gap-2">
-        <Info size={16} /> For more accurate results, enter the full company
-        name, role, or skill.
-      </p>
     </div>
   );
 }
