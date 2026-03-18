@@ -32,6 +32,11 @@ export async function GET(
             companyLogo: true,
             companyName: true,
             role: true,
+            skills: {
+              include: {
+                skill: true,
+              },
+            },
             jobType: true,
             jobMode: true,
             location: true,
