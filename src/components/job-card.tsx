@@ -163,7 +163,7 @@ export function JobCard({ job }: { job: JobListItem }) {
               </span>
             </div>
 
-            <div className="mt-4 flex items-center flex-wrap gap-3 text-gray-600 dark:text-muted-foreground/70">
+            <div className="mt-4 flex items-center flex-wrap gap-3 text-gray-600 dark:text-muted-foreground">
               {skills.slice(0, 3).map((js, index) => (
                 <span key={js.skillId} className="flex items-center gap-2">
                   <span className="capitalize text-sm font-medium">
@@ -171,7 +171,7 @@ export function JobCard({ job }: { job: JobListItem }) {
                   </span>
 
                   {index < Math.min(skills.length, 3) - 1 && (
-                    <span className="h-1 w-1 rounded-full bg-gray-600 dark:bg-muted-foreground/70"></span>
+                    <span className="h-1 w-1 rounded-full bg-gray-600 dark:bg-muted-foreground"></span>
                   )}
                 </span>
               ))}

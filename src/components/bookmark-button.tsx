@@ -418,7 +418,7 @@ export function BookmarkButton({
   return (
     <button
       type="button"
-      className={cn("text-brand", className)}
+      className={cn("text-brand w-11 h-11", className)}
       aria-label={bookmarked ? "remove from bookmarks" : "add to bookmarks"}
       disabled={loading}
       onClick={() => mutate()}
