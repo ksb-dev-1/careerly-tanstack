@@ -1,20 +1,11 @@
-import { isServer, QueryClient } from "@tanstack/react-query";
+import { QueryClient, isServer } from "@tanstack/react-query";
 
 function makeTanstackQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        // staleTime: Infinity, // never becomes stale
-        // gcTime: Infinity, // never garbage collected
-        // refetchOnWindowFocus: false, // no refetch on tab focus
-        // refetchOnMount: false, // no refetch on remount
-        // refetchOnReconnect: false, // no refetch on reconnect
-
-        staleTime: 5 * 60 * 1000, // 5 minutes
-        gcTime: 10 * 60 * 1000, // 10 minutes
-        refetchOnWindowFocus: false,
-        refetchOnMount: true, // ← Enable this
-        refetchOnReconnect: true,
+        staleTime: Infinity,
+        gcTime: Infinity,
       },
     },
   });
@@ -35,3 +26,9 @@ export function getTanstackQueryClient() {
     return browserQueryClient;
   }
 }
+
+// staleTime: Infinity, // never becomes stale
+// gcTime: Infinity, // never garbage collected
+// refetchOnWindowFocus: false, // no refetch on tab focus
+// refetchOnMount: false, // no refetch on remount
+// refetchOnReconnect: false, // no refetch on reconnect

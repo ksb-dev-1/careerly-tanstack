@@ -22,7 +22,6 @@ export function Bookmarks() {
       if (!body.success) {
         throw { status: res.status, message: body.error };
       }
-
       return body;
     },
   });

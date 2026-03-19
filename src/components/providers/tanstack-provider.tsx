@@ -7,9 +7,6 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: Infinity, // never becomes stale
       gcTime: Infinity, // never garbage collected
-      // refetchOnWindowFocus: false, // no refetch on tab focus
-      // refetchOnMount: false, // no refetch on remount
-      // refetchOnReconnect: false, // no refetch on reconnect
     },
   },
 });
@@ -20,21 +17,19 @@ export function TanstackProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// refetchOnWindowFocus: false, // no refetch on tab focus
+// refetchOnMount: false, // no refetch on remount
+// refetchOnReconnect: false, // no refetch on reconnect
+
 // -----------------------------------------------------------------------------
 
 // "use client";
 
-// // ========================================
-// // Imports
-// // ========================================
 // import { QueryClientProvider } from "@tanstack/react-query";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // import { getTanstackQueryClient } from "@/lib/getTanstackQueryClient";
 
-// // ========================================
-// // Tanstack provider component
-// // ========================================
 // export function TanstackProvider({ children }: { children: React.ReactNode }) {
 //   // NOTE: Avoid useState when initializing the query client if you don't
 //   //       have a suspense boundary between this and the code that may
