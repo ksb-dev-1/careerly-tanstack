@@ -2,6 +2,8 @@ import { Suspense } from "react";
 
 import { Mulish } from "next/font/google";
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import { NavigationProgress } from "@/components/navigation-progress";
 import { Providers } from "@/components/providers/providers";
 
@@ -26,6 +28,7 @@ export default function RootLayout({
         </Suspense>
         <Providers>
           <main>{children}</main>
+          <SpeedInsights />
         </Providers>
       </body>
     </html>
