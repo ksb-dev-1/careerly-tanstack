@@ -76,10 +76,10 @@ function AccordionSection() {
     <Accordion type="single" collapsible defaultValue="item-1">
       {faqs.map((faq, index) => (
         <AccordionItem key={index} value={`item-${index}`}>
-          <AccordionTrigger className="sm:text-lg font-semibold">
+          <AccordionTrigger className="font-semibold">
             {faq.question}
           </AccordionTrigger>
-          <AccordionContent className="text-base text-slate-600 dark:text-muted-foreground">
+          <AccordionContent className="text-slate-600 dark:text-muted-foreground">
             {faq.answer}
           </AccordionContent>
         </AccordionItem>

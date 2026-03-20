@@ -29,9 +29,9 @@ export function SearchInput() {
   };
 
   return (
-    <div className="max-w-2xl w-full relative">
+    <div className="w-full relative">
       <Input
-        className="p-5"
+        className="w-full px-2 sm:p-4 text-sm sm:text-base"
         placeholder="Enter company, role or skill"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -42,9 +42,9 @@ export function SearchInput() {
 
       <button
         onClick={handleSearch}
-        className="bg-brand text-white dark:text-background hover:bg-brand-hover absolute top-px right-0 h-10 px-4 flex items-center justify-center rounded-tr-md rounded-br-md"
+        className="bg-brand text-white dark:text-background hover:bg-brand-hover absolute top-0 right-0 h-9 px-3 flex items-center justify-center rounded-tr-md rounded-br-md"
       >
-        <Search size={18} className="mr-2" /> Search
+        <Search size={18} />
       </button>
     </div>
   );

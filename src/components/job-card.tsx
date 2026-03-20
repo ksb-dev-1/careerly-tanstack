@@ -14,6 +14,7 @@ import {
   Star,
   Timer,
 } from "lucide-react";
+import { FaStar } from "react-icons/fa";
 import TurndownService from "turndown";
 
 import {
@@ -22,7 +23,12 @@ import {
   JobType,
   SalaryPeriod,
 } from "@/generated/prisma/browser";
-import { relativeDate } from "@/lib/utils";
+import {
+  formatEnums,
+  formatMoney,
+  getCurrencyIcon,
+  relativeDate,
+} from "@/lib/utils";
 import { JobListItem, Skill } from "@/types/api";
 
 import { BookmarkButton } from "./bookmark-button";
@@ -64,61 +70,6 @@ export function JobCard({ job }: { job: JobListItem }) {
   const markdown = turndown.turndown(description);
   const shortDescription = markdown.split("\n\n")[0];
 
-  function getSalaryPeriod(period: SalaryPeriod): string {
-    switch (period) {
-      case SalaryPeriod.MONTHLY:
-        return "month";
-      default:
-        return "year";
-    }
-  }
-
-  function getCurrencyIcon(currency: Currency): React.ReactNode {
-    switch (currency) {
-      case Currency.INR:
-        return <IndianRupeeIcon size={16} />;
-      case Currency.EUR:
-        return <Euro size={16} />;
-      default:
-        return <DollarSign size={16} />;
-    }
-  }
-
-  function formatMoney(
-    amount: number,
-    currency: Currency = Currency.INR,
-    locale?: string,
-  ) {
-    // Default locale for each currency
-    const currencyLocales: Record<string, string> = {
-      USD: "en-US",
-      INR: "en-IN",
-      EUR: "de-DE",
-    };
-
-    // If locale is not provided, use the default locale for that currency
-    const selectedLocale = locale || currencyLocales[currency];
-
-    // Create a number formatter for currency
-    const formatter = new Intl.NumberFormat(selectedLocale, {
-      style: "decimal",
-      currency: currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-
-    // Format the amount and return it
-    return formatter.format(amount);
-  }
-
-  function formatEnums(value: JobType | JobMode): string {
-    return value
-      .toLowerCase()
-      .split("_")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  }
-
   return (
     <div className="relative">
       <CustomLink href={`/job-seeker/jobs/${id}`}>
@@ -133,7 +84,7 @@ export function JobCard({ job }: { job: JobListItem }) {
                   <CardTitle className="sm:text-lg font-bold">{role}</CardTitle>
                   {appliedOn && <Badge>Applied</Badge>}
                 </div>
-                <CardDescription className="mt-2 flex items-center gap-2 text-brand">
+                <CardDescription className="mt-2 flex items-center gap-2 text-brand font-bold">
                   {companyName}
                 </CardDescription>
               </div>
@@ -141,29 +92,8 @@ export function JobCard({ job }: { job: JobListItem }) {
           </CardHeader>
 
           <CardContent className="px-4! sm:px-6!">
-            <div className="mt-4 flex items-center flex-wrap gap-2 sm:gap-3 text-gray-700 dark:text-muted-foreground">
-              <span className="bg-muted rounded-md px-3 py-2 text-xs flex items-center gap-2">
-                <BriefcaseBusiness size={16} />
-                {experienceMin}-{experienceMax} years
-              </span>
-              <span className="bg-muted rounded-md px-3 py-2 text-xs flex items-center gap-2">
-                <Timer size={16} />
-                {formatEnums(jobType)}
-              </span>
-              <span className="bg-muted rounded-md px-3 py-2 text-xs flex items-center gap-2">
-                <Building size={16} />
-                {formatEnums(jobMode)}
-              </span>
-              <span className="bg-muted rounded-md px-3 py-2 text-xs flex items-center gap-2">
-                {getCurrencyIcon(currency)} {formatMoney(salary, currency)}
-              </span>
-              <span className="bg-muted rounded-md px-3 py-2 text-xs flex items-center gap-2">
-                <MapPin size={16} />
-                {location.split(",")[0]}
-              </span>
-            </div>
-
             <div className="mt-4 flex items-center flex-wrap gap-3 text-gray-600 dark:text-muted-foreground">
+              <Layers size={16} />
               {skills.slice(0, 3).map((js, index) => (
                 <span key={js.skillId} className="flex items-center gap-2">
                   <span className="capitalize text-sm font-medium">
@@ -183,6 +113,28 @@ export function JobCard({ job }: { job: JobListItem }) {
               )}
             </div>
 
+            <div className="mt-6 flex items-center flex-wrap gap-2 sm:gap-3 text-gray-700 dark:text-muted-foreground">
+              <Badge variant="secondary">
+                <BriefcaseBusiness />
+                {experienceMin}-{experienceMax} years
+              </Badge>
+              <Badge variant="secondary">
+                <Timer />
+                {formatEnums(jobType)}
+              </Badge>
+              <Badge variant="secondary">
+                <Building />
+                {formatEnums(jobMode)}
+              </Badge>
+              <Badge variant="secondary">
+                {getCurrencyIcon(currency)} {formatMoney(salary, currency)}
+              </Badge>
+              <Badge variant="secondary">
+                <MapPin />
+                {location.split(",")[0]}
+              </Badge>
+            </div>
+
             <span className="mt-6 text-muted-foreground flex items-center gap-1 text-xs">
               <Calendar size={12} /> {relativeDate(createdAt)}
             </span>
@@ -191,8 +143,8 @@ export function JobCard({ job }: { job: JobListItem }) {
       </CustomLink>
       {isFeatured && (
         <span className="absolute top-0 right-0 px-2 py-1 flex items-center gap-1 text-xs rounded-tr-xl rounded-bl-xl bg-brand text-white dark:text-background">
-          <Star className="h-4 w-4 sm:h-3 sm:w-3" />
-          <span className="hidden sm:block">Featured</span>
+          <FaStar className="h-3 w-3" />
+          <span className="">Featured</span>
         </span>
       )}
       <BookmarkButton

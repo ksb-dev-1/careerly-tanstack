@@ -38,7 +38,7 @@ export function Bookmarks() {
   if (!bookmarks || bookmarks.length === 0) return <EmptyState />;
 
   return (
-    <div className="grid md:grid-cols-1 gap-6">
+    <div className="grid gap-6">
       {bookmarks.map((job) => (
         <JobCard key={job.id} job={job} />
       ))}

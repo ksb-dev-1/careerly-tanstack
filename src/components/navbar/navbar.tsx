@@ -163,7 +163,7 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
             >
               <CustomLink
                 href={href}
-                prefetch={false}
+                prefetch={true}
                 isActive={isActive}
                 className="font-semibold"
               >
@@ -172,10 +172,9 @@ function JobSeekerNavbar({ session }: { session: UserSession }) {
             </Button>
           );
         })}
-      </div>
 
-      <div className="hidden md:flex items-center gap-2">
         <ThemeSwitch />
+
         <ProfileDropdownMenu
           image={session.user.image}
           role={session.user.role as UserRole}

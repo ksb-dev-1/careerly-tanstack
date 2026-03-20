@@ -101,7 +101,9 @@ function ReusableCard({ icon, title, description, steps }: ReusableCardProps) {
           {icon}
         </div>
         <div>
-          <CardTitle className="text-lg font-bold">{title}</CardTitle>
+          <CardTitle className="text-lg font-bold text-brand">
+            {title}
+          </CardTitle>
           <CardDescription className="mt-1 text-slate-600 dark:text-muted-foreground">
             {description}
           </CardDescription>

@@ -303,6 +303,7 @@ import { useEffect, useState } from "react";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Bookmark, BookmarkCheck } from "lucide-react";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { toast } from "sonner";
 
 import {
@@ -418,7 +419,7 @@ export function BookmarkButton({
   return (
     <button
       type="button"
-      className={cn("text-brand w-11 h-11", className)}
+      className={cn("text-brand", className)}
       aria-label={bookmarked ? "remove from bookmarks" : "add to bookmarks"}
       disabled={loading}
       onClick={() => mutate()}
@@ -426,9 +427,9 @@ export function BookmarkButton({
       {loading ? (
         <Spinner size={20} color="text-brand" />
       ) : bookmarked ? (
-        <BookmarkCheck size={20} />
+        <FaBookmark />
       ) : (
-        <Bookmark size={20} />
+        <FaRegBookmark />
       )}
     </button>
   );
